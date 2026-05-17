@@ -4,9 +4,11 @@
       "command": "npx",
       "args": [
         "-y",
-        "mcp-remote",
-        "https://mcp.tavily.com/mcp/?tavilyApiKey=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"
-      ]
+        "tavily-mcp@latest"
+      ],
+      "env": {
+        "TAVILY_API_KEY": "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"
+      }
     }
   }
 }
