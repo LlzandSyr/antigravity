@@ -1,0 +1,39 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (145,37)<a aria-label='Google Antigravity' class='logo-link' href='/' />
+	[1] (145,40)<antigravity-logo  />
+[2] (495,36)<nav  />
+	[3] (307,36)<div  />
+		[4] (307,35)<app-button  />
+			[5] (307,36)<button aria-label='Product' class='button button-compact button-nav call-to-action--nav dropdown-nav'>Product />
+				[6] (340,36)<span >keyboard_arrow_down />
+	[7] (417,36)<div  />
+		[8] (417,35)<app-button  />
+			[9] (417,36)<button aria-label='Use Cases' class='button button-compact button-nav call-to-action--nav dropdown-nav'>Use Cases />
+				[10] (457,36)<span >keyboard_arrow_down />
+	[11] (515,36)<div  />
+		[12] (515,35)<app-button  />
+			[13] (515,36)<button aria-label='Pricing' class='button button-compact button-nav call-to-action--nav dropdown-open'>Pricing />
+	[14] (585,36)<div  />
+		[15] (585,35)<app-button  />
+			[16] (585,36)<button aria-label='Blog' class='button button-compact button-nav call-to-action--nav dropdown-open'>Blog />
+	[17] (675,36)<div  />
+		[18] (675,35)<app-button  />
+			[19] (675,36)<button aria-label='Resources' class='button button-compact button-nav call-to-action--nav dropdown-nav'>Resources />
+				[20] (715,36)<span >keyboard_arrow_down />
+[21] (859,36)<button class='button button-compact button-primary call-to-action--nav download-button dropdown-nav'>Download />
+	[22] (898,36)<span >download />
+Experience liftoff
+[23] (550,363)<a class='call-to-action call-to-action--nav' href='/download'>Download />
+[24] (543,403)<a class='call-to-action call-to-action--nav' href='/product'>Product />
+[25] (533,443)<a class='call-to-action call-to-action--nav' href='/docs'>Docs />
+[26] (553,483)<a class='call-to-action call-to-action--nav' href='/changelog'>Changelog />
+[27] (534,523)<a class='call-to-action call-to-action--nav' href='/press'>Press />
+[28] (545,563)<a class='call-to-action call-to-action--nav' href='/releases'>Releases />
+[29] (754,363)<a class='call-to-action call-to-action--nav' href='/blog'>Blog />
+[30] (763,403)<a class='call-to-action call-to-action--nav' href='/pricing'>Pricing />
+[31] (774,443)<a class='call-to-action call-to-action--nav' href='/use-cases'>Use Cases />
+
+</current_dom>

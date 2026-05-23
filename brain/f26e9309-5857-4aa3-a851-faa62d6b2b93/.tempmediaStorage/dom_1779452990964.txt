@@ -1,0 +1,22 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+2025年10月13日，在以色列本-古里安机场，以色列总理内塔尼亚胡（前）同到访的美国总统特朗普同乘一辆车。新华社记者陈君清摄
+同日，美国阿克西奥斯新闻网站引述两名美国官员的话称，预计特朗普19日将与其国家安全团队成员举行会议，讨论对伊朗再次动武的选项。
+从上述动向不难看出，美方对伊朗动武的可能性正在上升。据美媒分析研判，若美军发起军事打击，其目标可能是此前军方已划定但尚未实施袭击的剩余目标，也可能是伊朗民用基础设施。
+另有分析认为，受弹药储备有限和国内民意掣肘等因素制约，美国或已无力支撑大规模长期战事。因此，若再度对伊朗动武，美方大概率会采取猛烈而短促的打击方式，试图逼迫伊方妥协。
+[0] (966,696)<div  />
+	[1] (966,696)<ul  />
+		[2] (966,597)<li  />
+			[3] (966,599)<span >评论 />
+				[4] (965,584)<em  />
+		[5] (966,677)<li  />
+			[6] (966,678)<span >分享 />
+				[7] (965,663)<em  />
+		[8] (966,776)<li  />
+			[9] (966,758)<span >关注 />
+				[10] (966,743)<em  />
+[11] (919,855)<div >返回顶部 />
+
+</current_dom>

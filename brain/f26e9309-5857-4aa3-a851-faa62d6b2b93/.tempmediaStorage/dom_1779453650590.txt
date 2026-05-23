@@ -1,0 +1,150 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (127,73)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwiE1IKz9cyUAxUJK_sDHfOpMDcQPAgI' id='logo' title='Google 首页' />
+[1] (418,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (629,71)<div  />
+	[3] (627,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (627,71)<span  />
+	[5] (650,71)<span  />
+[6] (673,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (711,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (755,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (749,71)<div  />
+		[10] (749,71)<span  />
+[11] (830,72)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[12] (830,74)<div  />
+		[13] (830,72)<span  />
+[14] (874,72)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[15] (941,72)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3DGoogle%2BAntigravity%2B2.0%2BPro%2Bquota%2Bupdates%2BMay%2B2026&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[16] (105,157)<a class='XVMlrc C6AK7c' href='/search?q=Google+Antigravity+2.0+Pro+quota+updates+May+2026&sca_esv=1189c3486312da6e&udm=50&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&aep=1&ntc=1&sa=X&ved=2ahUKEwiE1IKz9cyUAxUJK_sDHfOpMDcQ2J8OegQIDxAD' />
+	[17] (105,157)<div  />
+		[18] (105,169)<div  />
+			[19] (105,162)<span  />
+				[20] (105,161)<span >AI 模式 />
+[21] (163,157)<a class='C6AK7c' role='link' />
+	全部
+[22] (212,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&q=Google+Antigravity+2.0+Pro+quota+updates+May+2026&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&sa=X&ved=2ahUKEwiE1IKz9cyUAxUJK_sDHfOpMDcQ0pQJegQIFRAB' />
+	[23] (212,157)<div  />
+		[24] (212,169)<span >新闻 />
+[25] (262,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&q=Google+Antigravity+2.0+Pro+quota+updates+May+2026&sa=X&ved=2ahUKEwiE1IKz9cyUAxUJK_sDHfOpMDcQtKgLegQIFBAB' />
+	[26] (262,157)<div  />
+		[27] (262,169)<span >视频 />
+[28] (311,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&q=Google+Antigravity+2.0+Pro+quota+updates+May+2026&sa=X&ved=2ahUKEwiE1IKz9cyUAxUJK_sDHfOpMDcQtKgLegQIExAB' />
+	[29] (311,157)<div  />
+		[30] (311,169)<span >图片 />
+[31] (360,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&q=Google+Antigravity+2.0+Pro+quota+updates+May+2026&ved=1t:220175&ictx=111' />
+	[32] (360,157)<div  />
+		[33] (360,169)<span >购物 />
+[34] (416,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&q=Google+Antigravity+2.0+Pro+quota+updates+May+2026&sa=X&ved=2ahUKEwiE1IKz9cyUAxUJK_sDHfOpMDcQs6gLegQIERAB' />
+	[35] (416,157)<div  />
+		[36] (416,169)<span >短视频 />
+[37] (481,157)<div class='mTpL7c' role='button' />
+	[38] (481,157)<div  />
+		[39] (481,169)<div  />
+			[40] (473,162)<span >更多 />
+			[41] (494,162)<span  />
+[42] (548,157)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[43] (548,157)<div  />
+		[44] (548,169)<div  />
+			[45] (539,162)<span >工具 />
+			[46] (561,162)<span  />
+搜索结果
+Web results
+[47] (231,298)<a class='zReHs' href='https://antigravity.google/blog/changes-to-antigravity-plans' />
+	[48] (205,328)<h3 >Changes to Antigravity Plans />
+	[49] (231,276)<div  />
+		[50] (231,276)<div  />
+			[51] (97,276)<span  />
+				[52] (97,276)<div  />
+					[53] (97,276)<img  />
+			[54] (250,276)<div  />
+				[55] (250,264)<div  />
+					[56] (250,264)<span >Google Antigravity />
+				[57] (250,290)<div  />
+					[58] (250,290)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://antigravity.google />
+						[59] (293,289)<span class='ylgVCe ob9lvb' role='text'>› blog › changes-... />
+·
+[60] (380,290)<a class='dEEN8c' href='https://antigravity.google/blog/changes-to-antigravity-plans' />
+	[61] (380,289)<span >翻译此页 />
+[62] (423,289)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[63] (423,289)<span  />
+		[64] (423,290)<span  />
+3天前
+—
+...
+quota
+limit — just claim the offer in your
+Antigravity
+app. The offer expires
+May 25, 2026
+. Terms apply. Concluding Thoughts. Making
+Google
+...
+[65] (296,507)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1thwtwp/changes_to_antigravity_plans/' />
+	[66] (296,537)<h3 >Changes to Antigravity Plans : r/google_antigravity />
+	[67] (186,485)<div  />
+		[68] (186,485)<div  />
+			[69] (97,485)<span  />
+				[70] (97,485)<div  />
+					[71] (97,485)<img  />
+			[72] (205,485)<div  />
+				[73] (205,473)<div  />
+					[74] (205,473)<span >Reddit · r/google_antigravity />
+				[75] (205,499)<div  />
+					[76] (161,499)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>7条评论  ·  2天前 />
+[77] (307,498)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[78] (307,498)<span  />
+		[79] (307,499)<span  />
+Credit Changes: Subscriptions are being simplified by removing base AI credits (
+quotas
+have been increased to compensate). Credits will now only ...
+[80] (242,648)<a href='https://www.reddit.com/r/google_antigravity/comments/1thx7pm/megathread_everything_announced_at_google_io_2026/' />
+	[81] (242,648)<span >MEGATHREAD: Everything Announced at
+I ... />
+		[82] (357,648)<em >Google />
+22 个帖子
+2026年5月19日
+[83] (225,679)<a href='https://www.reddit.com/r/GeminiAI/comments/1tikeir/antigravity_20_feels_worse_even_for_pro_users/' />
+	[84] (225,679)<span >feels worse even for
+users ... />
+		[85] (126,679)<em >Antigravity 2.0 />
+		[86] (305,679)<em >Pro />
+37 个帖子
+2026年5月20日
+[87] (191,709)<a href='/search?q=Google+Antigravity+2.0+Pro+quota+updates+May+2026+site:www.reddit.com&sca_esv=1189c3486312da6e&sa=X&ved=2ahUKEwiE1IKz9cyUAxUJK_sDHfOpMDcQrQIoAnoECB4QAw' />
+	[88] (191,709)<span >www.reddit.com站内的其它相关信息 />
+[89] (333,815)<a class='zReHs' href='https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-developer-highlights/' />
+	[90] (333,845)<h3 >I/O 2026 developer highlights: Antigravity, Gemini API, AI ... />
+	[91] (230,793)<div  />
+		[92] (230,793)<div  />
+			[93] (97,793)<span  />
+				[94] (97,793)<div  />
+					[95] (97,793)<img  />
+			[96] (249,793)<div  />
+				[97] (249,780)<div  />
+					[98] (249,780)<span >blog.google />
+				[99] (249,807)<div  />
+					[100] (249,807)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://blog.google />
+						[101] (277,806)<span class='ylgVCe ob9lvb' role='text'>› technology › google-i... />
+·
+[102] (377,807)<a class='dEEN8c' href='https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-developer-highlights/' />
+	[103] (377,806)<span >翻译此页 />
+[104] (421,805)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[105] (421,805)<span  />
+		[106] (421,807)<span  />
+3天前
+—
+We're introducing new tools to take your ideas from a prompt to a production-ready application, including updates to
+Google Antigravity
+, ...
+视频
+[107] (150,994)<div aria-label='关于这条结果的详细信息' class='iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[108] (150,994)<span  />
+		[109] (150,995)<span  />
+
+</current_dom>

@@ -1,0 +1,118 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (126,73)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwjAnLOz8cyUAxUqU0EAHZTKBmEQPAgH' id='logo' title='Google 首页' />
+[1] (436,72)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' title='Google 搜索' />
+[2] (666,72)<div  />
+	[3] (664,72)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (664,72)<span  />
+	[5] (687,72)<span  />
+[6] (710,72)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (754,72)<button aria-label='Google 搜索' class='HZVG1b Tg7LZd' />
+	[8] (748,72)<div  />
+		[9] (748,72)<span  />
+[10] (829,72)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[11] (829,75)<div  />
+		[12] (829,72)<span  />
+[13] (873,72)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products' role='button' />
+[14] (940,72)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fsca_esv%3D1189c3486312da6e%26q%3D%25E4%25B8%25AD%25E4%25B8%259C%25E5%259C%25B0%25E5%258C%25BA%25E5%25B1%2580%25E5%258A%25BF%2B%25E6%259C%2580%25E6%2596%25B0%25E6%2596%25B0%25E9%2597%25BB%2B2026%25E5%25B9%25B45%25E6%259C%2588%26tbm%3Dnws%26source%3Dlnms%26fbs%3DADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA%26sa%3DX%26ved%3D2ahUKEwjd8OGh8cyUAxVNUEEAHdQKA-wQ0pQJegQIFRAB%26biw%3D1048%26bih%3D723%26dpr%3D1.25&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[15] (104,151)<a class='XVMlrc C6AK7c' href='/search?q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&sa=X&sca_esv=1189c3486312da6e&biw=1048&bih=723&udm=50&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&aep=1&ntc=1&ved=2ahUKEwjAnLOz8cyUAxUqU0EAHZTKBmEQ2J8OegQIAxAD' />
+	[16] (104,151)<div  />
+		[17] (104,163)<div  />
+			[18] (104,156)<span  />
+				[19] (104,155)<span >AI 模式 />
+[20] (161,151)<a class='C6AK7c' href='/search?q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&sca_esv=1189c3486312da6e&biw=1048&bih=723&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&sa=X&ved=2ahUKEwjAnLOz8cyUAxUqU0EAHZTKBmEQ0pQJegQIAxAF' />
+	[21] (161,151)<div  />
+		[22] (161,163)<span >全部 />
+[23] (211,151)<a class='C6AK7c' role='link' />
+	新闻
+[24] (261,151)<a class='C6AK7c' href='/search?q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&sa=X&sca_esv=1189c3486312da6e&biw=1048&bih=723&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&ved=2ahUKEwjAnLOz8cyUAxUqU0EAHZTKBmEQtKgLegQIAxAJ' />
+	[25] (261,151)<div  />
+		[26] (261,163)<span >视频 />
+[27] (310,151)<a class='C6AK7c' href='/search?q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&sa=X&sca_esv=1189c3486312da6e&biw=1048&bih=723&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&ved=2ahUKEwjAnLOz8cyUAxUqU0EAHZTKBmEQtKgLegQIAxAL' />
+	[28] (310,151)<div  />
+		[29] (310,163)<span >图片 />
+[30] (360,151)<a class='C6AK7c' href='/search?q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&sa=X&sca_esv=1189c3486312da6e&biw=1048&bih=723&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&ved=1t:220175&ictx=111' />
+	[31] (360,151)<div  />
+		[32] (360,163)<span >购物 />
+[33] (416,151)<a class='C6AK7c' href='/search?q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&sa=X&sca_esv=1189c3486312da6e&biw=1048&bih=723&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&ved=2ahUKEwjAnLOz8cyUAxUqU0EAHZTKBmEQs6gLegQIAxAP' />
+	[34] (416,151)<div  />
+		[35] (416,163)<span >短视频 />
+[36] (481,151)<div class='mTpL7c' role='button' />
+	[37] (481,151)<div  />
+		[38] (481,163)<div  />
+			[39] (472,156)<span >更多 />
+			[40] (494,156)<span  />
+[41] (548,151)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[42] (548,151)<div  />
+		[43] (548,163)<div  />
+			[44] (539,156)<span >工具 />
+			[45] (561,156)<span  />
+搜索结果
+[46] (393,313)<a class='WlydOe' href='https://news.un.org/zh/story/2026/05/1142179' />
+	[47] (393,313)<div  />
+		[48] (342,313)<div >. />
+			[49] (342,237)<div  />
+				[50] (342,237)<div  />
+					[51] (90,237)<div  />
+						[52] (90,237)<img  />
+					[53] (129,237)<span >UN News />
+			[54] (342,277)<div class='n0jPhd y9Qqsf ynAwRc MBeuO' role='heading'>国际劳工组织：中东危机正加剧全球劳动力市场风险 />
+			[55] (342,336)<div >国际劳工组织周二发布最新报告指出，中东危机正通过能源成本上涨、运输路线中断、供应链承压、旅游业疲软以及移民限制等多重因素，对全球就业、收入和... />
+			.
+			[56] (101,389)<div  />
+				[57] (101,389)<span >2 天前 />
+[58] (393,527)<a class='WlydOe' href='https://china.kyodonews.net/articles/-/10589' />
+	[59] (393,527)<div  />
+		[60] (660,527)<div  />
+			[61] (660,503)<div  />
+				[62] (660,503)<div  />
+					[63] (660,503)<img  />
+		[64] (342,527)<div >. />
+			[65] (342,451)<div  />
+				[66] (342,451)<div  />
+					[67] (90,451)<div  />
+						[68] (90,451)<img  />
+					[69] (122,451)<span >共同网 />
+			[70] (342,491)<div class='n0jPhd y9Qqsf ynAwRc MBeuO' role='heading'>4月访日外国人减5.5% 受中东局势与中国游客低迷影响 />
+			[71] (342,550)<div >【共同社5月20日电】日本国家旅游局20日发布估算数据称，4月访日外国人较去年同期减少约21.7万人次，至369.22万人次，减幅为5.5%。 />
+			.
+			[72] (101,603)<div  />
+				[73] (101,603)<span >2 天前 />
+[74] (393,741)<a class='WlydOe' href='https://www.21jingji.com/article/20260521/herald/7798ae152ef2ae25997fa60e02985271.html' />
+	[75] (393,741)<div  />
+		[76] (660,741)<div  />
+			[77] (660,718)<div  />
+				[78] (660,718)<div  />
+					[79] (660,718)<img  />
+		[80] (342,741)<div >. />
+			[81] (342,665)<div  />
+				[82] (342,665)<div  />
+					[83] (90,665)<div  />
+						[84] (90,665)<img  />
+					[85] (123,665)<span >21财经 />
+			[86] (342,705)<div class='n0jPhd y9Qqsf ynAwRc MBeuO' role='heading'>受中东局势影响 欧盟下调2026年经济增长预期至1.1% />
+			[87] (342,765)<div >当地时间5月21日，欧盟委员会发表声明称，将2026年欧盟经济增长预期下调至1.1%，原因是受中东局势影响，能源价格飙升导致经济增长放缓。 />
+			.
+			[88] (101,817)<div  />
+				[89] (101,817)<span >1 天前 />
+[90] (393,956)<a class='WlydOe' href='https://www.news.cn/world/20260518/ff4e9beb266d42a980da7343fd5498d3/c.html' />
+	[91] (393,956)<div  />
+		[92] (660,956)<div  />
+			[93] (660,932)<div  />
+				[94] (660,932)<div  />
+					[95] (660,932)<img  />
+		[96] (342,956)<div  />
+			[97] (342,880)<div  />
+				[98] (342,880)<div  />
+					[99] (90,880)<div  />
+						[100] (90,880)<img  />
+					[101] (122,880)<span >新华网 />
+			[102] (342,920)<div class='n0jPhd y9Qqsf ynAwRc MBeuO' role='heading'>国际观察丨特朗普连发威胁，中东战火重燃的风险犹存 />
+			[103] (342,979)<div >新华社北京5月18日电（记者刘赞席玥）美国总统特朗普17日在社交媒体发文称，伊朗如果不迅速行动，“将一无所有”。另据媒体报道，特朗普当天早些时候与以色列... />
+
+</current_dom>

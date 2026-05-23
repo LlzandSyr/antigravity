@@ -1,0 +1,98 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+中东局势
+新华网
+https://www.news.cn
+› world › byctsj
+美众议院推迟表决限制特朗普对伊动武法案
+· 伊朗民众集会悼念已故最高领袖 · 黎巴嫩：空袭后废墟上的搜救 · 加沙城：领取食物 · 伊朗说向美国提出的提议“并不过分” · 以军空袭黎 ...
+[0] (169,242)<a class='zReHs' href='https://www.dw.com/zh/%E4%B8%AD%E4%B8%9C/t-41544297' />
+	[1] (102,272)<h3 >中东 />
+	[2] (169,220)<div  />
+		[3] (169,220)<div  />
+			[4] (96,220)<span  />
+				[5] (96,220)<div  />
+					[6] (96,220)<img  />
+			[7] (187,220)<div  />
+				[8] (187,207)<div  />
+					[9] (187,207)<span >DW.com />
+				[10] (187,234)<div  />
+					[11] (187,234)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://www.dw.com />
+						[12] (238,233)<span class='ylgVCe ob9lvb' role='text'>› 中东 />
+[13] (274,232)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[14] (274,232)<span  />
+		[15] (274,234)<span  />
+每日
+新闻
+.
+2026年5月2日 2026年5月2日
+. 霍尔木兹海峡：美警告支付伊朗过路费风险. 显示更多. 跳转至下一栏深度报道. 深度报道.
+[16] (243,447)<a class='zReHs' href='https://www.mfa.gov.cn/wjbzhd/202605/t20260506_11905251.shtml' />
+	[17] (207,481)<h3 >王毅同伊朗外长阿拉格齐会谈 />
+	[18] (243,429)<div  />
+		[19] (243,429)<div  />
+			[20] (96,429)<span  />
+				[21] (96,429)<div  />
+					[22] (96,429)<span  />
+			[23] (262,429)<div  />
+				[24] (262,417)<div  />
+					[25] (262,417)<span >中华人民共和国外交部 />
+				[26] (262,443)<div  />
+					[27] (262,443)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://www.mfa.gov.cn />
+						[28] (321,442)<span class='ylgVCe ob9lvb' role='text'>› wjbzhd › t20260506_11905251 />
+[29] (425,441)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[30] (425,441)<span  />
+		[31] (425,443)<span  />
+2026年5月6日
+—
+2026年5月6日
+，中共中央政治局委员、外交部长王毅在北京同伊朗外长阿拉格齐举行会谈。 阿拉格齐通报了伊美谈判
+最新
+情况及伊方下步考虑，表示事实已经 ...
+[32] (228,660)<a class='zReHs' href='https://www.imo.org/zh/mediacentre/hottopics/pages/middle-east-strait-of-hormuz.aspx' />
+	[33] (102,690)<h3 >中东 />
+	[34] (228,638)<div  />
+		[35] (228,638)<div  />
+			[36] (96,638)<span  />
+				[37] (96,638)<div  />
+					[38] (96,638)<img  />
+			[39] (247,638)<div  />
+				[40] (247,626)<div  />
+					[41] (247,626)<span >International Maritime Organization />
+				[42] (247,652)<div  />
+					[43] (247,652)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://www.imo.org />
+						[44] (297,651)<span class='ylgVCe ob9lvb' role='text'>› middle-east-strait-of-hormuz />
+[45] (393,650)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[46] (393,650)<span  />
+		[47] (393,652)<span  />
+3天前
+—
+中东地区
+持续的不稳定
+局势
+给全球航运业带来了迅速变化的形势。国际海事组织正在密切关注事态发展，以保护该地区的20,000 多名海员，包括那些被困在无法 ...
+[48] (312,865)<a class='zReHs' href='https://world.people.com.cn/n1/2026/0519/c1002-40722749.html' />
+	[49] (312,899)<h3 >国际观察丨特朗普连发威胁，中东战火重燃的风险犹存 />
+	[50] (188,847)<div  />
+		[51] (188,847)<div  />
+			[52] (96,847)<span  />
+				[53] (96,847)<div  />
+					[54] (96,847)<img  />
+			[55] (207,847)<div  />
+				[56] (207,835)<div  />
+					[57] (207,835)<span >人民网 />
+				[58] (207,861)<div  />
+					[59] (207,861)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://world.people.com.cn />
+						[60] (276,860)<span class='ylgVCe ob9lvb' role='text'>› 国际 />
+[61] (314,860)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[62] (314,860)<span  />
+		[63] (314,861)<span  />
+3天前
+—
+据伊朗法尔斯通讯社17日报道，美方在其对伊方的
+最新
+回应中提出五项条件，包括不向伊朗支付战争赔偿、要求伊朗将400公斤浓缩铀交给美国、仅允许伊朗保留一处 ...
+
+</current_dom>

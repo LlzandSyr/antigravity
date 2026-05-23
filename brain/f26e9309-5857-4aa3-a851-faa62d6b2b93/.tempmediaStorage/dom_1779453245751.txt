@@ -1,0 +1,27 @@
+[0] (795,39)<a aria-label='Gmail ' class='gb_4' href='https://mail.google.com/mail/&ogbl'>Gmail />
+[1] (838,39)<a aria-label='搜索图片 ' class='gb_4' href='https://www.google.com/imghp?hl=zh-CN&ogbl'>图片 />
+[2] (883,39)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products' role='button' />
+[3] (950,39)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/&ec=futura_exp_og_so_72776762_e'>登录 />
+	登录
+[4] (195,382)<button aria-label='上传文件或图片' class='UbbAWe' />
+	[5] (195,382)<span  />
+[6] (433,382)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' title='Google 搜索' />
+[7] (666,382)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[8] (704,382)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[9] (775,382)<button class='plR5qb Y5MKCd' role='link' />
+	[10] (775,382)<div  />
+		[11] (748,382)<span  />
+		[12] (787,382)<span >AI 模式 />
+[13] (448,482)<input aria-label='Google 搜索' class='gNO89b' role='button' />
+[14] (559,482)<input aria-label=' 手气不错 ' class='RNmpXc' />
+Google 提供：
+[15] (542,585)<a href='https://www.google.com/setprefs?sig=0_Ig4Cd-T1QYLohGW84Fj-yNT_HJc%3D&hl=en&source=homepage&sa=X&ved=0ahUKEwjY_O7y88yUAxWBVEEAHYaJD8gQ2ZgBCCI'>English />
+英国
+[16] (204,965)<a class='pHiOh' href='https://about.google/?utm_source=google-GB&utm_medium=referral&utm_campaign=hp-footer&fg=1'>关于 Google />
+[17] (283,965)<a class='pHiOh' href='https://www.google.com/intl/zh-CN_uk/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1'>广告 />
+[18] (338,965)<a class='pHiOh' href='https://www.google.com/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1'>商务 />
+[19] (450,965)<a class='pHiOh' href='https://google.com/search/howsearchworks/?fg=1'>Google 搜索的运作方式 />
+[20] (703,965)<a class='pHiOh' href='https://policies.google.com/privacy?hl=zh-CN&fg=1'>隐私权 />
+[21] (764,965)<a class='pHiOh' href='https://policies.google.com/terms?hl=zh-CN&fg=1'>条款 />
+[22] (820,965)<div class='CcNe6e' role='button' />
+	[23] (820,965)<div >设置 />

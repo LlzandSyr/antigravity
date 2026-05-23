@@ -1,0 +1,102 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+航线绕行与替代方案
+：全球最大航运公司地中海航运（MSC）已于5月10日启动全新海陆联运服务。货物由欧洲运至沙特吉达港或达曼港后，通过卡车陆运横跨沙特，再由支线小船接驳至波斯湾各地，以彻底避开风险极高的霍尔木兹海峡。
+船舶滞留与撤离
+：波斯湾及海峡周边曾一度滞留上百艘集装箱船及数百艘各类货船。近期，包括MSC旗下6艘主力船在内的多艘大型集装箱船通过关闭AIS（船舶自动识别系统）秘密撤离，成功驶入阿拉伯海并恢复正常航线。部分其他航运公司（如赫伯罗特）仍在等待安全穿越的“窗口期”。
+港口拥堵与物流压力
+：由于船只无法正常进出波斯湾，阿曼（如索哈港）和阿联酋东海岸的港口出现了货物严重堆积的现象，大量货运不得不依赖昂贵的陆路转运。
+通行管控
+：局势仍高度紧张，联合国警告有约两万名海员被困于该水域的滞留船只上。伊朗方面正计划公布关于霍尔木兹海峡通行管理的新机制，未来航行规则存在变数。
+www.ungeneva.org
++5
+您可以随时访问
+联合新闻网
+查看关于该地缘政治危机对全球能源与物流影响的最新动态，或在
+地中海航运官网
+追踪绕行新航线（Europe-to-Middle East service）的详细船期及截关信息。
+UN News
+[0] (392,720)<div class='N8RrG rAdPSe' role='none' scrollable='true' />
+	两万海员受困霍尔木兹海峡：现代航运“前所未有”的危机
+	2026年3月31日 —
+	随着中东战争持续，约有2万名海员被困于滞留在霍尔木兹海峡的船只上，这一情况被形容为二战结束以来“前所未有”的局面。 这些...
+	www.ungeneva.org
+	霍尔木兹海峡局势动荡加剧脆弱地区能源冲击 - UN News
+	2026年4月30日 —
+	联合国多个机构本周发出警告，随着霍尔木兹海峡航运僵局持续，布伦特原油价格已攀升至每桶120 美元左右，一场全球性能源震荡...
+	UN News
+	2026年霍尔木兹海峡局势将如何影响中国航运？
+	2026年4月15日 —
+	霍尔木兹海峡的局势将对2026年中国航运造成影响，具体表现为更高的货运风险、更弱的船期可靠性、不断上涨的油价、更大的保险...
+	Tonlexing
+[1] (394,258)<div aria-label='显示更多 AI 概览' class='Jzkafd' role='button' />
+	[2] (331,258)<div  />
+		[3] (331,258)<div >展开 />
+			展开
+			[4] (348,258)<span  />
+网页搜索结果
+[5] (229,430)<a class='zReHs' href='https://finance.sina.com.cn/wm/2026-05-13/doc-inhxufva0633081.shtml?froms=ggmp' />
+	[6] (208,460)<h3 >霍尔木兹海峡，断航已经10周 />
+	[7] (229,408)<div  />
+		[8] (229,408)<div  />
+			[9] (96,408)<span  />
+				[10] (96,408)<div  />
+					[11] (96,408)<img  />
+			[12] (248,408)<div  />
+				[13] (248,396)<div  />
+					[14] (248,396)<span >新浪财经 />
+				[15] (248,422)<div  />
+					[16] (248,422)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://finance.sina.com.cn />
+						[17] (316,421)<span class='ylgVCe ob9lvb' role='text'>› doc-inhxufva0633081 />
+[18] (395,421)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[19] (395,421)<span  />
+		[20] (395,422)<span  />
+2026年5月13日
+—
+霍尔木兹海峡
+持续10周断航，这一近年最大规模石油供应中断，仅对全球经济增长造成中等程度损害。高盛哈兹乌斯预计短期内布伦特油价稳定，年底回落至90 ...
+[21] (340,639)<a class='zReHs' href='https://www.shobserver.com/staticsg/res/html/web/newsDetail.html?id=1107068&sid=11' />
+	[22] (340,669)<h3 >全球最大航运公司推出中东至欧洲新服务，避开霍尔木兹海峡 />
+	[23] (238,617)<div  />
+		[24] (238,617)<div  />
+			[25] (96,617)<span  />
+				[26] (96,617)<div  />
+					[27] (96,617)<img  />
+			[28] (256,617)<div  />
+				[29] (256,605)<div  />
+					[30] (256,605)<span >上观新闻 />
+				[31] (256,631)<div  />
+					[32] (256,631)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://www.shobserver.com />
+						[33] (328,630)<span class='ylgVCe ob9lvb' role='text'>› html › web › newsDetail />
+[34] (411,630)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[35] (411,630)<span  />
+		[36] (411,631)<span  />
+2026年5月3日
+—
+美国和以色列对伊朗发动军事行动使得
+霍尔木兹海峡航运
+持续受阻。这迫使
+航运
+公司寻找耗时更长、成本更高的陆上替代方案，包括阿曼和阿联酋东海岸的港口也 ...
+[37] (285,845)<a class='zReHs' href='https://www.tonlexing.com/zh-CN/2026%E5%B9%B4%E9%9C%8D%E5%B0%94%E6%9C%A8%E5%85%B9%E6%B5%B7%E5%B3%A1%E5%B1%80%E5%8A%BF%E5%B0%86%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%E4%B8%AD%E5%9B%BD%E8%88%AA%E8%BF%90%EF%BC%9F/' />
+	[38] (285,879)<h3 >2026年霍尔木兹海峡局势将如何影响中国航运？ />
+	[39] (240,826)<div  />
+		[40] (240,826)<div  />
+			[41] (96,826)<span  />
+				[42] (96,826)<div  />
+					[43] (96,826)<img  />
+			[44] (259,826)<div  />
+				[45] (259,814)<div  />
+					[46] (259,814)<span >Tonlexing />
+				[47] (259,840)<div  />
+					[48] (259,840)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://www.tonlexing.com />
+						[49] (325,839)<span class='ylgVCe ob9lvb' role='text'>› zh-CN › 2026年霍尔木兹... />
+[50] (419,839)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[51] (419,839)<span  />
+		[52] (419,840)<span  />
+霍尔木兹海峡的局势将对2026年中国航运造成影响
+，具体表现为更高的货运风险、更弱的船期可靠性、不断上涨的油价、更大的保险压力以及更广泛的供应链不稳定。由于该海峡支撑 ...
+
+</current_dom>

@@ -1,0 +1,159 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Flash and Pro models draw from the same usage pool.
+Quota Reset:
+The systemwide reset aims to replenish your token limit for the week, allowing you to immediately continue work.
+Google Antigravity
++2
+How the Community Is Reacting
+Many developers on the
+Google AI Developer Forum
+and social platforms note that while the 3x increase helps, complex agentic tasks still deplete the allocation rapidly. Because Antigravity is highly dependent on "work done" (such as continuous edits, repository scans, and background testing), some users are transitioning to simpler tasks or opting for alternative models to avoid lockouts.
+Google AI Developers Forum
++3
+Helpful Tips to Manage Your Limits
+To get the most out of your Pro or Ultra tier without hitting the weekly lockout:
+Monitor your usage:
+Visit
+Agent Manager
+→
+Settings
+→
+Models
+in your IDE to check if your baseline quota is dipping dangerously low.
+Task severity:
+Heavy agent tasks (e.g., refactoring large repositories) drain your limits faster. Run code sequentially rather than letting autonomous agents run on infinite loops.
+Alternative APIs:
+If you need a separate or custom quota for intensive workflows, you can connect your environment to
+Google AI Studio
+for API-based billing.
+Google AI Developers Forum
++1
+8 个网站
+Changes to Antigravity Plans
+2026年5月19日 —
+Antigravity in Enterprise. Google Antigravity is now availab...
+Google Antigravity
+UPDATE -> 3X limit of on all paid tiers, let's see how long it will last
+2026年5月21日 —
+UPDATE -> 3X limit of on all paid tiers, let's see how long ...
+Google AI Developers Forum
+Antigravity 3x Increase + Quota Reset… and I Still Hit a Weekly ...
+2026年5月21日 —
+Antigravity 3x Increase + Quota Reset… and I Still Hit a Wee...
+Google AI Developers Forum
+全部显示
+展开
+Web results
+[0] (231,199)<a class='zReHs' href='https://antigravity.google/blog/changes-to-antigravity-plans' />
+	[1] (205,229)<h3 >Changes to Antigravity Plans />
+	[2] (231,177)<div  />
+		[3] (231,177)<div  />
+			[4] (96,177)<span  />
+				[5] (96,177)<div  />
+					[6] (96,177)<img  />
+			[7] (250,177)<div  />
+				[8] (250,165)<div  />
+					[9] (250,165)<span >Google Antigravity />
+				[10] (250,191)<div  />
+					[11] (250,191)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://antigravity.google />
+						[12] (293,190)<span class='ylgVCe ob9lvb' role='text'>› blog › changes-... />
+·
+[13] (379,191)<a class='dEEN8c' href='https://antigravity.google/blog/changes-to-antigravity-plans' />
+	[14] (379,190)<span >翻译此页 />
+[15] (423,190)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[16] (423,190)<span  />
+		[17] (423,191)<span  />
+3天前
+—
+The $100/mo Ultra plan will have a
+rate limit
+of 5X worth of tokens compared to the $20/mo
+Pro
+plan and the $200/mo Ultra plan will have a rate ...
+[18] (342,408)<a class='zReHs' href='https://discuss.ai.google.dev/t/the-new-model-rate-limits-for-ai-pro-tier/146410' />
+	[19] (342,438)<h3 >The new model Rate Limits for AI Pro tier - Google Antigravity />
+	[20] (235,386)<div  />
+		[21] (235,386)<div  />
+			[22] (96,386)<span  />
+				[23] (96,386)<div  />
+					[24] (96,386)<img  />
+			[25] (254,386)<div  />
+				[26] (254,374)<div  />
+					[27] (254,374)<span >Google AI Developers Forum />
+				[28] (254,400)<div  />
+					[29] (254,400)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://discuss.ai.google.dev />
+						[30] (308,399)<span class='ylgVCe ob9lvb' role='text'>› the-new-mod... />
+·
+[31] (388,400)<a class='dEEN8c' href='https://discuss.ai.google.dev/t/the-new-model-rate-limits-for-ai-pro-tier/146410' />
+	[32] (388,399)<span >翻译此页 />
+[33] (432,399)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[34] (432,399)<span  />
+		[35] (432,400)<span  />
+2天前
+—
+Google AI Pro / Antigravity 2.0
+: Gemini 3.5 Flash weekly quota makes real development unusable ... rate limit for 3.5 Flash on the Pro Plan!
+缺少字词：
+3x
+‎| 必须包含：
+[36] (256,542)<a href='/search?sca_esv=1189c3486312da6e&q=Google+Antigravity+2.0+Pro+quota+rate+limit+%223x%22+updates&sa=X&ved=2ahUKEwi287j688yUAxURVEEAHVe2PIIQ5t4CegQIHBAB' />
+	[37] (256,542)<span >3x />
+[38] (330,648)<a class='zReHs' href='https://www.reddit.com/r/Bard/comments/1tjnf9h/can_someone_explain_me_how_the_hell_antigravity/' />
+	[39] (330,678)<h3 >Can someone explain me how the hell antigravity usage ... />
+	[40] (159,626)<div  />
+		[41] (159,626)<div  />
+			[42] (96,626)<span  />
+				[43] (96,626)<div  />
+					[44] (96,626)<img  />
+			[45] (178,626)<div  />
+				[46] (178,613)<div  />
+					[47] (178,613)<span >Reddit · r/Bard />
+				[48] (178,639)<div  />
+					[49] (178,639)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>10+ 条评论  ·  21小时前 />
+[50] (254,638)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[51] (254,638)<span  />
+		[52] (254,639)<span  />
+Hey everyone,
+
+I’m on the Google AI Pro annual plan and heavily use Gemini (both the app and AI Studio) for work. After the recent presentation, I decided ...
+[53] (112,782)<a class='Zv9Ied' href='https://www.reddit.com/r/Bard/comments/1tjnf9h/can_someone_explain_me_how_the_hell_antigravity/on2yae2/'>13 个回答 />
+·
+最佳答案:
+No idea. Mine says I have 6 days to refresh and then I’ll come back after an hour and it’s ...
+[54] (226,819)<a href='https://www.reddit.com/r/google_antigravity/comments/1tk6vu7/additional_3x_increase_of_gemini_in_antigravity/' />
+	[55] (226,819)<span >Additional
+increase of Gemini in
+... />
+		[56] (152,819)<em >3x />
+		[57] (322,819)<em >Antigravity />
+145 个回答
+2026年5月22日
+[58] (229,849)<a href='https://www.reddit.com/r/google_antigravity/comments/1tjbd1e/3x_usage_for_gemini_models_for_all_ai_plus_pro/' />
+	[59] (229,849)<span >usage for Gemini models for all AI Plus,
+... />
+		[60] (91,849)<em >3X />
+		[61] (351,849)<em >Pro />
+152 个回答
+2026年5月21日
+[62] (190,880)<a href='/search?q=Google+Antigravity+2.0+Pro+quota+rate+limit+3x+updates+site:www.reddit.com&sca_esv=1189c3486312da6e&sa=X&ved=2ahUKEwi287j688yUAxURVEEAHVe2PIIQrQIoAnoECCkQAw' />
+	[63] (190,880)<span >www.reddit.com站内的其它相关信息 />
+[64] (336,985)<a class='zReHs' href='https://discuss.ai.google.dev/t/antigravity-2-0-0-great-new-model-same-old-broken-quotas/145783' />
+	[65] (233,963)<div  />
+		[66] (233,963)<div  />
+			[67] (96,963)<span  />
+				[68] (96,963)<div  />
+					[69] (96,963)<img  />
+			[70] (252,963)<div  />
+				[71] (252,951)<div  />
+					[72] (252,951)<span >Google AI Developers Forum />
+				[73] (252,977)<div  />
+					[74] (252,977)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://discuss.ai.google.dev />
+						[75] (305,976)<span class='ylgVCe ob9lvb' role='text'>› antigravity-2... />
+·
+[76] (383,977)<a class='dEEN8c' href='https://discuss.ai.google.dev/t/antigravity-2-0-0-great-new-model-same-old-broken-quotas/145783' />
+	[77] (383,976)<span >翻译此页 />
+
+</current_dom>

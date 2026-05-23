@@ -1,0 +1,156 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (127,73)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwjwl8b09cyUAxUQUaQEHT7SFUIQPAgI' id='logo' title='Google 首页' />
+[1] (418,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (629,71)<div  />
+	[3] (627,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (627,71)<span  />
+	[5] (650,71)<span  />
+[6] (673,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (711,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (755,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (749,71)<div  />
+		[10] (749,71)<span  />
+[11] (830,72)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[12] (830,74)<div  />
+		[13] (830,72)<span  />
+[14] (874,72)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[15] (941,72)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3D%2522Varun%2BMohan%2522%2B%25223x%2522%2BOR%2B%2522tripled%2522%2B%2522Antigravity%2522&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[16] (105,157)<a class='XVMlrc C6AK7c' href='/search?q=%22Varun+Mohan%22+%223x%22+OR+%22tripled%22+%22Antigravity%22&sca_esv=1189c3486312da6e&udm=50&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0bvQoo9Pq6A9ryhd_Z_O7CFKEk_CTldzL95znGxvA4tCZC0BzpNJ5q2katOx264FMjR_KoipBU8KbT6qudOKF5jlIyIiE67VFD4Jzd5yOZoHe8nQ&aep=1&ntc=1&sa=X&ved=2ahUKEwjwl8b09cyUAxUQUaQEHT7SFUIQ2J8OegQIDxAD' />
+	[17] (105,157)<div  />
+		[18] (105,169)<div  />
+			[19] (105,162)<span  />
+				[20] (105,161)<span >AI 模式 />
+[21] (163,157)<a class='C6AK7c' role='link' />
+	全部
+[22] (212,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0bvQoo9Pq6A9ryhd_Z_O7CFKEk_CTldzL95znGxvA4tCZC0BzpNJ5q2katOx264FMjR_KoipBU8KbT6qudOKF5jlIyIiE67VFD4Jzd5yOZoHe8nQ&q=%22Varun+Mohan%22+%223x%22+OR+%22tripled%22+%22Antigravity%22&sa=X&ved=2ahUKEwjwl8b09cyUAxUQUaQEHT7SFUIQtKgLegQIFRAB' />
+	[23] (212,157)<div  />
+		[24] (212,169)<span >图片 />
+[25] (262,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0bvQoo9Pq6A9ryhd_Z_O7CFKEk_CTldzL95znGxvA4tCZC0BzpNJ5q2katOx264FMjR_KoipBU8KbT6qudOKF5jlIyIiE67VFD4Jzd5yOZoHe8nQ&q=%22Varun+Mohan%22+%223x%22+OR+%22tripled%22+%22Antigravity%22&sa=X&ved=2ahUKEwjwl8b09cyUAxUQUaQEHT7SFUIQtKgLegQIFBAB' />
+	[26] (262,157)<div  />
+		[27] (262,169)<span >视频 />
+[28] (311,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&q=%22Varun+Mohan%22+%223x%22+OR+%22tripled%22+%22Antigravity%22&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0bvQoo9Pq6A9ryhd_Z_O7CFKEk_CTldzL95znGxvA4tCZC0BzpNJ5q2katOx264FMjR_KoipBU8KbT6qudOKF5jlIyIiE67VFD4Jzd5yOZoHe8nQ&sa=X&ved=2ahUKEwjwl8b09cyUAxUQUaQEHT7SFUIQ0pQJegQIERAB' />
+	[29] (311,157)<div  />
+		[30] (311,169)<span >新闻 />
+[31] (360,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0bvQoo9Pq6A9ryhd_Z_O7CFKEk_CTldzL95znGxvA4tCZC0BzpNJ5q2katOx264FMjR_KoipBU8KbT6qudOKF5jlIyIiE67VFD4Jzd5yOZoHe8nQ&q=%22Varun+Mohan%22+%223x%22+OR+%22tripled%22+%22Antigravity%22&ved=1t:220175&ictx=111' />
+	[32] (360,157)<div  />
+		[33] (360,169)<span >购物 />
+[34] (416,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0bvQoo9Pq6A9ryhd_Z_O7CFKEk_CTldzL95znGxvA4tCZC0BzpNJ5q2katOx264FMjR_KoipBU8KbT6qudOKF5jlIyIiE67VFD4Jzd5yOZoHe8nQ&q=%22Varun+Mohan%22+%223x%22+OR+%22tripled%22+%22Antigravity%22&sa=X&ved=2ahUKEwjwl8b09cyUAxUQUaQEHT7SFUIQs6gLegQIEhAB' />
+	[35] (416,157)<div  />
+		[36] (416,169)<span >短视频 />
+[37] (481,157)<div class='mTpL7c' role='button' />
+	[38] (481,157)<div  />
+		[39] (481,169)<div  />
+			[40] (473,162)<span >更多 />
+			[41] (494,162)<span  />
+[42] (548,157)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[43] (548,157)<div  />
+		[44] (548,169)<div  />
+			[45] (539,162)<span >工具 />
+			[46] (561,162)<span  />
+搜索结果
+Web results
+[47] (318,298)<a class='zReHs' href='https://x.com/OfficialLoganK/status/2057657580546322844' />
+	[48] (318,328)<h3 >We just 3xed the Antigravity limits again, but this time ... />
+	[49] (156,276)<div  />
+		[50] (156,276)<div  />
+			[51] (97,276)<span  />
+				[52] (97,276)<div  />
+					[53] (97,276)<img  />
+			[54] (175,276)<div  />
+				[55] (175,264)<div  />
+					[56] (175,264)<span >X · OfficialLoganK />
+				[57] (175,290)<div  />
+					[58] (172,290)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>640+ 个赞  ·  9小时前 />
+[59] (248,289)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[60] (248,289)<span  />
+		[61] (248,290)<span  />
+Varun Mohan
+profile.
+Varun Mohan
+. ✓. _mohansolo. 1h. Yesterday, we
+3x
+'d limits on
+Antigravity
+and are seeing you build so much more. One thing ...
+[62] (333,507)<a class='zReHs' href='https://9to5google.com/2026/05/21/google-has-tripled-gemini-usage-limits-for-antigravity-twice/' />
+	[63] (333,537)<h3 >Google has tripled Gemini usage limits for Antigravity, twice />
+	[64] (231,485)<div  />
+		[65] (231,485)<div  />
+			[66] (97,485)<span  />
+				[67] (97,485)<div  />
+					[68] (97,485)<img  />
+			[69] (250,485)<div  />
+				[70] (250,473)<div  />
+					[71] (250,473)<span >9to5Google />
+				[72] (250,499)<div  />
+					[73] (250,499)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://9to5google.com />
+						[74] (290,498)<span class='ylgVCe ob9lvb' role='text'>› 2026/05/21 › goo... />
+·
+[75] (380,499)<a class='dEEN8c' href='https://9to5google.com/2026/05/21/google-has-tripled-gemini-usage-limits-for-antigravity-twice/' />
+	[76] (380,498)<span >翻译此页 />
+[77] (423,498)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[78] (423,498)<span  />
+		[79] (423,499)<span  />
+9小时前
+—
+On Wednesday, Google raised Gemini model rate limits for
+Antigravity
+by
+3x
+, as well as resetting the weekly quotas for all users. ...
+Varun Mohan
+, ...
+[80] (309,713)<a class='zReHs' href='https://www.linkedin.com/posts/logankilpatrick_varun-mohan-mohansolo-on-x-activity-7463100993157795840-ISFd' />
+	[81] (309,747)<h3 >Logan Kilpatrick - Varun Mohan (@_mohansolo) on X />
+	[82] (181,694)<div  />
+		[83] (181,694)<div  />
+			[84] (97,694)<span  />
+				[85] (97,694)<div  />
+					[86] (97,694)<img  />
+			[87] (200,694)<div  />
+				[88] (200,682)<div  />
+					[89] (200,682)<span >LinkedIn · Logan Kilpatrick />
+				[90] (200,708)<div  />
+					[91] (169,708)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>40+ 个回应  ·  1天前 />
+[92] (299,707)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[93] (299,707)<span  />
+		[94] (299,708)<span  />
+We just 3xed the rate limits across all tiers in
+Antigravity
+so ...
+3x
+is permanent? Limits reset could be on monday, not random day.
+[95] (341,922)<a class='zReHs' href='https://www.kucoin.com/news/flash/google-antigravity-raises-gemini-rate-limits-3x-admits-early-mistakes' />
+	[96] (341,956)<h3 >Google Antigravity triples Gemini rate limits, acknowledges ... />
+	[97] (222,904)<div  />
+		[98] (222,904)<div  />
+			[99] (97,904)<span  />
+				[100] (97,904)<div  />
+					[101] (97,904)<img  />
+			[102] (241,904)<div  />
+				[103] (241,891)<div  />
+					[104] (241,891)<span >KuCoin />
+				[105] (241,917)<div  />
+					[106] (241,917)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://www.kucoin.com />
+						[107] (282,917)<span class='ylgVCe ob9lvb' role='text'>› News › Details />
+·
+[108] (363,917)<a class='dEEN8c' href='https://www.kucoin.com/news/flash/google-antigravity-raises-gemini-rate-limits-3x-admits-early-mistakes' />
+	[109] (363,917)<span >翻译此页 />
+[110] (407,916)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[111] (407,916)<span  />
+		[112] (407,917)<span  />
+1天前
+—
+...
+Varun Mohan
+, a core member of Google's
+Antigravity
+team (formerly founder of Windsurf), today announced emergency corrective measures. He ...
+
+</current_dom>

@@ -1,0 +1,154 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (127,73)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwifu-bv8cyUAxVOUaQEHe-aL9UQPAgI' id='logo' title='Google 首页' />
+[1] (418,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (629,71)<div  />
+	[3] (626,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (626,71)<span  />
+	[5] (650,71)<span  />
+[6] (673,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (711,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (755,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (749,71)<div  />
+		[10] (749,71)<span  />
+[11] (830,72)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[12] (830,74)<div  />
+		[13] (830,72)<span  />
+[14] (874,72)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[15] (941,72)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3D%25E4%25B8%25AD%25E4%25B8%259C%25E5%259C%25B0%25E5%258C%25BA%25E5%25B1%2580%25E5%258A%25BF%2B%25E6%259C%2580%25E6%2596%25B0%25E6%2596%25B0%25E9%2597%25BB%2B2026%25E5%25B9%25B45%25E6%259C%2588&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[16] (105,157)<a class='XVMlrc C6AK7c' href='/search?q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&sca_esv=1189c3486312da6e&udm=50&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&aep=1&ntc=1&sa=X&ved=2ahUKEwifu-bv8cyUAxVOUaQEHe-aL9UQ2J8OegQIDxAD' />
+	[17] (105,157)<div  />
+		[18] (105,169)<div  />
+			[19] (105,162)<span  />
+				[20] (105,161)<span >AI 模式 />
+[21] (162,157)<a class='C6AK7c' role='link' />
+	全部
+[22] (212,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&sa=X&ved=2ahUKEwifu-bv8cyUAxVOUaQEHe-aL9UQ0pQJegQIFRAB' />
+	[23] (212,157)<div  />
+		[24] (212,169)<span >新闻 />
+[25] (261,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&sa=X&ved=2ahUKEwifu-bv8cyUAxVOUaQEHe-aL9UQtKgLegQIFBAB' />
+	[26] (261,157)<div  />
+		[27] (261,169)<span >视频 />
+[28] (311,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&sa=X&ved=2ahUKEwifu-bv8cyUAxVOUaQEHe-aL9UQtKgLegQIExAB' />
+	[29] (311,157)<div  />
+		[30] (311,169)<span >图片 />
+[31] (360,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&ved=1t:220175&ictx=111' />
+	[32] (360,157)<div  />
+		[33] (360,169)<span >购物 />
+[34] (417,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONTshNMjE5PZCaAuOHwFZmwGvygM6sIam3D8eQBqs50rx6FFQlRCq3efnjMArc-DNgO9KB_o7gURyx_j3Tx48gEz3Nnpu2IJeB7VNgFkPy8YyfPFcWOu8WFZTag-GR1YMbSRyhDThLGsw10uUKL4UBXQiGBiCVSbMYlLIklK_VEQxhxnQGnA&q=%E4%B8%AD%E4%B8%9C%E5%9C%B0%E5%8C%BA%E5%B1%80%E5%8A%BF+%E6%9C%80%E6%96%B0%E6%96%B0%E9%97%BB+2026%E5%B9%B45%E6%9C%88&sa=X&ved=2ahUKEwifu-bv8cyUAxVOUaQEHe-aL9UQs6gLegQIERAB' />
+	[35] (417,157)<div  />
+		[36] (417,169)<span >短视频 />
+[37] (481,157)<div class='mTpL7c' role='button' />
+	[38] (481,157)<div  />
+		[39] (481,169)<div  />
+			[40] (473,162)<span >更多 />
+			[41] (495,162)<span  />
+[42] (548,157)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[43] (548,157)<div  />
+		[44] (548,169)<div  />
+			[45] (539,162)<span >工具 />
+			[46] (561,162)<span  />
+搜索结果
+網頁搜尋結果
+[47] (207,298)<a class='zReHs' href='https://www.bbc.com/zhongwen/topics/c712zdkzz63t/trad' />
+	[48] (176,328)<h3 >中東- BBC News 中文 />
+	[49] (207,276)<div  />
+		[50] (207,276)<div  />
+			[51] (96,276)<span  />
+				[52] (96,276)<div  />
+					[53] (96,276)<img  />
+			[54] (226,276)<div  />
+				[55] (226,264)<div  />
+					[56] (226,264)<span >BBC />
+				[57] (226,290)<div  />
+					[58] (226,290)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://www.bbc.com />
+						[59] (261,289)<span class='ylgVCe ob9lvb' role='text'>› topics › trad />
+·
+[60] (344,290)<a class='dEEN8c' href='https://www.bbc.com/zhongwen/topics/c712zdkzz63t/trad' />
+	[61] (344,289)<span >转为简体网页 />
+[62] (399,289)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[63] (399,289)<span  />
+		[64] (399,290)<span  />
+2026年5月18日
+. 特朗普稱伊朗終戰提案「完全不可接受」，油價再度上漲.
+2026
+... 伊朗稱美國已回應
+最新
+的和平提案.
+2026年5月4日
+. 一名身穿白色長袍的男子，走 ...
+[65] (184,507)<a class='zReHs' href='https://www.voachinese.com/z/1759' />
+	[66] (140,537)<h3 >中东相关新闻 />
+	[67] (184,485)<div  />
+		[68] (184,485)<div  />
+			[69] (96,485)<span  />
+				[70] (96,485)<div  />
+					[71] (96,485)<img  />
+			[72] (203,485)<div  />
+				[73] (203,473)<div  />
+					[74] (203,473)<span >美国之音 />
+				[75] (203,499)<div  />
+					[76] (203,499)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://www.voachinese.com />
+						[77] (275,498)<span class='ylgVCe ob9lvb' role='text'>› ... />
+[78] (304,498)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[79] (304,498)<span  />
+		[80] (304,499)<span  />
+2026年5月19日
+. 人们对伊朗冲突造成的成本感到担心，但美伊有望再启谈判；全球市场涨跌互现，油价窜升. 星期一(5月18日)，随着
+中东
+冲突仍处在僵局以及来自中国的经济数据比 ...
+[81] (286,713)<a class='zReHs' href='https://lk.china-embassy.gov.cn/fyrth/202603/t20260305_11869312.htm' />
+	[82] (286,747)<h3 >2026年3月5日外交部发言人毛宁主持例行记者会 />
+	[83] (241,694)<div  />
+		[84] (241,694)<div  />
+			[85] (96,694)<span  />
+				[86] (96,694)<div  />
+					[87] (96,694)<span  />
+			[88] (260,694)<div  />
+				[89] (260,682)<div  />
+					[90] (260,682)<span >china-embassy.gov.cn />
+				[91] (260,708)<div  />
+					[92] (260,708)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://lk.china-embassy.gov.cn />
+						[93] (339,707)<span class='ylgVCe ob9lvb' role='text'>› t20260305_11869312 />
+[94] (420,707)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[95] (420,707)<span  />
+		[96] (420,708)<span  />
+2026年3月5日
+—
+总台CGTN记者：美国和以色列对伊朗发动军事打击，
+地区
+紧张
+局势
+持续升级。请问中方为斡旋
+局势
+降温采取了哪些努力，下阶段将开展哪些工作？
+[97] (351,925)<a class='zReHs' href='https://news.un.org/zh/story/2026/05/1142181' />
+	[98] (351,956)<h3 >联合国警告：中东冲突拖累全球增长并推高通胀发展中经济体 ... />
+	[99] (193,904)<div  />
+		[100] (193,904)<div  />
+			[101] (96,904)<span  />
+				[102] (96,904)<div  />
+					[103] (96,904)<img  />
+			[104] (212,904)<div  />
+				[105] (212,891)<div  />
+					[106] (212,891)<span >UN News />
+				[107] (212,917)<div  />
+					[108] (212,917)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://news.un.org />
+						[109] (261,917)<span class='ylgVCe ob9lvb' role='text'>› story › 2026/05 />
+[110] (323,916)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[111] (323,916)<span  />
+		[112] (323,917)<span  />
+3天前
+—
+联合国周二发布《
+2026年
+年中世界经济形势与展望》报告指出，
+中东
+危机再次对全球经济造成冲击，导致增长放缓、通胀压力回升并加剧不确定性。
+
+</current_dom>

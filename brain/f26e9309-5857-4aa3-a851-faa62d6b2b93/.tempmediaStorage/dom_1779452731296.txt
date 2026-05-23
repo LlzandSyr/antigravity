@@ -1,0 +1,40 @@
+跳至主要内容/导航
+[0] (137,25)<a class='site-welcome navbar-brand text-body fs-default p-0' href='https://www.un.org/zh' title='United Nations' />
+	[1] (47,25)<i  />
+	[2] (151,26)<span >欢迎来到联合国，您的世界！ />
+Language
+[3] (442,25)<a class='nav-link nav-link--zh-ar- d-flex gap-s align-items-center justify-content-between' href='/ar/'>العربية />
+[4] (485,25)<a class='nav-link active nav-link--zh-zh- d-flex gap-s align-items-center justify-content-between' href='/zh/'>中文 />
+[5] (535,25)<a class='nav-link nav-link--zh-en- d-flex gap-s align-items-center justify-content-between' href='/en/'>English />
+[6] (597,25)<a class='nav-link nav-link--zh-fr- d-flex gap-s align-items-center justify-content-between' href='/fr/'>Français />
+[7] (663,25)<a class='nav-link nav-link--zh-ru- d-flex gap-s align-items-center justify-content-between' href='/ru/'>Русский />
+[8] (728,25)<a class='nav-link nav-link--zh-es- d-flex gap-s align-items-center justify-content-between' href='/es/'>Español />
+[9] (797,25)<a class='nav-link nav-link--zh-pt- d-flex gap-s align-items-center justify-content-between' href='/pt/'>Português />
+[10] (869,25)<a class='nav-link nav-link--zh-sw- d-flex gap-s align-items-center justify-content-between' href='/sw/'>Kiswahili />
+[11] (937,25)<button class='nav-link dropdown-toggle nav-link- d-flex gap-s align-items-center justify-content-between'>其它 />
+[12] (149,132)<a href='/zh/' title='United Nations' />
+	[13] (149,135)<img  />
+[14] (348,112)<a href='/zh/' title='联合国新闻'>联合国新闻 />
+全球视野, 常人故事
+[15] (934,135)<button class='search-toggler collapsed d-none align-self-center btn gap-0 shadow-none text-uppercase ms-g mb-0 p-0 d-lg-flex'>搜索 />
+[16] (81,256)<a class='nav-link dropdown-toggle nav-link--zh- d-flex gap-s align-items-center justify-content-between' href='/zh/' title='主页'>主页 />
+[17] (182,256)<a class='nav-link dropdown-toggle nav-link- d-flex gap-s align-items-center justify-content-between' title='全球议题'>全球议题 />
+[18] (299,256)<a class='nav-link dropdown-toggle nav-link- d-flex gap-s align-items-center justify-content-between' title='深度报道'>深度报道 />
+[19] (408,256)<a class='nav-link dropdown-toggle nav-link-https--wwwunorg-sg-zh d-flex gap-s align-items-center justify-content-between' href='https://www.un.org/sg/zh' title='秘书长'>秘书长 />
+[20] (517,256)<a class='nav-link dropdown-toggle nav-link- d-flex gap-s align-items-center justify-content-between' title='新闻媒体'>新闻媒体 />
+Audio and Subscription
+[21] (845,332)<a class='audio-hub-link nav-link nav-link--zh-audio-hub d-flex gap-s align-items-center justify-content-between' href='/zh/audio-hub' title='音频站' />
+	[22] (835,332)<span >音频站 />
+	[23] (875,332)<i  />
+[24] (926,332)<a class='subscribe-link nav-link nav-link--zh-content-un-newsletter-subscribe d-flex gap-s align-items-center justify-content-between' href='/zh/content/un-newsletter-subscribe' title='订阅' />
+	[25] (914,332)<span >订阅 />
+	[26] (947,332)<i  />
+联合国警告：中东冲突拖累全球增长并推高通胀 发展中经济体首当其冲
+[27] (500,828)<div  />
+	[28] (500,828)<div  />
+		[29] (500,828)<picture  />
+			[30] (500,828)<img  />
+[31] (981,427)<a class='weibo ext' href='https://service.weibo.com/share/share.php?url=https://news.un.org/zh/story/2026/05/1142181&title=联合国警告：中东冲突拖累全球增长并推高通胀 发展中经济体首当其冲' title='Share this via Weibo (opens in a new window)' />
+[32] (981,486)<a class='twitter ext' href='https://twitter.com/intent/tweet?text=联合国警告：中东冲突拖累全球增长并推高通胀 发展中经济体首当其冲&url=https://news.un.org/zh/story/2026/05/1142181' title='Share this via Twitter (opens in a new window)' />
+[33] (981,544)<a class='print' title='Share this via 打印' />
+[34] (981,599)<a class='email' href='mailto:?subject=联合国警告：中东冲突拖累全球增长并推高通胀 发展中经济体首当其冲&body=https://news.un.org/zh/story/2026/05/1142181' title='Share this via 电子邮件' />

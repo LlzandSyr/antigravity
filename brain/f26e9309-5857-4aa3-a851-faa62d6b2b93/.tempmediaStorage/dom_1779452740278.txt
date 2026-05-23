@@ -1,0 +1,28 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (113,59)<a href='/zh/' title='United Nations' />
+	[1] (113,62)<img  />
+[2] (267,45)<a href='/zh/' title='联合国新闻'>联合国新闻 />
+全球视野, 常人故事
+[3] (934,62)<button class='search-toggler collapsed d-none align-self-center btn gap-0 shadow-none text-uppercase ms-g mb-0 p-0 d-lg-flex'>搜索 />
+能源冲击推高成本并加剧通胀
+报告指出，此次冲击主要体现在能源领域。供应受限、价格飙升以及运输和保险成本上升通过供应链传导，推高全球生产成本。尽管能源企业从价格上涨中获得收益，但家庭和企业面临更大成本压力。
+报告强调，冲击持续时间将决定总体影响，但不确定性显著上升，风险明显偏向下行。
+中东冲突已中断自2023年以来的全球通胀回落趋势。在发达经济体中，通胀率预计将从2025年的2.6%升至2026年的2.9%；在发展中经济体则将从4.2%升至5.2%。能源、运输和进口成本上涨正在侵蚀实际收入，并扩大价格压力的范围。
+食品价格问题尤为突出。报告指出，化肥供应受扰推高成本，可能降低农作物产量并进一步推高食品价格。
+政策两难与金融条件收紧
+报告指出，通胀前景不确定性加剧，使各国央行面临政策两难：加息可能抑制通胀但削弱增长，维持利率则可能固化价格压力。
+报告指出，目前全球金融市场总体保持韧性，但能源价格上涨推高通胀预期并带动短期债券收益率上升。对发展中国家而言，这一趋势导致外部融资条件收紧，并削弱财政状况，尤其是在政策空间有限的情况下。
+[4] (855,237)<a href='/zh/story/2026/01/1141426'>联合国报告：全球经济展现韧性但增长乏力　贸易紧张与债务压力拖累前景 />
+[5] (812,416)<a href='/zh/story/2026/04/1142036' />
+	[6] (812,416)<picture  />
+		[7] (812,416)<img  />
+[8] (855,561)<a href='/zh/story/2026/04/1142036'>中东冲突推高能源与大宗商品价格 全球通胀攀升并拖累经济增长 />
+[9] (981,427)<a class='weibo ext' href='https://service.weibo.com/share/share.php?url=https://news.un.org/zh/story/2026/05/1142181&title=联合国警告：中东冲突拖累全球增长并推高通胀 发展中经济体首当其冲' title='Share this via Weibo (opens in a new window)' />
+[10] (981,486)<a class='twitter ext' href='https://twitter.com/intent/tweet?text=联合国警告：中东冲突拖累全球增长并推高通胀 发展中经济体首当其冲&url=https://news.un.org/zh/story/2026/05/1142181' title='Share this via Twitter (opens in a new window)' />
+[11] (981,544)<a class='print' title='Share this via 打印' />
+[12] (981,599)<a class='email' href='mailto:?subject=联合国警告：中东冲突拖累全球增长并推高通胀 发展中经济体首当其冲&body=https://news.un.org/zh/story/2026/05/1142181' title='Share this via 电子邮件' />
+
+</current_dom>

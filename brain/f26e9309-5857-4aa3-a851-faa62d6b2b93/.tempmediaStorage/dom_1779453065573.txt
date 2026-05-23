@@ -1,0 +1,108 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (127,73)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwiajdyO88yUAxWRWkEAHSHmNKEQPAgI' id='logo' title='Google 首页' />
+[1] (418,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (629,71)<div  />
+	[3] (626,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (626,71)<span  />
+	[5] (650,71)<span  />
+[6] (673,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (711,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (755,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (749,71)<div  />
+		[10] (749,71)<span  />
+[11] (830,72)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[12] (830,74)<div  />
+		[13] (830,72)<span  />
+[14] (874,72)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[15] (941,72)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3D2026%25E5%25B9%25B4%2B%25E9%259C%258D%25E5%25B0%2594%25E6%259C%25A8%25E5%2585%25B9%25E6%25B5%25B7%25E5%25B3%25A1%2B%25E8%2588%25AA%25E8%25BF%2590%2B%25E6%259C%2580%25E6%2596%25B0%25E6%2583%2585%25E5%2586%25B5%26sca_esv%3D1189c3486312da6e%26source%3Dhp%26ei%3DWkwQaszhKczvhbIPzse6oA8%26iflsig%3DAFdpzrgAAAAAahBaasduZeB1hhP20_95YB3lGf1l7U3L&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[16] (105,157)<a class='XVMlrc C6AK7c' href='/search?q=2026%E5%B9%B4+%E9%9C%8D%E5%B0%94%E6%9C%A8%E5%85%B9%E6%B5%B7%E5%B3%A1+%E8%88%AA%E8%BF%90+%E6%9C%80%E6%96%B0%E6%83%85%E5%86%B5&sca_esv=1189c3486312da6e&udm=50&source=hp&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONThzuZ3Y2Cbge6N8GD-jNeuoXgo2PB_GD83jrZk0kQzeqDupJ6tc57_6OdN_MKM5GiF7FJsZzcX6T6vyd2M36hmdBBK1XITSHAsqBRT-SyMJviD41FEKRoBfpy_tg1o6-IqzPLi6ZawWIYElBnTY0SXsc4nJ88FRLcShK7AakqK_Rl-fppQ&aep=1&ntc=1&sa=X&ved=2ahUKEwiajdyO88yUAxWRWkEAHSHmNKEQ2J8OegQIEBAD' />
+	[17] (105,157)<div  />
+		[18] (105,169)<div  />
+			[19] (105,162)<span  />
+				[20] (105,161)<span >AI 模式 />
+[21] (162,157)<a class='C6AK7c' role='link' />
+	全部
+[22] (212,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&q=2026%E5%B9%B4+%E9%9C%8D%E5%B0%94%E6%9C%A8%E5%85%B9%E6%B5%B7%E5%B3%A1+%E8%88%AA%E8%BF%90+%E6%9C%80%E6%96%B0%E6%83%85%E5%86%B5&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONThzuZ3Y2Cbge6N8GD-jNeuoXgo2PB_GD83jrZk0kQzeqDupJ6tc57_6OdN_MKM5GiF7FJsZzcX6T6vyd2M36hmdBBK1XITSHAsqBRT-SyMJviD41FEKRoBfpy_tg1o6-IqzPLi6ZawWIYElBnTY0SXsc4nJ88FRLcShK7AakqK_Rl-fppQ&sa=X&ved=2ahUKEwiajdyO88yUAxWRWkEAHSHmNKEQ0pQJegQIFhAB' />
+	[23] (212,157)<div  />
+		[24] (212,169)<span >新闻 />
+[25] (261,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONThzuZ3Y2Cbge6N8GD-jNeuoXgo2PB_GD83jrZk0kQzeqDupJ6tc57_6OdN_MKM5GiF7FJsZzcX6T6vyd2M36hmdBBK1XITSHAsqBRT-SyMJviD41FEKRoBfpy_tg1o6-IqzPLi6ZawWIYElBnTY0SXsc4nJ88FRLcShK7AakqK_Rl-fppQ&q=2026%E5%B9%B4+%E9%9C%8D%E5%B0%94%E6%9C%A8%E5%85%B9%E6%B5%B7%E5%B3%A1+%E8%88%AA%E8%BF%90+%E6%9C%80%E6%96%B0%E6%83%85%E5%86%B5&sa=X&ved=2ahUKEwiajdyO88yUAxWRWkEAHSHmNKEQtKgLegQIFRAB' />
+	[26] (261,157)<div  />
+		[27] (261,169)<span >图片 />
+[28] (311,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONThzuZ3Y2Cbge6N8GD-jNeuoXgo2PB_GD83jrZk0kQzeqDupJ6tc57_6OdN_MKM5GiF7FJsZzcX6T6vyd2M36hmdBBK1XITSHAsqBRT-SyMJviD41FEKRoBfpy_tg1o6-IqzPLi6ZawWIYElBnTY0SXsc4nJ88FRLcShK7AakqK_Rl-fppQ&q=2026%E5%B9%B4+%E9%9C%8D%E5%B0%94%E6%9C%A8%E5%85%B9%E6%B5%B7%E5%B3%A1+%E8%88%AA%E8%BF%90+%E6%9C%80%E6%96%B0%E6%83%85%E5%86%B5&ved=1t:220175&ictx=111' />
+	[29] (311,157)<div  />
+		[30] (311,169)<span >购物 />
+[31] (360,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONThzuZ3Y2Cbge6N8GD-jNeuoXgo2PB_GD83jrZk0kQzeqDupJ6tc57_6OdN_MKM5GiF7FJsZzcX6T6vyd2M36hmdBBK1XITSHAsqBRT-SyMJviD41FEKRoBfpy_tg1o6-IqzPLi6ZawWIYElBnTY0SXsc4nJ88FRLcShK7AakqK_Rl-fppQ&q=2026%E5%B9%B4+%E9%9C%8D%E5%B0%94%E6%9C%A8%E5%85%B9%E6%B5%B7%E5%B3%A1+%E8%88%AA%E8%BF%90+%E6%9C%80%E6%96%B0%E6%83%85%E5%86%B5&sa=X&ved=2ahUKEwiajdyO88yUAxWRWkEAHSHmNKEQtKgLegQIExAB' />
+	[32] (360,157)<div  />
+		[33] (360,169)<span >视频 />
+[34] (417,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVrl2pKVsOrAGyrx9IK5ONThzuZ3Y2Cbge6N8GD-jNeuoXgo2PB_GD83jrZk0kQzeqDupJ6tc57_6OdN_MKM5GiF7FJsZzcX6T6vyd2M36hmdBBK1XITSHAsqBRT-SyMJviD41FEKRoBfpy_tg1o6-IqzPLi6ZawWIYElBnTY0SXsc4nJ88FRLcShK7AakqK_Rl-fppQ&q=2026%E5%B9%B4+%E9%9C%8D%E5%B0%94%E6%9C%A8%E5%85%B9%E6%B5%B7%E5%B3%A1+%E8%88%AA%E8%BF%90+%E6%9C%80%E6%96%B0%E6%83%85%E5%86%B5&sa=X&ved=2ahUKEwiajdyO88yUAxWRWkEAHSHmNKEQs6gLegQIEhAB' />
+	[35] (417,157)<div  />
+		[36] (417,169)<span >短视频 />
+[37] (481,157)<div class='mTpL7c' role='button' />
+	[38] (481,157)<div  />
+		[39] (481,169)<div  />
+			[40] (473,162)<span >更多 />
+			[41] (495,162)<span  />
+[42] (548,157)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[43] (548,157)<div  />
+		[44] (548,169)<div  />
+			[45] (539,162)<span >工具 />
+			[46] (561,162)<span  />
+搜索结果
+网页搜索结果
+[47] (337,298)<a class='zReHs' href='https://news.un.org/zh/story/2026/04/1142056' />
+	[48] (337,328)<h3 >霍尔木兹海峡局势动荡加剧脆弱地区能源冲击| | 1联合国新闻 />
+	[49] (193,276)<div  />
+		[50] (193,276)<div  />
+			[51] (96,276)<span  />
+				[52] (96,276)<div  />
+					[53] (96,276)<img  />
+			[54] (212,276)<div  />
+				[55] (212,264)<div  />
+					[56] (212,264)<span >UN News />
+				[57] (212,290)<div  />
+					[58] (212,290)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>https://news.un.org />
+						[59] (261,289)<span class='ylgVCe ob9lvb' role='text'>› story › 2026/04 />
+[60] (323,289)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[61] (323,289)<span  />
+		[62] (323,290)<span  />
+2026年4月30日
+—
+联合国多个机构本周发出警告，随着
+霍尔木兹海峡航运
+僵局持续，布伦特原油价格已攀升至每桶120 美元左右，一场全球性能源震荡正从亚洲蔓延至欧洲，黎巴嫩等 ...
+AI 概览
+[63] (643,476)<div aria-label='查看 3 条佐证链接' class='QUUgY' role='button' />
+	[64] (643,476)<div  />
+		[65] (620,476)<div  />
+			[66] (620,476)<img  />
+		[67] (633,476)<div  />
+			[68] (633,476)<img  />
+		[69] (646,476)<div  />
+			[70] (646,476)<img  />
+		[71] (664,476)<span >+5 />
+[72] (695,479)<div aria-label='关于这条结果的详细信息' class='Mtffrd' role='button' />
+受美以与伊朗冲突影响，
+当前霍尔木兹海峡的航运面临严重受阻
+。航运巨头正绕道区域外港口，大量船只曾一度滞留，全球能源价格攀升，海员安全及供应链稳定受到极大挑战。
+[73] (186,597)<a aria-label='www.ungeneva.org（+5 个）- 查看相关链接' class='muU3oe' href='https://www.ungeneva.org/zh/news-media/news/2026/03/117239/liangwanhaiyuanshoukunhuoermuzihaixiaxiandaihangyun' />
+www.ungeneva.org
++5
+核心航运现状与动态：
+航线绕行与替代方案
+：全球最大航运公司地中海航运（MSC）已于5月10日启动全新海陆联运服务。货物由欧洲运至沙特吉达港或达曼港后，通过卡车陆运横跨沙特，再由支线小船接驳至波斯湾各地，以彻底避开风险极高的霍尔木兹海峡。
+船舶滞留与撤离
+：波斯湾及海峡周边曾一度滞留上百艘集装箱船及数百艘各类货船。近期，包括MSC旗下6艘主力船在内的多艘大型集装箱船通过关闭AIS（船舶自动识别系统）秘密撤离，成功驶入阿拉伯海并恢复正常航线。部分其他航运公司（如赫伯罗特）仍在等待安全穿越的“窗口期”。
+港口拥堵与物流压力
+：由于船只无法正常进出波斯湾，阿曼（如索哈港）和阿联酋东海岸的港口出现了货物严重堆积的现象，大量货运不得不依赖昂贵的陆路转运。
+[74] (331,947)<div  />
+	[75] (331,947)<div >展开 />
+		展开
+		[76] (348,947)<span  />
+
+</current_dom>

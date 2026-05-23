@@ -1,0 +1,102 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+2026-05-22
+星期五
+[0] (869,20)<a class='register' href='javascript:void(0);'>注册 />
+[1] (924,20)<a class='login' href='javascript:void(0);'>登录 />
+[2] (991,20)<a class='download-app' href='/staticsg/res/html/web/download.html?v=1.0'>下载APP />
+[3] (81,131)<a href='/staticsg/home' />
+	[4] (81,131)<img  />
+[5] (169,131)<li  />
+	[6] (169,131)<a class='section-a' href='/staticsg/home' />
+		[7] (169,131)<span >热点 />
+[8] (203,131)<li  />
+	[9] (203,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=1&v=2.2' />
+		[10] (203,131)<span >政情 />
+[11] (236,131)<li  />
+	[12] (236,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=2&v=2.2' />
+		[13] (236,131)<span >经济 />
+[14] (269,131)<li  />
+	[15] (269,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=64&v=2.2' />
+		[16] (269,131)<span >视频 />
+[17] (303,131)<li  />
+	[18] (303,131)<a class='section-a' href='/staticsg/res/html/web/livingList.html' />
+		[19] (303,131)<span >直播 />
+[20] (336,131)<li  />
+	[21] (336,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=44&v=2.2' />
+		[22] (336,131)<span >评论 />
+[23] (370,131)<li  />
+	[24] (370,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=35&v=2.2' />
+		[25] (370,131)<span >区情 />
+[26] (403,131)<li  />
+	[27] (403,131)<a class='section-a' href='/staticsg/res/html/web/specialDetail.html?hotNaviSectionId=-507&id=1702' />
+		[28] (403,131)<span  />
+			[29] (404,131)<img  />
+[30] (437,131)<li  />
+	[31] (437,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=40&v=2.2' />
+		[32] (437,131)<span >民生 />
+[33] (470,131)<li  />
+	[34] (470,131)<a class='section-a' href='https://smartgate.ywtbsupappw.sh.gov.cn/site/act/shangguan/#/index' />
+		[35] (470,131)<span  />
+			[36] (471,131)<img  />
+[37] (503,131)<li  />
+	[38] (503,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=4&v=2.2' />
+		[39] (503,131)<span >文化 />
+[40] (537,131)<li  />
+	[41] (537,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=45&v=2.2' />
+		[42] (537,131)<span >深度 />
+[43] (570,131)<li  />
+	[44] (570,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=47&v=2.2' />
+		[45] (570,131)<span >科创 />
+[46] (604,131)<li  />
+	[47] (604,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=62&v=2.2' />
+		[48] (604,131)<span >思想 />
+[49] (637,131)<li  />
+	[50] (637,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=49&v=2.2' />
+		[51] (637,131)<span >教卫 />
+[52] (671,131)<li  />
+	[53] (671,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=48&v=2.2' />
+		[54] (671,131)<span >体育 />
+[55] (704,131)<li  />
+	[56] (704,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=46&v=2.2' />
+		[57] (704,131)<span >社会 />
+[58] (738,131)<li  />
+	[59] (738,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=50&v=2.2' />
+		[60] (738,131)<span >长三角 />
+[61] (771,131)<li  />
+	[62] (771,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=42&v=2.2' />
+		[63] (771,131)<span >要闻 />
+[64] (804,131)<li  />
+	[65] (804,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=51&v=2.2' />
+		[66] (804,131)<span >国内 />
+[67] (838,131)<li  />
+	[68] (838,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=52&v=2.2' />
+		[69] (838,131)<span >国际 />
+[70] (871,131)<li  />
+	[71] (871,131)<a class='section-a li-hover' href='/staticsg/res/html/web/section.html?id=21&v=2.2' />
+		[72] (871,131)<span >天下 />
+[73] (905,131)<li  />
+	[74] (905,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=41&v=2.2' />
+		[75] (905,131)<span >视觉 />
+[76] (938,131)<li  />
+	[77] (938,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=70&v=2.2' />
+		[78] (938,131)<span >副刊 />
+[79] (972,131)<li  />
+	[80] (972,131)<a class='section-a' href='/staticsg/res/html/web/section.html?id=67&v=2.2' />
+		[81] (972,131)<span >文学报 />
+专题
+全球最大航运公司推出中东至欧洲新服务，避开霍尔木兹海峡
+[82] (70,379)<img  />
+[83] (156,380)<span class='subsection-name-box'>2026-05-04 08:35 />
+	[84] (156,371)<span >纵览 />
+	2026-05-04 08:35
+[85] (767,393)<span class='subscribe' id='subscribe' />
+	[86] (767,384)<img  />
+来源：上观新闻
+作者：央视新闻客户端
+全球最大航运公司地中海航运公司2日发布公告称，该公司推出一项从欧洲、经红海、至中东的新快运服务，以响应日益增长的欧洲至红海的服务需求，并应对当前中东地区充满挑战的形势。
+电子报
+
+</current_dom>

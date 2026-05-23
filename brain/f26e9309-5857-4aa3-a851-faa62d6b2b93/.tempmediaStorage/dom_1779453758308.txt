@@ -1,0 +1,144 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (127,73)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwjmj9nj9cyUAxUUTaQEHUuGOI4QPAgI' id='logo' title='Google 首页' />
+[1] (418,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (629,71)<div  />
+	[3] (627,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (627,71)<span  />
+	[5] (650,71)<span  />
+[6] (673,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (711,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (755,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (749,71)<div  />
+		[10] (749,71)<span  />
+[11] (830,72)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[12] (830,74)<div  />
+		[13] (830,72)<span  />
+[14] (874,72)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[15] (941,72)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3Dsite:reddit.com%2B%2522Antigravity%2522%2B%2522Varun%2BMohan%2522&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[16] (105,157)<a class='XVMlrc C6AK7c' href='/search?q=site:reddit.com+%22Antigravity%22+%22Varun+Mohan%22&sca_esv=1189c3486312da6e&udm=50&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&aep=1&ntc=1&sa=X&ved=2ahUKEwjmj9nj9cyUAxUUTaQEHUuGOI4Q2J8OegQIDxAD' />
+	[17] (105,157)<div  />
+		[18] (105,169)<div  />
+			[19] (105,162)<span  />
+				[20] (105,161)<span >AI 模式 />
+[21] (163,157)<a class='C6AK7c' role='link' />
+	全部
+[22] (212,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&q=site:reddit.com+%22Antigravity%22+%22Varun+Mohan%22&sa=X&ved=2ahUKEwjmj9nj9cyUAxUUTaQEHUuGOI4QtKgLegQIEBAB' />
+	[23] (212,157)<div  />
+		[24] (212,169)<span >图片 />
+[25] (262,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&q=site:reddit.com+%22Antigravity%22+%22Varun+Mohan%22&sa=X&ved=2ahUKEwjmj9nj9cyUAxUUTaQEHUuGOI4QtKgLegQIExAB' />
+	[26] (262,157)<div  />
+		[27] (262,169)<span >视频 />
+[28] (311,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&q=site:reddit.com+%22Antigravity%22+%22Varun+Mohan%22&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&sa=X&ved=2ahUKEwjmj9nj9cyUAxUUTaQEHUuGOI4Q0pQJegQIEhAB' />
+	[29] (311,157)<div  />
+		[30] (311,169)<span >新闻 />
+[31] (360,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&q=site:reddit.com+%22Antigravity%22+%22Varun+Mohan%22&ved=1t:220175&ictx=111' />
+	[32] (360,157)<div  />
+		[33] (360,169)<span >购物 />
+[34] (416,157)<a class='C6AK7c' href='/search?sca_esv=1189c3486312da6e&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&q=site:reddit.com+%22Antigravity%22+%22Varun+Mohan%22&sa=X&ved=2ahUKEwjmj9nj9cyUAxUUTaQEHUuGOI4Qs6gLegQIFBAB' />
+	[35] (416,157)<div  />
+		[36] (416,169)<span >短视频 />
+[37] (481,157)<div class='mTpL7c' role='button' />
+	[38] (481,157)<div  />
+		[39] (481,169)<div  />
+			[40] (473,162)<span >更多 />
+			[41] (494,162)<span  />
+[42] (548,157)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[43] (548,157)<div  />
+		[44] (548,169)<div  />
+			[45] (539,162)<span >工具 />
+			[46] (561,162)<span  />
+搜索结果
+Web results
+[47] (303,298)<a class='zReHs' href='https://www.reddit.com/r/AI_India/comments/1p3nhin/google_hires_windsurf_ceo_varun_and_launches/' />
+	[48] (303,328)<h3 >Google Hires Windsurf CEO Varun and Launches ... />
+	[49] (156,276)<div  />
+		[50] (156,276)<div  />
+			[51] (97,276)<span  />
+				[52] (97,276)<div  />
+					[53] (97,276)<img  />
+			[54] (175,276)<div  />
+				[55] (175,264)<div  />
+					[56] (175,264)<span >Reddit · r/AI_India />
+				[57] (175,290)<div  />
+					[58] (175,290)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>10+ 条评论  ·  6个月前 />
+[59] (248,289)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[60] (248,289)<span  />
+		[61] (248,290)<span  />
+...
+Antigravity
+. Google is targeting both developers and vibe ... r/google - Google hires Windsurf CEO
+Varun Mohan
+, others in $2.4 billion AI.
+[62] (350,507)<a class='zReHs' href='https://www.reddit.com/r/AntigravityGoogle/comments/1tk1q9i/i_have_a_confession_to_make_to_google/' />
+	[63] (350,537)<h3 >I have a confession to make to Google 😡 : r/AntigravityGoogle />
+	[64] (184,485)<div  />
+		[65] (184,485)<div  />
+			[66] (97,485)<span  />
+				[67] (97,485)<div  />
+					[68] (97,485)<img  />
+			[69] (203,485)<div  />
+				[70] (203,473)<div  />
+					[71] (203,473)<span >Reddit · r/AntigravityGoogle />
+				[72] (203,499)<div  />
+					[73] (170,499)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>5条评论  ·  13小时前 />
+[74] (304,498)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[75] (304,498)<span  />
+		[76] (304,499)<span  />
+...
+Antigravity
+CLI,
+Antigravity
+IDE, and
+Antigravity
+2.0. Luckily, the
+Antigravity
+team and Google know how to multiply.
+Varun Mohan
+recently ...
+[77] (209,716)<a class='zReHs' href='https://www.reddit.com/r/GeminiAI/comments/1tjujsl/quotas_increased/' />
+	[78] (209,747)<h3 >quotas increased : r/GeminiAI />
+	[79] (159,694)<div  />
+		[80] (159,694)<div  />
+			[81] (97,694)<span  />
+				[82] (97,694)<div  />
+					[83] (97,694)<img  />
+			[84] (178,694)<div  />
+				[85] (178,682)<div  />
+					[86] (178,682)<span >Reddit · r/GeminiAI />
+				[87] (178,708)<div  />
+					[88] (170,708)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>5条评论  ·  17小时前 />
+[89] (254,707)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[90] (254,707)<span  />
+		[91] (254,708)<span  />
+Varun Mohan
+(creator of Windsurf) posted it on X. ​To clarify, this only applies to the
+Antigravity
+platform's paid tiers. It effectively ...
+[92] (328,925)<a class='zReHs' href='https://www.reddit.com/r/singularity/comments/1p09wug/some_missed_the_gemini_3_model_card_pdf/' />
+	[93] (328,956)<h3 >Some missed the Gemini 3 Model Card PDF : r/singularity />
+	[94] (162,904)<div  />
+		[95] (162,904)<div  />
+			[96] (97,904)<span  />
+				[97] (97,904)<div  />
+					[98] (97,904)<img  />
+			[99] (180,904)<div  />
+				[100] (180,891)<div  />
+					[101] (180,891)<span >Reddit · r/singularity />
+				[102] (180,917)<div  />
+					[103] (175,917)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>20+ 条评论  ·  6个月前 />
+[104] (259,916)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[105] (259,916)<span  />
+		[106] (259,917)<span  />
+Is it related to
+Varun Mohan
+posting video of Laptop flying? ... Google
+Antigravity
+is an agentic development platform, evolving the ...
+
+</current_dom>
