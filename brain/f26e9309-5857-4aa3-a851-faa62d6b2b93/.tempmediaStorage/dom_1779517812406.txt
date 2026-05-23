@@ -1,0 +1,135 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (130,72)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwi_lOir5M6UAxXnWEEAHceEL7IQPAgI' id='logo' title='Google 首页' />
+[1] (444,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (655,71)<div  />
+[3] (675,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[4] (713,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[5] (757,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[6] (751,71)<div  />
+		[7] (751,71)<span  />
+[8] (831,71)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[9] (831,74)<div  />
+		[10] (831,71)<span  />
+[11] (875,71)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[12] (941,71)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3Dsite%253Areddit.com%2BAntigravity%2Bquota%2B%2522marketing%2522%2BOR%2B%25229x%2522%2BOR%2B%2522math%2522%2BOR%2B%2522speed%2522%2BOR%2B%2522weekly%2522%26sca_esv%3Db95ffecbfaf145e4%26source%3Dhp%26ei%3DT0kRarqKBN_GkdUPzealCQ%26iflsig%3DAFdpzrgAAAAAahFXXw-e3q8_Djb6j4z1dI8-2FsUHbuX%26ved%3D0ahUKEwj67eqm5M6UAxVfY6QEHU1zKQEQ4dUDCBc%26uact%3D5%26oq%3Dsite%253Areddit.com%2BAntigravity%2Bquota%2B%2522marketing%2522%2BOR%2B%25229x%2522%2BOR%2B%2522math%2522%2BOR%2B%2522speed%2522%2BOR%2B%2522weekly%2522%26gs_lp%3DEgdnd3Mtd2l6IlZzaXRlOnJlZGRpdC5jb20gQW50aWdyYXZpdHkgcXVvdGEgIm1hcmtldGluZyIgT1IgIjl4IiBPUiAibWF0aCIgT1IgInNwZWVkIiBPUiAid2Vla2x5IkiDK1DZEViQHHABeACQAQCYAdYCoAH8CaoBBTItMS4zuAEDyAEA-AEBmAIAoAIAqAIAmAMD8QVKVHT6Q5nEXJIHAKAHRLIHALgHAMIHAMgHAIAIAQ%26sclient%3Dgws-wiz&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[13] (108,155)<a class='XVMlrc C6AK7c' href='/search?q=site:reddit.com+Antigravity+quota+%22marketing%22+OR+%229x%22+OR+%22math%22+OR+%22speed%22+OR+%22weekly%22&sca_esv=b95ffecbfaf145e4&udm=50&source=hp&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3GuaXDG2rjNRLSVhAS-_RRmXibRvr6c7UM2oUTr6WIkCykAxU2sstzIW_v8OwolA03qn0roGFME7_AJNwQLHRaWKORRgecQ0-l2g9LC8LBvPUffpocYFSp2m22dKDCAF6eH-VGuhVPSmSKo5GNrvjqt318sOg&aep=1&ntc=1&sa=X&ved=2ahUKEwi_lOir5M6UAxXnWEEAHceEL7IQ2J8OegQIERAD' />
+	[14] (108,155)<div  />
+		[15] (108,167)<div  />
+			[16] (108,160)<span  />
+				[17] (108,160)<span >AI 模式 />
+[18] (165,155)<a class='C6AK7c' role='link' />
+	全部
+[19] (214,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3GuaXDG2rjNRLSVhAS-_RRmXibRvr6c7UM2oUTr6WIkCykAxU2sstzIW_v8OwolA03qn0roGFME7_AJNwQLHRaWKORRgecQ0-l2g9LC8LBvPUffpocYFSp2m22dKDCAF6eH-VGuhVPSmSKo5GNrvjqt318sOg&q=site:reddit.com+Antigravity+quota+%22marketing%22+OR+%229x%22+OR+%22math%22+OR+%22speed%22+OR+%22weekly%22&sa=X&ved=2ahUKEwi_lOir5M6UAxXnWEEAHceEL7IQtKgLegQIEhAB' />
+	[20] (214,155)<div  />
+		[21] (214,167)<span >图片 />
+[22] (263,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&q=site:reddit.com+Antigravity+quota+%22marketing%22+OR+%229x%22+OR+%22math%22+OR+%22speed%22+OR+%22weekly%22&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3GuaXDG2rjNRLSVhAS-_RRmXibRvr6c7UM2oUTr6WIkCykAxU2sstzIW_v8OwolA03qn0roGFME7_AJNwQLHRaWKORRgecQ0-l2g9LC8LBvPUffpocYFSp2m22dKDCAF6eH-VGuhVPSmSKo5GNrvjqt318sOg&sa=X&ved=2ahUKEwi_lOir5M6UAxXnWEEAHceEL7IQ0pQJegQIFBAB' />
+	[23] (263,155)<div  />
+		[24] (263,167)<span >新闻 />
+[25] (312,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3GuaXDG2rjNRLSVhAS-_RRmXibRvr6c7UM2oUTr6WIkCykAxU2sstzIW_v8OwolA03qn0roGFME7_AJNwQLHRaWKORRgecQ0-l2g9LC8LBvPUffpocYFSp2m22dKDCAF6eH-VGuhVPSmSKo5GNrvjqt318sOg&q=site:reddit.com+Antigravity+quota+%22marketing%22+OR+%229x%22+OR+%22math%22+OR+%22speed%22+OR+%22weekly%22&sa=X&ved=2ahUKEwi_lOir5M6UAxXnWEEAHceEL7IQtKgLegQIFRAB' />
+	[26] (312,155)<div  />
+		[27] (312,167)<span >视频 />
+[28] (361,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3GuaXDG2rjNRLSVhAS-_RRmXibRvr6c7UM2oUTr6WIkCykAxU2sstzIW_v8OwolA03qn0roGFME7_AJNwQLHRaWKORRgecQ0-l2g9LC8LBvPUffpocYFSp2m22dKDCAF6eH-VGuhVPSmSKo5GNrvjqt318sOg&q=site:reddit.com+Antigravity+quota+%22marketing%22+OR+%229x%22+OR+%22math%22+OR+%22speed%22+OR+%22weekly%22&ved=1t:220175&ictx=111' />
+	[29] (361,155)<div  />
+		[30] (361,167)<span >购物 />
+[31] (417,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3GuaXDG2rjNRLSVhAS-_RRmXibRvr6c7UM2oUTr6WIkCykAxU2sstzIW_v8OwolA03qn0roGFME7_AJNwQLHRaWKORRgecQ0-l2g9LC8LBvPUffpocYFSp2m22dKDCAF6eH-VGuhVPSmSKo5GNrvjqt318sOg&q=site:reddit.com+Antigravity+quota+%22marketing%22+OR+%229x%22+OR+%22math%22+OR+%22speed%22+OR+%22weekly%22&sa=X&ved=2ahUKEwi_lOir5M6UAxXnWEEAHceEL7IQs6gLegQIFxAB' />
+	[32] (417,155)<div  />
+		[33] (417,167)<span >短视频 />
+[34] (481,155)<div class='mTpL7c' role='button' />
+	[35] (481,155)<div  />
+		[36] (481,167)<div  />
+			[37] (473,160)<span >更多 />
+			[38] (495,160)<span  />
+[39] (548,155)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[40] (548,155)<div  />
+		[41] (548,167)<div  />
+			[42] (539,160)<span >工具 />
+			[43] (561,160)<span  />
+搜索结果
+Web results
+[44] (333,276)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1q82mt3/google_antigravity_implementing_weekly_rate/' />
+	[45] (333,306)<h3 >Google Antigravity implementing weekly rate limits for all ... />
+	[46] (188,255)<div  />
+		[47] (188,255)<div  />
+			[48] (99,255)<span  />
+				[49] (99,255)<div  />
+					[50] (99,255)<img  />
+			[51] (206,255)<div  />
+				[52] (206,243)<div  />
+					[53] (206,243)<span >Reddit · r/google_antigravity />
+				[54] (206,268)<div  />
+					[55] (180,268)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>180+ 条评论  ·  4个月前 />
+[56] (308,267)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[57] (308,267)<span  />
+		[58] (308,268)<span  />
+That's exactly the problem though: the
+weekly quota
+isn't documented anywhere in
+Antigravity's
+UI or support pages. ... Its a bad
+marketing
+move, ...
+[59] (331,483)<a class='zReHs' href='https://www.reddit.com/r/Bard/comments/1tjnf9h/can_someone_explain_me_how_the_hell_antigravity/' />
+	[60] (331,513)<h3 >Can someone explain me how the hell antigravity usage ... />
+	[61] (153,462)<div  />
+		[62] (153,462)<div  />
+			[63] (99,462)<span  />
+				[64] (99,462)<div  />
+					[65] (99,462)<img  />
+			[66] (171,462)<div  />
+				[67] (171,449)<div  />
+					[68] (171,449)<span >Reddit · r/Bard />
+				[69] (171,475)<div  />
+					[70] (171,475)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>10+ 条评论  ·  1天前 />
+[71] (238,474)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[72] (238,474)<span  />
+		[73] (238,475)<span  />
+Hey everyone,
+
+I’m on the Google AI Pro annual plan and heavily use Gemini (both the app and AI Studio) for work. After the recent presentation, I decided ...
+[74] (115,617)<a class='Zv9Ied' href='https://www.reddit.com/r/Bard/comments/1tjnf9h/can_someone_explain_me_how_the_hell_antigravity/on2yae2/'>14 个回答 />
+·
+最佳答案:
+No idea. Mine says I have 6 days to refresh and then I’ll come back after an hour and it’s ...
+[75] (274,720)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1rhmmvp/can_any_one_explain_how_the_ag_limits_quota/' />
+	[76] (274,750)<h3 >Can any one explain how the AG limits quota />
+	[77] (188,698)<div  />
+		[78] (188,698)<div  />
+			[79] (99,698)<span  />
+				[80] (99,698)<div  />
+					[81] (99,698)<img  />
+			[82] (206,698)<div  />
+				[83] (206,686)<div  />
+					[84] (206,686)<span >Reddit · r/google_antigravity />
+				[85] (206,712)<div  />
+					[86] (177,712)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>20+ 条评论  ·  2个月前 />
+[87] (308,711)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[88] (308,711)<span  />
+		[89] (308,712)<span  />
+I'm confused by the pattern as it would limit the gemini models after several refills to few days later? is the pattern fixed or it is, like some people ...
+[90] (115,853)<a class='Zv9Ied' href='https://www.reddit.com/r/google_antigravity/comments/1rhmmvp/can_any_one_explain_how_the_ag_limits_quota/o7zstu5/'>27 个回答 />
+·
+最佳答案:
+I ask my local swamp hag to read sheep intestines to predict the weekly quota. It’s more reliable.
+[91] (290,957)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1rlewnj/does_anyone_know_how_this_quota_is_calculated/' />
+	[92] (290,987)<h3 >Does anyone know how this quota is calculated? />
+	[93] (188,935)<div  />
+		[94] (188,935)<div  />
+			[95] (99,935)<span  />
+				[96] (99,935)<div  />
+					[97] (99,935)<img  />
+			[98] (206,935)<div  />
+				[99] (206,923)<div  />
+					[100] (206,923)<span >Reddit · r/google_antigravity />
+				[101] (206,949)<div  />
+					[102] (177,949)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>20+ 条评论  ·  2个月前 />
+[103] (308,947)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[104] (308,947)<span  />
+		[105] (308,949)<span  />
+
+</current_dom>

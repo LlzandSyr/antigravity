@@ -1,0 +1,136 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (130,72)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwi2-aK85M6UAxVSUUEAHYaxKaAQPAgI' id='logo' title='Google 首页' />
+[1] (421,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (632,71)<div  />
+	[3] (629,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (629,71)<span  />
+	[5] (652,71)<span  />
+[6] (675,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (713,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (757,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (751,71)<div  />
+		[10] (751,71)<span  />
+[11] (831,71)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[12] (831,74)<div  />
+		[13] (831,71)<span  />
+[14] (875,71)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[15] (941,71)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3Dsite%253Areddit.com%252Fr%252Fgoogle_antigravity%2B%25229x%2522%2BOR%2B%2522math%2522%2BOR%2B%2522weekly%2522%2BOR%2B%2522speed%2522%26sca_esv%3Db95ffecbfaf145e4%26biw%3D1058%26bih%3D734%26ei%3DdkkRaoiPKtqxhbIPlLLMqAo&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[16] (108,155)<a class='XVMlrc C6AK7c' href='/search?q=site:reddit.com/r/google_antigravity+%229x%22+OR+%22math%22+OR+%22weekly%22+OR+%22speed%22&sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&udm=50&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLqz22G_DDF8uXB52NlEFf5wf7GIq1kUkf2LzqDT3jWEtP6wIPqyN5KEXkAZxwbMJ5yiczr5iL7VhU7UDtQD2riWsGO8Q1G3JjRukKzy5XsVkXEdr-QxhcFl8U7vbRZWG1-mksaTo1a-K3477KjmScZXDYzJw&aep=1&ntc=1&sa=X&ved=2ahUKEwi2-aK85M6UAxVSUUEAHYaxKaAQ2J8OegQIEhAD' />
+	[17] (108,155)<div  />
+		[18] (108,167)<div  />
+			[19] (108,160)<span  />
+				[20] (108,160)<span >AI 模式 />
+[21] (165,155)<a class='C6AK7c' role='link' />
+	全部
+[22] (214,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLqz22G_DDF8uXB52NlEFf5wf7GIq1kUkf2LzqDT3jWEtP6wIPqyN5KEXkAZxwbMJ5yiczr5iL7VhU7UDtQD2riWsGO8Q1G3JjRukKzy5XsVkXEdr-QxhcFl8U7vbRZWG1-mksaTo1a-K3477KjmScZXDYzJw&q=site:reddit.com/r/google_antigravity+%229x%22+OR+%22math%22+OR+%22weekly%22+OR+%22speed%22&sa=X&ved=2ahUKEwi2-aK85M6UAxVSUUEAHYaxKaAQtKgLegQIGBAB' />
+	[23] (214,155)<div  />
+		[24] (214,167)<span >图片 />
+[25] (263,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLqz22G_DDF8uXB52NlEFf5wf7GIq1kUkf2LzqDT3jWEtP6wIPqyN5KEXkAZxwbMJ5yiczr5iL7VhU7UDtQD2riWsGO8Q1G3JjRukKzy5XsVkXEdr-QxhcFl8U7vbRZWG1-mksaTo1a-K3477KjmScZXDYzJw&q=site:reddit.com/r/google_antigravity+%229x%22+OR+%22math%22+OR+%22weekly%22+OR+%22speed%22&sa=X&ved=2ahUKEwi2-aK85M6UAxVSUUEAHYaxKaAQtKgLegQIFxAB' />
+	[26] (263,155)<div  />
+		[27] (263,167)<span >视频 />
+[28] (312,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLqz22G_DDF8uXB52NlEFf5wf7GIq1kUkf2LzqDT3jWEtP6wIPqyN5KEXkAZxwbMJ5yiczr5iL7VhU7UDtQD2riWsGO8Q1G3JjRukKzy5XsVkXEdr-QxhcFl8U7vbRZWG1-mksaTo1a-K3477KjmScZXDYzJw&q=site:reddit.com/r/google_antigravity+%229x%22+OR+%22math%22+OR+%22weekly%22+OR+%22speed%22&ved=1t:220175&ictx=111' />
+	[29] (312,155)<div  />
+		[30] (312,167)<span >购物 />
+[31] (361,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&q=site:reddit.com/r/google_antigravity+%229x%22+OR+%22math%22+OR+%22weekly%22+OR+%22speed%22&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLqz22G_DDF8uXB52NlEFf5wf7GIq1kUkf2LzqDT3jWEtP6wIPqyN5KEXkAZxwbMJ5yiczr5iL7VhU7UDtQD2riWsGO8Q1G3JjRukKzy5XsVkXEdr-QxhcFl8U7vbRZWG1-mksaTo1a-K3477KjmScZXDYzJw&sa=X&ved=2ahUKEwi2-aK85M6UAxVSUUEAHYaxKaAQ0pQJegQIFRAB' />
+	[32] (361,155)<div  />
+		[33] (361,167)<span >新闻 />
+[34] (417,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLqz22G_DDF8uXB52NlEFf5wf7GIq1kUkf2LzqDT3jWEtP6wIPqyN5KEXkAZxwbMJ5yiczr5iL7VhU7UDtQD2riWsGO8Q1G3JjRukKzy5XsVkXEdr-QxhcFl8U7vbRZWG1-mksaTo1a-K3477KjmScZXDYzJw&q=site:reddit.com/r/google_antigravity+%229x%22+OR+%22math%22+OR+%22weekly%22+OR+%22speed%22&sa=X&ved=2ahUKEwi2-aK85M6UAxVSUUEAHYaxKaAQs6gLegQIFBAB' />
+	[35] (417,155)<div  />
+		[36] (417,167)<span >短视频 />
+[37] (481,155)<div class='mTpL7c' role='button' />
+	[38] (481,155)<div  />
+		[39] (481,167)<div  />
+			[40] (473,160)<span >更多 />
+			[41] (495,160)<span  />
+[42] (548,155)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[43] (548,155)<div  />
+		[44] (548,167)<div  />
+			[45] (539,160)<span >工具 />
+			[46] (561,160)<span  />
+搜索结果
+Web results
+[47] (338,276)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1titb17/gemini_35_flash_is_amazing_speed_quality_with_the/' />
+	[48] (338,306)<h3 >Gemini 3.5 Flash is amazing (speed, quality) with the new ... />
+	[49] (188,255)<div  />
+		[50] (188,255)<div  />
+			[51] (99,255)<span  />
+				[52] (99,255)<div  />
+					[53] (99,255)<img  />
+			[54] (206,255)<div  />
+				[55] (206,243)<div  />
+					[56] (206,243)<span >Reddit · r/google_antigravity />
+				[57] (206,268)<div  />
+					[58] (175,268)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>120+ 条评论  ·  2天前 />
+[59] (308,267)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[60] (308,267)<span  />
+		[61] (308,268)<span  />
+I believe there was 5 hour refresh and
+weekly
+quota and now it is
+weekly
+quota on all. ... How this
+math
+works? Any idea? gotoariel. • 1d ...
+[62] (284,483)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1rdt0el/rip_ultra_users_the_highest_weekly_rate_limit/' />
+	[63] (284,513)<h3 >RIP Ultra users - "The highest weekly rate limit" />
+	[64] (188,462)<div  />
+		[65] (188,462)<div  />
+			[66] (99,462)<span  />
+				[67] (99,462)<div  />
+					[68] (99,462)<img  />
+			[69] (206,462)<div  />
+				[70] (206,449)<div  />
+					[71] (206,449)<span >Reddit · r/google_antigravity />
+				[72] (206,475)<div  />
+					[73] (180,475)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>100+ 条评论  ·  2个月前 />
+[74] (308,474)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[75] (308,474)<span  />
+		[76] (308,475)<span  />
+RIP Ultra users - "The highest
+weekly
+rate limit" ... Now the Ultra plan (250$ btw) shows that it also has a
+weekly
+limit.
+[77] (311,690)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1romtzs/ai_pro_plan_has_weekly_limit_for_gemini_now_after/' />
+	[78] (311,720)<h3 >AI Pro Plan has weekly limit for Gemini now, after a ... />
+	[79] (188,668)<div  />
+		[80] (188,668)<div  />
+			[81] (99,668)<span  />
+				[82] (99,668)<div  />
+					[83] (99,668)<img  />
+			[84] (206,668)<div  />
+				[85] (206,656)<div  />
+					[86] (206,656)<span >Reddit · r/google_antigravity />
+				[87] (206,682)<div  />
+					[88] (180,682)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>100+ 条评论  ·  2个月前 />
+[89] (308,681)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[90] (308,681)<span  />
+		[91] (308,682)<span  />
+There's no
+weekly
+cap like this for AI Pro, at least not for Gemini, it's supposed to reset every 5 hours (that's what's advertised, and this is ...
+[92] (241,897)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1t1prxc/weekly_usage/' />
+	[93] (241,927)<h3 >Weekly usage? : r/google_antigravity />
+	[94] (188,875)<div  />
+		[95] (188,875)<div  />
+			[96] (99,875)<span  />
+				[97] (99,875)<div  />
+					[98] (99,875)<img  />
+			[99] (206,875)<div  />
+				[100] (206,863)<div  />
+					[101] (206,863)<span >Reddit · r/google_antigravity />
+				[102] (206,889)<div  />
+					[103] (163,889)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>7条评论  ·  2周前 />
+[104] (308,887)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[105] (308,887)<span  />
+		[106] (308,889)<span  />
+Weekly
+usage? Question / Help. Hi, I'm testing a couple different subscriptions to see how much usage each of them gives. The time for Google ...
+
+</current_dom>

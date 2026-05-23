@@ -1,0 +1,127 @@
+跳到主要内容
+无障碍功能帮助
+[0] (122,72)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwio4MG_5M6UAxWMXUEAHZtpAwwQPAgI' id='logo' title='Google 首页' />
+[1] (410,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (617,71)<div  />
+	[3] (615,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (615,71)<span  />
+	[5] (638,71)<span  />
+[6] (661,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (699,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (742,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (736,71)<div  />
+		[10] (736,71)<span  />
+[11] (817,71)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[12] (817,74)<div  />
+		[13] (817,71)<span  />
+[14] (860,71)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[15] (927,71)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3Dsite%253Areddit.com%252Fr%252Fgoogle_antigravity%2B%25229x%2522%26sca_esv%3Db95ffecbfaf145e4%26biw%3D1058%26bih%3D734%26ei%3DfEkRarbLAdKihbIPhuOmgQo&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[16] (100,155)<a class='XVMlrc C6AK7c' href='/search?q=site:reddit.com/r/google_antigravity+%229x%22&sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&udm=50&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenfhJMtO4x41VfNir3SjdVdhyyyyYILncmWVWY-SA4CdevaFXj2U84euI-vNNo4UARPcaV47m6mTgAsbjS7_epCPI3DSJ6KdcSz4biIigkW7B8OoKWxKNn_jiyclzI50U4IWn8bxfjbzDxI5orECR8sWYhxKoPk49bevSZsu_aFaTLJumsQ&aep=1&ntc=1&sa=X&ved=2ahUKEwio4MG_5M6UAxWMXUEAHZtpAwwQ2J8OegQIEhAD' />
+	[17] (100,155)<div  />
+		[18] (100,167)<div  />
+			[19] (100,160)<span  />
+				[20] (100,160)<span >AI 模式 />
+[21] (158,155)<a class='C6AK7c' role='link' />
+	全部
+[22] (207,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenfhJMtO4x41VfNir3SjdVdhyyyyYILncmWVWY-SA4CdevaFXj2U84euI-vNNo4UARPcaV47m6mTgAsbjS7_epCPI3DSJ6KdcSz4biIigkW7B8OoKWxKNn_jiyclzI50U4IWn8bxfjbzDxI5orECR8sWYhxKoPk49bevSZsu_aFaTLJumsQ&q=site:reddit.com/r/google_antigravity+%229x%22&ved=1t:220175&ictx=111' />
+	[23] (207,155)<div  />
+		[24] (207,167)<span >购物 />
+[25] (256,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenfhJMtO4x41VfNir3SjdVdhyyyyYILncmWVWY-SA4CdevaFXj2U84euI-vNNo4UARPcaV47m6mTgAsbjS7_epCPI3DSJ6KdcSz4biIigkW7B8OoKWxKNn_jiyclzI50U4IWn8bxfjbzDxI5orECR8sWYhxKoPk49bevSZsu_aFaTLJumsQ&q=site:reddit.com/r/google_antigravity+%229x%22&sa=X&ved=2ahUKEwio4MG_5M6UAxWMXUEAHZtpAwwQtKgLegQIFxAB' />
+	[26] (256,155)<div  />
+		[27] (256,167)<span >图片 />
+[28] (305,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenfhJMtO4x41VfNir3SjdVdhyyyyYILncmWVWY-SA4CdevaFXj2U84euI-vNNo4UARPcaV47m6mTgAsbjS7_epCPI3DSJ6KdcSz4biIigkW7B8OoKWxKNn_jiyclzI50U4IWn8bxfjbzDxI5orECR8sWYhxKoPk49bevSZsu_aFaTLJumsQ&q=site:reddit.com/r/google_antigravity+%229x%22&sa=X&ved=2ahUKEwio4MG_5M6UAxWMXUEAHZtpAwwQtKgLegQIFhAB' />
+	[29] (305,155)<div  />
+		[30] (305,167)<span >视频 />
+[31] (361,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenfhJMtO4x41VfNir3SjdVdhyyyyYILncmWVWY-SA4CdevaFXj2U84euI-vNNo4UARPcaV47m6mTgAsbjS7_epCPI3DSJ6KdcSz4biIigkW7B8OoKWxKNn_jiyclzI50U4IWn8bxfjbzDxI5orECR8sWYhxKoPk49bevSZsu_aFaTLJumsQ&q=site:reddit.com/r/google_antigravity+%229x%22&sa=X&ved=2ahUKEwio4MG_5M6UAxWMXUEAHZtpAwwQs6gLegQIFBAB' />
+	[32] (361,155)<div  />
+		[33] (361,167)<span >短视频 />
+[34] (417,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&biw=1058&bih=734&q=site:reddit.com/r/google_antigravity+%229x%22&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenfhJMtO4x41VfNir3SjdVdhyyyyYILncmWVWY-SA4CdevaFXj2U84euI-vNNo4UARPcaV47m6mTgAsbjS7_epCPI3DSJ6KdcSz4biIigkW7B8OoKWxKNn_jiyclzI50U4IWn8bxfjbzDxI5orECR8sWYhxKoPk49bevSZsu_aFaTLJumsQ&sa=X&ved=2ahUKEwio4MG_5M6UAxWMXUEAHZtpAwwQ0pQJegQIFRAB' />
+	[35] (417,155)<div  />
+		[36] (417,167)<span >新闻 />
+[37] (474,155)<div class='mTpL7c' role='button' />
+	[38] (474,155)<div  />
+		[39] (474,167)<div  />
+			[40] (466,160)<span >更多 />
+			[41] (487,160)<span  />
+[42] (540,155)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[43] (540,155)<div  />
+		[44] (540,167)<div  />
+			[45] (532,160)<span >工具 />
+			[46] (554,160)<span  />
+搜索结果
+Web results
+[47] (273,276)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1tk6vu7/additional_3x_increase_of_gemini_in_antigravity/' />
+	[48] (273,306)<h3 >Additional 3x increase of Gemini in Antigravity! />
+	[49] (180,255)<div  />
+		[50] (180,255)<div  />
+			[51] (92,255)<span  />
+				[52] (92,255)<div  />
+					[53] (92,255)<img  />
+			[54] (199,255)<div  />
+				[55] (199,243)<div  />
+					[56] (199,243)<span >Reddit · r/google_antigravity />
+				[57] (199,268)<div  />
+					[58] (167,268)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>190+ 条评论  ·  1天前 />
+[59] (301,267)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[60] (301,267)<span  />
+		[61] (301,268)<span  />
+Thanks! So not it's
+9x
+of original? Or 1x+3x+3x= 7x original quota? The problem though is the 7 day refresh.. It's way too long. Make it like a ...
+[62] (338,483)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1ryr23r/wouldnt_it_be_better_if_kimi_k25_was_included_in/' />
+	[63] (338,513)<h3 >Wouldn't it be better if KIMI K2.5 was included in Antigravity ... />
+	[64] (180,462)<div  />
+		[65] (180,462)<div  />
+			[66] (92,462)<span  />
+				[67] (92,462)<div  />
+					[68] (92,462)<img  />
+			[69] (199,462)<div  />
+				[70] (199,449)<div  />
+					[71] (199,449)<span >Reddit · r/google_antigravity />
+				[72] (199,475)<div  />
+					[73] (170,475)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>10+ 条评论  ·  2个月前 />
+[74] (301,474)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[75] (301,474)<span  />
+		[76] (301,475)<span  />
+from what I have experienced it's a very good coding model, I don't see people using GPT OSS that much. I guess both are open source and now that perplexity ...
+[77] (108,617)<a class='Zv9Ied' href='https://www.reddit.com/r/google_antigravity/comments/1ryr23r/wouldnt_it_be_better_if_kimi_k25_was_included_in/obnoyge/'>13 个回答 />
+·
+最佳答案:
+Wouldn't it cost them ? Kimi K2.5 is a 1T+ parameter model while GPT is a 120B parameter model. ...
+[78] (320,720)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1tkkssm/flash_35_just_super_good_dont_want_to_use_pro/' />
+	[79] (320,750)<h3 >Flash 3.5 just super good, don't want to use pro anymore. />
+	[80] (180,698)<div  />
+		[81] (180,698)<div  />
+			[82] (92,698)<span  />
+				[83] (92,698)<div  />
+					[84] (92,698)<img  />
+			[85] (199,698)<div  />
+				[86] (199,686)<div  />
+					[87] (199,686)<span >Reddit · r/google_antigravity />
+				[88] (199,712)<div  />
+					[89] (173,712)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>50+ 条评论  ·  15小时前 />
+[90] (301,711)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[91] (301,711)<span  />
+		[92] (301,712)<span  />
+...
+9x
+?) the usage to counter this, but the real issue is that it burns tokens because it's doing lots of random stuff it doesn't need to be ...
+[93] (292,927)<a class='zReHs' href='https://www.reddit.com/r/google_antigravity/comments/1qo92am/getting_error_when_trying_to_integrate_gemini_cli/?tl=zh-hans' />
+	[94] (292,957)<h3 >在Mac上尝试将Gemini CLI与Antigravity集成时出错 />
+	[95] (180,905)<div  />
+		[96] (180,905)<div  />
+			[97] (92,905)<span  />
+				[98] (92,905)<div  />
+					[99] (92,905)<img  />
+			[100] (199,905)<div  />
+				[101] (199,893)<div  />
+					[102] (199,893)<span >Reddit · r/google_antigravity />
+				[103] (199,919)<div  />
+					[104] (162,919)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>3条评论  ·  3个月前 />
+[105] (301,917)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[106] (301,917)<span  />
+		[107] (301,919)<span  />
+HELP Patcher
+9x
+for Win 98 on Android/Anbernic 405m. 1 个点赞· 5 条评论 ...

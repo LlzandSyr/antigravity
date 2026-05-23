@@ -1,0 +1,158 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (130,72)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwjk5sKA5M6UAxURUkEAHZYBJmMQPAgI' id='logo' title='Google 首页' />
+[1] (421,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (632,71)<div  />
+	[3] (629,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (629,71)<span  />
+	[5] (652,71)<span  />
+[6] (675,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (713,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (757,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (751,71)<div  />
+		[10] (751,71)<span  />
+[11] (831,71)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[12] (831,74)<div  />
+		[13] (831,71)<span  />
+[14] (875,71)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[15] (941,71)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3DAntigravity%2Bquota%2B%25229x%2522%2B%2522Varun%2BMohan%2522%2BOR%2B%25229to5Google%2522%26sca_esv%3Db95ffecbfaf145e4%26source%3Dhp%26ei%3D9EgRatCrHI-ZhbIPodnU8AE%26iflsig%3DAFdpzrgAAAAAahFXBER_GVxj6bGpHCaC9g0FnwUMsvXC%26ved%3D0ahUKEwjQ9dD7486UAxWPTEEAHaEsFR4Q4dUDCBc%26uact%3D5%26oq%3DAntigravity%2Bquota%2B%25229x%2522%2B%2522Varun%2BMohan%2522%2BOR%2B%25229to5Google%2522%26gs_lp%3DEgdnd3Mtd2l6IjRBbnRpZ3Jhdml0eSBxdW90YSAiOXgiICJWYXJ1biBNb2hhbiIgT1IgIjl0bzVHb29nbGUiMgUQIRigATIFECEYoAEyBRAhGKABMgUQIRigATIFECEYoAFIzihQrhBY_RZwAXgAkAEAmAHGAqAB3gmqAQUyLTEuM7gBA8gBAPgBAZgCBKAC_AmoAgDCAgcQIRgKGKABwgIIEAAYgAQYogSYAwTxBQ05m9JAxeFMkgcDMy00oAe0CbIHAzMtNLgH_AnCBwUwLjIuMsgHDoAIAQ%26sclient%3Dgws-wiz&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[16] (108,155)<a class='XVMlrc C6AK7c' href='/search?q=Antigravity+quota+%229x%22+%22Varun+Mohan%22+OR+%229to5Google%22&sca_esv=b95ffecbfaf145e4&udm=50&source=hp&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&aep=1&ntc=1&sa=X&ved=2ahUKEwjk5sKA5M6UAxURUkEAHZYBJmMQ2J8OegQIDxAD' />
+	[17] (108,155)<div  />
+		[18] (108,167)<div  />
+			[19] (108,160)<span  />
+				[20] (108,160)<span >AI 模式 />
+[21] (165,155)<a class='C6AK7c' role='link' />
+	全部
+[22] (214,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&q=Antigravity+quota+%229x%22+%22Varun+Mohan%22+OR+%229to5Google%22&sa=X&ved=2ahUKEwjk5sKA5M6UAxURUkEAHZYBJmMQtKgLegQIFRAB' />
+	[23] (214,155)<div  />
+		[24] (214,167)<span >图片 />
+[25] (263,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&q=Antigravity+quota+%229x%22+%22Varun+Mohan%22+OR+%229to5Google%22&sa=X&ved=2ahUKEwjk5sKA5M6UAxURUkEAHZYBJmMQtKgLegQIFBAB' />
+	[26] (263,155)<div  />
+		[27] (263,167)<span >视频 />
+[28] (312,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&q=Antigravity+quota+%229x%22+%22Varun+Mohan%22+OR+%229to5Google%22&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&sa=X&ved=2ahUKEwjk5sKA5M6UAxURUkEAHZYBJmMQ0pQJegQIEhAB' />
+	[29] (312,155)<div  />
+		[30] (312,167)<span >新闻 />
+[31] (361,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&q=Antigravity+quota+%229x%22+%22Varun+Mohan%22+OR+%229to5Google%22&ved=1t:220175&ictx=111' />
+	[32] (361,155)<div  />
+		[33] (361,167)<span >购物 />
+[34] (417,155)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrsojpaijeJRLrp4clUvcwVLi54dOkHWv8dWQ1lqb_5yWnnFHysznsWJN-Hkwoo5xEl0tvVkPImz6dqiyxXUrOi2QVzuXcmiLSu0GzjUWoyHjv7i1dOoas9sJQfn2AcZSvZpbcoNoWpOQBsC1WAZoTbu-K_sgHk8u6mfAtv0ALTDHLoAGJA&q=Antigravity+quota+%229x%22+%22Varun+Mohan%22+OR+%229to5Google%22&sa=X&ved=2ahUKEwjk5sKA5M6UAxURUkEAHZYBJmMQs6gLegQIERAB' />
+	[35] (417,155)<div  />
+		[36] (417,167)<span >短视频 />
+[37] (481,155)<div class='mTpL7c' role='button' />
+	[38] (481,155)<div  />
+		[39] (481,167)<div  />
+			[40] (473,160)<span >更多 />
+			[41] (495,160)<span  />
+[42] (548,155)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[43] (548,155)<div  />
+		[44] (548,167)<div  />
+			[45] (539,160)<span >工具 />
+			[46] (561,160)<span  />
+搜索结果
+Web results
+[47] (326,291)<a class='zReHs' href='https://www.androidauthority.com/gemini-antigravity-limits-increased-3670209/' />
+	[48] (326,325)<h3 >Google ups Gemini limits once again for Antigravity users />
+	[49] (234,273)<div  />
+		[50] (234,273)<div  />
+			[51] (99,273)<span  />
+				[52] (99,273)<div  />
+					[53] (99,273)<img  />
+			[54] (253,273)<div  />
+				[55] (253,261)<div  />
+					[56] (253,261)<span >Android Authority />
+				[57] (253,287)<div  />
+					[58] (253,287)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://www.androidauthority.com />
+						[59] (318,286)<span class='ylgVCe ob9lvb' role='text'>› gemini-... />
+·
+[60] (385,287)<a class='dEEN8c' href='https://www.androidauthority.com/gemini-antigravity-limits-increased-3670209/' />
+	[61] (385,286)<span >翻译此页 />
+[62] (428,286)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[63] (428,286)<span  />
+		[64] (428,287)<span  />
+17小时前
+—
+...
+9x
+compared to the post-nerf state. The higher limits apply ...
+Varun Mohan
+posted on X about
+Antigravity
+.
+Varun Mohan
+/ X. According ...
+[65] (303,498)<a class='zReHs' href='https://www.gate.com/news/detail/google-raises-gemini-api-limit-by-3x-on-may-22-cumulative-increase-hits-9x-21298268' />
+	[66] (303,532)<h3 >Google Raises Gemini API Limit by 3x on May 22 ... />
+	[67] (215,480)<div  />
+		[68] (215,480)<div  />
+			[69] (99,480)<span  />
+				[70] (99,480)<div  />
+					[71] (99,480)<img  />
+			[72] (234,480)<div  />
+				[73] (234,468)<div  />
+					[74] (234,468)<span >Gate.com />
+				[75] (234,494)<div  />
+					[76] (234,494)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://www.gate.com />
+						[77] (270,493)<span class='ylgVCe ob9lvb' role='text'>› News › Flash />
+·
+[78] (346,494)<a class='dEEN8c' href='https://www.gate.com/news/detail/google-raises-gemini-api-limit-by-3x-on-may-22-cumulative-increase-hits-9x-21298268' />
+	[79] (346,493)<span >翻译此页 />
+[80] (390,492)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[81] (390,492)<span  />
+		[82] (390,494)<span  />
+1天前
+—
+According to Beating, Google's
+Antigravity
+team core member
+Varun Mohan
+announced on May 22 that all paid subscription plans will have their ...
+视频
+[83] (152,679)<div aria-label='关于这条结果的详细信息' class='iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[84] (152,679)<span  />
+		[85] (152,680)<span  />
+[86] (474,780)<a class='rIRoqf' href='https://www.instagram.com/reel/DYkpgTyPAZ_/' />
+	[87] (474,780)<div class='V5XKdd' role='heading' />
+		[88] (474,740)<div  />
+			[89] (439,740)<div  />
+				[90] (439,740)<span >Gemini 3.5 Flash has landed. Learn more at the link in bio />
+		[91] (474,807)<div  />
+			[92] (474,807)<div  />
+				[93] (474,792)<span  />
+					[94] (274,791)<span >Instagram />
+					[95] (363,791)<span >Google DeepMind />
+						[96] (308,791)<span >· />
+				[97] (474,822)<div  />
+					[98] (264,821)<span >2 天前 />
+[99] (441,790)<div aria-label='关于这条结果的详细信息' class='iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[100] (441,790)<span  />
+		[101] (441,792)<span  />
+[102] (156,780)<a aria-label='Gemini 3.5 Flash has landed. Learn more at the link in bio，由Google DeepMind上传到Instagram上. 在Instagram上播放. 1:01' class='rIRoqf' href='https://www.instagram.com/reel/DYkpgTyPAZ_/' />
+	[103] (156,780)<div  />
+		[104] (156,780)<div  />
+			[105] (112,812)<div  />
+				[106] (112,812)<span >1:01 />
+[107] (474,927)<a class='rIRoqf' href='https://www.instagram.com/reel/DYmZUIuxCsg/' />
+	[108] (474,927)<div class='V5XKdd' role='heading' />
+		[109] (474,887)<div  />
+			[110] (448,887)<div  />
+				[111] (448,887)<span >Gemini 3.5 Flash launched at Google I/O and Google said ... />
+		[112] (474,939)<span  />
+			[113] (274,938)<span >Instagram />
+			[114] (344,938)<span >Arnav Jaitly />
+				[115] (308,938)<span >· />
+		[116] (264,968)<span >1 天前 />
+[117] (402,937)<div aria-label='关于这条结果的详细信息' class='iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[118] (402,937)<span  />
+		[119] (402,939)<span  />
+[120] (156,927)<a aria-label='Gemini 3.5 Flash launched at Google I/O and Google said ...，由Arnav Jaitly上传到Instagram上. 在Instagram上播放. 1:02' class='rIRoqf' href='https://www.instagram.com/reel/DYmZUIuxCsg/' />
+	[121] (156,927)<div  />
+		[122] (156,927)<div  />
+			[123] (112,959)<div  />
+				[124] (112,959)<span >1:02 />
+
+</current_dom>

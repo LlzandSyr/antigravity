@@ -1,0 +1,15 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+TL;DR
+Google quietly reduced Gemini AI Pro limits, triggering backlash from Reddit users who said the paid plan suddenly felt far more restrictive.
+After criticism exploded online, Google DeepMind’s Varun Mohan announced two separate quota boosts for Antigravity users, effectively increasing Gemini limits by 9x compared to the post-nerf state.
+The higher limits apply only inside Antigravity for now, while broader Gemini usage caps remain unchanged — and many users say the limits are still lower than before the original rollback.
+Two days ago,
+[0] (335,894)<a href='https://www.androidauthority.com/google-ai-pro-usage-limits-3669063/'>we reported that Google quietly nerfed the AI Pro plan />
+, and the backlash was immediate.
+[1] (298,932)<a href='https://www.reddit.com/r/GeminiAI/comments/1thkj1v/the_new_limits_are_an_absolute_scam/'>Over on Reddit />
+, frustrated users accused the company of pulling a bait-and-switch after noticing tighter Gemini usage limits than before. For users who depend on Gemini for coding, deep research, or hours-long workflows, hitting weekly limits so quickly made the AI Pro plan feel unnecessarily restrictive, especially for something people are actively paying for.
+
+</current_dom>

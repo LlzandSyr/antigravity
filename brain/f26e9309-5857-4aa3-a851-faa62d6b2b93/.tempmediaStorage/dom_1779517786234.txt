@@ -1,0 +1,20 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (122,72)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwi_lOir5M6UAxXnWEEAHceEL7IQPAgI' id='logo' title='Google 首页' />
+[1] (473,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (743,71)<div  />
+	[3] (741,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (741,71)<span  />
+	[5] (764,71)<span  />
+[6] (787,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (825,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (868,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (862,71)<div  />
+		[10] (862,71)<span  />
+[11] (943,71)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+
+</current_dom>
