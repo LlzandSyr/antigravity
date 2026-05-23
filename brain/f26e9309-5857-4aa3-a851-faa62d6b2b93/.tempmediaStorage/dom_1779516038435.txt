@@ -1,0 +1,160 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+跳到主要内容
+无障碍功能帮助
+[0] (129,73)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwifoPno3c6UAxWARkEAHe5oIO8QPAgI' id='logo' title='Google 首页' />
+[1] (420,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (630,71)<div  />
+	[3] (628,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (628,71)<span  />
+	[5] (651,71)<span  />
+[6] (674,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (712,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (756,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (750,71)<div  />
+		[10] (750,71)<span  />
+[11] (830,71)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[12] (830,74)<div  />
+		[13] (830,71)<span  />
+[14] (874,71)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[15] (941,71)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3Dsite%253A9to5google.com%2BOR%2Bsite%253Aandroidauthority.com%2BAntigravity%2Blimit%26sca_esv%3Db95ffecbfaf145e4%26source%3Dhp%26ei%3Dc0IRau_3JPPtkdUPhcyrqAU%26iflsig%3DAFdpzrgAAAAAahFQg6LHGZrx0EpX-TyytaLLlutmp_0w%26ved%3D0ahUKEwiv_eHh3c6UAxXzdqQEHQXmClUQ4dUDCBc%26uact%3D5%26oq%3Dsite%253A9to5google.com%2BOR%2Bsite%253Aandroidauthority.com%2BAntigravity%2Blimit%26gs_lp%3DEgdnd3Mtd2l6IkJzaXRlOjl0bzVnb29nbGUuY29tIE9SIHNpdGU6YW5kcm9pZGF1dGhvcml0eS5jb20gQW50aWdyYXZpdHkgbGltaXRI1CxQyw9Y2xlwAXgAkAEAmAHeAqABsAqqAQMzLTS4AQPIAQD4AQGYAgCgAgCoAgCYAwPxBdntSX7Cdwr0kgcAoAdEsgcAuAcAwgcAyAcAgAgB%26sclient%3Dgws-wiz&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[16] (107,156)<a class='XVMlrc C6AK7c' href='/search?q=site:9to5google.com+OR+site:androidauthority.com+Antigravity+limit&sca_esv=b95ffecbfaf145e4&udm=50&source=hp&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3EsrMQmilneQWIE4eEekfJGpeqVnk5Wfwt_LUhvpnUNRP9585S4DhKs_mFSH-jUxUyoIjh_CXxl8AMmAav1O3stnLa-ufnVQ7fmQ7SfmDVxoNXNkcu0Hw4jybOLBa3-KaE0y9Iqxv1SOhD7PhmY8gkwLfqmSA&aep=1&ntc=1&sa=X&ved=2ahUKEwifoPno3c6UAxWARkEAHe5oIO8Q2J8OegQIEhAD' />
+	[17] (107,156)<div  />
+		[18] (107,168)<div  />
+			[19] (107,161)<span  />
+				[20] (107,161)<span >AI 模式 />
+[21] (164,156)<a class='C6AK7c' role='link' />
+	全部
+[22] (213,156)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3EsrMQmilneQWIE4eEekfJGpeqVnk5Wfwt_LUhvpnUNRP9585S4DhKs_mFSH-jUxUyoIjh_CXxl8AMmAav1O3stnLa-ufnVQ7fmQ7SfmDVxoNXNkcu0Hw4jybOLBa3-KaE0y9Iqxv1SOhD7PhmY8gkwLfqmSA&q=site:9to5google.com+OR+site:androidauthority.com+Antigravity+limit&sa=X&ved=2ahUKEwifoPno3c6UAxWARkEAHe5oIO8QtKgLegQIGBAB' />
+	[23] (213,156)<div  />
+		[24] (213,168)<span >图片 />
+[25] (262,156)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&q=site:9to5google.com+OR+site:androidauthority.com+Antigravity+limit&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3EsrMQmilneQWIE4eEekfJGpeqVnk5Wfwt_LUhvpnUNRP9585S4DhKs_mFSH-jUxUyoIjh_CXxl8AMmAav1O3stnLa-ufnVQ7fmQ7SfmDVxoNXNkcu0Hw4jybOLBa3-KaE0y9Iqxv1SOhD7PhmY8gkwLfqmSA&sa=X&ved=2ahUKEwifoPno3c6UAxWARkEAHe5oIO8Q0pQJegQIFxAB' />
+	[26] (262,156)<div  />
+		[27] (262,168)<span >新闻 />
+[28] (312,156)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3EsrMQmilneQWIE4eEekfJGpeqVnk5Wfwt_LUhvpnUNRP9585S4DhKs_mFSH-jUxUyoIjh_CXxl8AMmAav1O3stnLa-ufnVQ7fmQ7SfmDVxoNXNkcu0Hw4jybOLBa3-KaE0y9Iqxv1SOhD7PhmY8gkwLfqmSA&q=site:9to5google.com+OR+site:androidauthority.com+Antigravity+limit&ved=1t:220175&ictx=111' />
+	[29] (312,156)<div  />
+		[30] (312,168)<span >购物 />
+[31] (361,156)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3EsrMQmilneQWIE4eEekfJGpeqVnk5Wfwt_LUhvpnUNRP9585S4DhKs_mFSH-jUxUyoIjh_CXxl8AMmAav1O3stnLa-ufnVQ7fmQ7SfmDVxoNXNkcu0Hw4jybOLBa3-KaE0y9Iqxv1SOhD7PhmY8gkwLfqmSA&q=site:9to5google.com+OR+site:androidauthority.com+Antigravity+limit&sa=X&ved=2ahUKEwifoPno3c6UAxWARkEAHe5oIO8QtKgLegQIFRAB' />
+	[32] (361,156)<div  />
+		[33] (361,168)<span >视频 />
+[34] (417,156)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVNvV7jKtLqzLZ63dd2zPtrmgI7Q-S_UNmpLgK_HfmL3EsrMQmilneQWIE4eEekfJGpeqVnk5Wfwt_LUhvpnUNRP9585S4DhKs_mFSH-jUxUyoIjh_CXxl8AMmAav1O3stnLa-ufnVQ7fmQ7SfmDVxoNXNkcu0Hw4jybOLBa3-KaE0y9Iqxv1SOhD7PhmY8gkwLfqmSA&q=site:9to5google.com+OR+site:androidauthority.com+Antigravity+limit&sa=X&ved=2ahUKEwifoPno3c6UAxWARkEAHe5oIO8Qs6gLegQIFBAB' />
+	[35] (417,156)<div  />
+		[36] (417,168)<span >短视频 />
+[37] (481,156)<div class='mTpL7c' role='button' />
+	[38] (481,156)<div  />
+		[39] (481,168)<div  />
+			[40] (473,161)<span >更多 />
+			[41] (494,161)<span  />
+[42] (547,156)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[43] (547,156)<div  />
+		[44] (547,168)<div  />
+			[45] (539,161)<span >工具 />
+			[46] (561,161)<span  />
+搜索结果
+Web results
+[47] (333,278)<a class='zReHs' href='https://9to5google.com/2026/05/21/google-has-tripled-gemini-usage-limits-for-antigravity-twice/' />
+	[48] (333,308)<h3 >Google has tripled Gemini usage limits for Antigravity, twice />
+	[49] (232,256)<div  />
+		[50] (232,256)<div  />
+			[51] (98,256)<span  />
+				[52] (98,256)<div  />
+					[53] (98,256)<img  />
+			[54] (251,256)<div  />
+				[55] (251,244)<div  />
+					[56] (251,244)<span >9to5Google />
+				[57] (251,270)<div  />
+					[58] (251,270)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://9to5google.com />
+						[59] (290,269)<span class='ylgVCe ob9lvb' role='text'>› 2026/05/21 › goo... />
+·
+[60] (380,270)<a class='dEEN8c' href='https://translate.google.com/translate?u=https://9to5google.com/2026/05/21/google-has-tripled-gemini-usage-limits-for-antigravity-twice/&hl=zh-CN&sl=en&tl=zh-CN&client=search' />
+	[61] (380,269)<span >翻译此页 />
+[62] (424,268)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[63] (424,268)<span  />
+		[64] (424,270)<span  />
+1天前
+—
+On Wednesday,
+Google raised Gemini model rate limits for Antigravity by 3x
+, as well as resetting the weekly quotas for all users. This happened ...
+[65] (325,482)<a class='zReHs' href='https://www.androidauthority.com/gemini-antigravity-limits-increased-3670209/' />
+	[66] (325,516)<h3 >Google ups Gemini limits once again for Antigravity users />
+	[67] (234,464)<div  />
+		[68] (234,464)<div  />
+			[69] (98,464)<span  />
+				[70] (98,464)<div  />
+					[71] (98,464)<img  />
+			[72] (252,464)<div  />
+				[73] (252,452)<div  />
+					[74] (252,452)<span >Android Authority />
+				[75] (252,478)<div  />
+					[76] (252,478)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://www.androidauthority.com />
+						[77] (318,477)<span class='ylgVCe ob9lvb' role='text'>› gemini-... />
+·
+[78] (385,478)<a class='dEEN8c' href='https://translate.google.com/translate?u=https://www.androidauthority.com/gemini-antigravity-limits-increased-3670209/&hl=zh-CN&sl=en&tl=zh-CN&client=search' />
+	[79] (385,477)<span >翻译此页 />
+[80] (428,476)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[81] (428,476)<span  />
+		[82] (428,478)<span  />
+17小时前
+—
+Google is once again increasing Gemini limits on Antigravity
+after users pushed back hard against recent AI Pro changes.
+[83] (310,694)<a class='zReHs' href='https://9to5google.com/2026/05/19/google-ai-ultra-100/' />
+	[84] (310,724)<h3 >Gemini app now has compute-based limits, AI Ultra ... />
+	[85] (232,672)<div  />
+		[86] (232,672)<div  />
+			[87] (98,672)<span  />
+				[88] (98,672)<div  />
+					[89] (98,672)<img  />
+			[90] (251,672)<div  />
+				[91] (251,660)<div  />
+					[92] (251,660)<span >9to5Google />
+				[93] (251,686)<div  />
+					[94] (251,686)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://9to5google.com />
+						[95] (290,685)<span class='ylgVCe ob9lvb' role='text'>› google-ai-ultra-100 />
+·
+[96] (380,686)<a class='dEEN8c' href='https://translate.google.com/translate?u=https://9to5google.com/2026/05/19/google-ai-ultra-100/&hl=zh-CN&sl=en&tl=zh-CN&client=search' />
+	[97] (380,685)<span >翻译此页 />
+[98] (424,684)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[99] (424,684)<span  />
+		[100] (424,686)<span  />
+4天前
+—
+Gemini app now has compute-based usage
+limits
+as AI Ultra now starts at $100 · A 5X higher usage
+limit
+in the Gemini app and Google
+Antigravity
+...
+[101] (337,898)<a class='zReHs' href='https://www.androidauthority.com/google-ai-pro-usage-limits-3669063/' />
+	[102] (337,932)<h3 >Google quietly nerfed its AI Pro plan, and here's what you ... />
+	[103] (234,880)<div  />
+		[104] (234,880)<div  />
+			[105] (98,880)<span  />
+				[106] (98,880)<div  />
+					[107] (98,880)<img  />
+			[108] (253,880)<div  />
+				[109] (253,868)<div  />
+					[110] (253,868)<span >Android Authority />
+				[111] (253,894)<div  />
+					[112] (253,894)<cite class='qLRx3b tjvcx GvPZzd dTxz9 cHaqb' role='text'>https://www.androidauthority.com />
+						[113] (318,893)<span class='ylgVCe ob9lvb' role='text'>› google-... />
+·
+[114] (385,894)<a class='dEEN8c' href='https://translate.google.com/translate?u=https://www.androidauthority.com/google-ai-pro-usage-limits-3669063/&hl=zh-CN&sl=en&tl=zh-CN&client=search' />
+	[115] (385,893)<span >翻译此页 />
+[116] (429,892)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[117] (429,892)<span  />
+		[118] (429,894)<span  />
+2天前
+—
+These
+limits
+will also apply to other AI products outside of Gemini, including
+Antigravity
+and Flow. However, it's unclear whether there are any ...
+
+</current_dom>

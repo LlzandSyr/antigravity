@@ -1,0 +1,88 @@
+跳到主要内容
+无障碍功能帮助
+[0] (129,73)<a aria-label='Google 首页' href='https://www.google.com/webhp?hl=zh-CN&sa=X&ved=0ahUKEwjKk-LN3c6UAxXDWEEAHV6OHt4QPAgI' id='logo' title='Google 首页' />
+[1] (420,71)<textarea aria-label='搜索' class='gLFyf' id='APjFqb' role='combobox' />
+[2] (630,71)<div  />
+	[3] (628,71)<div aria-label='清除' class='vOY7J M2vV3' role='button' />
+		[4] (628,71)<span  />
+	[5] (651,71)<span  />
+[6] (674,71)<div aria-label='按语音搜索' class='fzj3ad' role='button' />
+[7] (712,71)<div aria-label='按图搜索' class='etxtjc' role='button' />
+[8] (756,71)<button aria-label='搜索' class='HZVG1b Tg7LZd' />
+	[9] (750,71)<div  />
+		[10] (750,71)<span  />
+[11] (830,71)<div aria-label='设置' class='fLciMb' id='og-te' role='button' />
+	[12] (830,74)<div  />
+		[13] (830,71)<span  />
+[14] (874,71)<a aria-label='Google 应用' class='gb_C' href='https://www.google.co.uk/intl/zh-CN/about/products?tab=wh' role='button' />
+[15] (941,71)<a aria-label='登录' class='gb_A' href='https://accounts.google.com/ServiceLogin?hl=zh-CN&passive=true&continue=https://www.google.com/search%3Fq%3Dsite%253Ax.com%252F_mohansolo%2B%2522Yesterday%252C%2Bwe%2B3x%2527d%2Blimits%2522%26sca_esv%3Db95ffecbfaf145e4%26source%3Dhp%26ei%3DOkIRavmxCJm4hbIP_rn5-Ag%26iflsig%3DAFdpzrgAAAAAahFQSmw8gIXYY6o47Sa7OTFuQU2FSPXH%26ved%3D0ahUKEwj5tq7G3c6UAxUZXEEAHf5cHo8Q4dUDCBc%26uact%3D5%26oq%3Dsite%253Ax.com%252F_mohansolo%2B%2522Yesterday%252C%2Bwe%2B3x%2527d%2Blimits%2522%26gs_lp%3DEgdnd3Mtd2l6IjFzaXRlOnguY29tL19tb2hhbnNvbG8gIlllc3RlcmRheSwgd2UgM3gnZCBsaW1pdHMiSM0qUMcTWJEacAF4AJABAJgBrAOgAaMMqgEFMy0yLjK4AQPIAQD4AQGYAgCgAgCoAgCYAwPxBdPI0ZeFgmm5kgcAoAdEsgcAuAcAwgcAyAcAgAgB%26sclient%3Dgws-wiz&ec=futura_srp_og_si_72236_p'>登录 />
+	登录
+[16] (107,156)<a class='XVMlrc C6AK7c' href='/search?q=site:x.com/_mohansolo+%22Yesterday,+we+3x%27d+limits%22&sca_esv=b95ffecbfaf145e4&udm=50&source=hp&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenf8qL71mitOjDmTARHl1NdU3YeRZeTMiNwvGrj5A6YnrTNi4y9QVHWynj0UQWxktERyGYLkrL_e2jQ5HXEabUAIEMdWmWZaK_9JMz1gpgp4Ry221xwSHBvGBwP7axQtQXDoYydFHtzwGj4hygVQgrIP5DV9wqnCx7WQjaOLUX-MpUdOH9g&aep=1&ntc=1&sa=X&ved=2ahUKEwjKk-LN3c6UAxXDWEEAHV6OHt4Q2J8OegQIDxAD' />
+	[17] (107,156)<div  />
+		[18] (107,168)<div  />
+			[19] (107,161)<span  />
+				[20] (107,161)<span >AI 模式 />
+[21] (164,156)<a class='C6AK7c' role='link' />
+	全部
+[22] (213,156)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=28&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenf8qL71mitOjDmTARHl1NdU3YeRZeTMiNwvGrj5A6YnrTNi4y9QVHWynj0UQWxktERyGYLkrL_e2jQ5HXEabUAIEMdWmWZaK_9JMz1gpgp4Ry221xwSHBvGBwP7axQtQXDoYydFHtzwGj4hygVQgrIP5DV9wqnCx7WQjaOLUX-MpUdOH9g&q=site:x.com/_mohansolo+%22Yesterday,+we+3x%27d+limits%22&ved=1t:220175&ictx=111' />
+	[23] (213,156)<div  />
+		[24] (213,168)<span >购物 />
+[25] (262,156)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=7&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenf8qL71mitOjDmTARHl1NdU3YeRZeTMiNwvGrj5A6YnrTNi4y9QVHWynj0UQWxktERyGYLkrL_e2jQ5HXEabUAIEMdWmWZaK_9JMz1gpgp4Ry221xwSHBvGBwP7axQtQXDoYydFHtzwGj4hygVQgrIP5DV9wqnCx7WQjaOLUX-MpUdOH9g&q=site:x.com/_mohansolo+%22Yesterday,+we+3x%27d+limits%22&sa=X&ved=2ahUKEwjKk-LN3c6UAxXDWEEAHV6OHt4QtKgLegQIFBAB' />
+	[26] (262,156)<div  />
+		[27] (262,168)<span >视频 />
+[28] (312,156)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=2&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenf8qL71mitOjDmTARHl1NdU3YeRZeTMiNwvGrj5A6YnrTNi4y9QVHWynj0UQWxktERyGYLkrL_e2jQ5HXEabUAIEMdWmWZaK_9JMz1gpgp4Ry221xwSHBvGBwP7axQtQXDoYydFHtzwGj4hygVQgrIP5DV9wqnCx7WQjaOLUX-MpUdOH9g&q=site:x.com/_mohansolo+%22Yesterday,+we+3x%27d+limits%22&sa=X&ved=2ahUKEwjKk-LN3c6UAxXDWEEAHV6OHt4QtKgLegQIExAB' />
+	[29] (312,156)<div  />
+		[30] (312,168)<span >图片 />
+[31] (361,156)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&q=site:x.com/_mohansolo+%22Yesterday,+we+3x%27d+limits%22&tbm=nws&source=lnms&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenf8qL71mitOjDmTARHl1NdU3YeRZeTMiNwvGrj5A6YnrTNi4y9QVHWynj0UQWxktERyGYLkrL_e2jQ5HXEabUAIEMdWmWZaK_9JMz1gpgp4Ry221xwSHBvGBwP7axQtQXDoYydFHtzwGj4hygVQgrIP5DV9wqnCx7WQjaOLUX-MpUdOH9g&sa=X&ved=2ahUKEwjKk-LN3c6UAxXDWEEAHV6OHt4Q0pQJegQIEhAB' />
+	[32] (361,156)<div  />
+		[33] (361,168)<span >新闻 />
+[34] (417,156)<a class='C6AK7c' href='/search?sca_esv=b95ffecbfaf145e4&udm=39&fbs=ADc_l-Z6XGGbkKmpylZqg2J7ZOuVtSi6kM5ZjADb03gRVWnenf8qL71mitOjDmTARHl1NdU3YeRZeTMiNwvGrj5A6YnrTNi4y9QVHWynj0UQWxktERyGYLkrL_e2jQ5HXEabUAIEMdWmWZaK_9JMz1gpgp4Ry221xwSHBvGBwP7axQtQXDoYydFHtzwGj4hygVQgrIP5DV9wqnCx7WQjaOLUX-MpUdOH9g&q=site:x.com/_mohansolo+%22Yesterday,+we+3x%27d+limits%22&sa=X&ved=2ahUKEwjKk-LN3c6UAxXDWEEAHV6OHt4Qs6gLegQIERAB' />
+	[35] (417,156)<div  />
+		[36] (417,168)<span >短视频 />
+[37] (481,156)<div class='mTpL7c' role='button' />
+	[38] (481,156)<div  />
+		[39] (481,168)<div  />
+			[40] (473,161)<span >更多 />
+			[41] (494,161)<span  />
+[42] (547,156)<div class='mOKdDc' id='hdtb-tls' role='button' />
+	[43] (547,156)<div  />
+		[44] (547,168)<div  />
+			[45] (539,161)<span >工具 />
+			[46] (561,161)<span  />
+搜索结果
+Web results
+[47] (341,297)<a class='zReHs' href='https://x.com/_mohansolo/status/2057656550286885284' />
+	[48] (341,327)<h3 >Yesterday, we 3x'd limits on Antigravity and are seeing you ... />
+	[49] (152,275)<div  />
+		[50] (152,275)<div  />
+			[51] (98,275)<span  />
+				[52] (98,275)<div  />
+					[53] (98,275)<img  />
+			[54] (171,275)<div  />
+				[55] (171,262)<div  />
+					[56] (171,262)<span >X · _mohansolo />
+				[57] (171,288)<div  />
+					[58] (171,288)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>2160+ 个赞  ·  1天前 />
+[59] (239,287)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[60] (239,287)<span  />
+		[61] (239,288)<span  />
+Yesterday, we 3x'd limits
+on Antigravity and are seeing you build so much more. One thing we heard was people are worried about hitting ...
+[62] (257,505)<a class='zReHs' href='https://x.com/_mohansolo' />
+	[63] (257,535)<h3 >Varun Mohan (@_mohansolo) / Posts / X />
+	[64] (153,483)<div  />
+		[65] (153,483)<div  />
+			[66] (98,483)<span  />
+				[67] (98,483)<div  />
+					[68] (98,483)<img  />
+			[69] (172,483)<div  />
+				[70] (172,470)<div  />
+					[71] (172,470)<span >X · _mohansolo />
+				[72] (172,496)<div  />
+					[73] (172,496)<cite class='qLRx3b tjvcx GvPZzd cHaqb' role='text'>超过 4.4万位关注者 />
+[74] (241,495)<div aria-label='关于这条结果的详细信息' class='MJ8UF iTPLzd rNSxBe eY4mx lUn2nc' role='button' />
+	[75] (241,495)<span  />
+		[76] (241,496)<span  />
+Yesterday, we 3x'd limits
+on Antigravity and are seeing you build so much more. One thing we heard was people are worried about hitting ...
+页脚链接

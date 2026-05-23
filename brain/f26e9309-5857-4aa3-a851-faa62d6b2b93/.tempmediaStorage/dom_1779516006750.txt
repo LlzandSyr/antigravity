@@ -1,0 +1,51 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,500)<div  />
+	[1] (500,742)<div  />
+		[2] (500,742)<div  />
+			新鲜事一网打尽
+			X 上的用户能够抢先知道。
+			[3] (860,742)<a class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-2yi16 r-1qi8awa r-3pj75a r-o7ynqc r-6416eg r-1ny4l3l r-1loqt21' href='/login' role='link' />
+				[4] (860,742)<div  />
+					[5] (860,742)<div  />
+						[6] (860,742)<span  />
+							[7] (860,742)<span >登录 />
+			[8] (932,742)<a class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-2yi16 r-1qi8awa r-3pj75a r-o7ynqc r-6416eg r-1ny4l3l r-1loqt21' href='/i/flow/signup' role='link' />
+				[9] (932,742)<div  />
+					[10] (932,742)<div  />
+						[11] (932,742)<span  />
+							[12] (932,742)<span >注册 />
+	[13] (500,895)<div  />
+		[14] (500,895)<div  />
+			有人说…Cookie 吗？
+			X 及其合作伙伴使用 Cookie 为你提供更好、更安全、更快捷的服务，并为我们的业务提供支持。有些 Cookie 是使用和改进我们的服务以及确保其正常运作所必需的。
+			[15] (451,920)<button class='css-1jxf684 r-bcqeeo r-qvutc0 r-poiln3 r-1ddef8g r-tjvw6i r-fdjqy7' role='button'>显示更多关于你的选项的信息。 />
+				显示更多关于你的选项的信息。
+			[16] (786,857)<button class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-18kxxzh r-1q142lx r-eu3ka r-5oul0u r-lif3th r-2yi16 r-1qi8awa r-3pj75a r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l' role='button' />
+				[17] (786,857)<div  />
+					[18] (786,857)<div  />
+						[19] (786,857)<span  />
+							[20] (786,857)<span >接受所有 Cookie />
+			[21] (786,923)<button class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-18kxxzh r-1q142lx r-eu3ka r-5oul0u r-lif3th r-2yi16 r-1qi8awa r-3pj75a r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l' role='button' />
+				[22] (786,923)<div  />
+					[23] (786,923)<div  />
+						[24] (786,923)<span  />
+							[25] (786,923)<span >拒绝非必要的 Cookie />
+	[26] (390,36)<div  />
+		[27] (390,36)<div  />
+			[28] (390,36)<div  />
+				[29] (390,36)<div  />
+					[30] (390,36)<div  />
+						[31] (148,36)<div  />
+							[32] (131,36)<button aria-label='返回' class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-2yi16 r-1qi8awa r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l' role='button' />
+								[33] (131,36)<div  />
+						[34] (390,36)<div  />
+							[35] (390,36)<div  />
+								[36] (194,36)<h2 class='css-146c3p1 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-adyw6z r-135wba7 r-b88u0q r-1559e4e' role='heading' />
+									[37] (194,36)<span >帖子 />
+						[38] (632,36)<div  />
+	对话
+
+</current_dom>

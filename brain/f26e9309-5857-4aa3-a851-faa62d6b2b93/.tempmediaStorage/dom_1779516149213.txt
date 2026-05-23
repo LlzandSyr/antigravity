@@ -1,0 +1,37 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (311,-34)<div class='dhw-slider-scroll' scrollable='true' />
+	Amazon
+	$84.99
+	$130.79
+	Belkin Universal USB-C 8-in-1 Dual Display Hub, Silver
+	At 365-day low price
+	Amazon
+	$199.99
+	$261.16
+	Klipsch R-80SWi Wireless 8-Inch Subwoofer, 150W, Black
+	Near 365-day low price
+	Amazon
+	$54.94
+	$70.25
+	SHOKZ OpenMove Open-Ear Bluetooth Headphones
+	At 90-day low price
+	Amazon
+	$167.47
+	$258.98
+	Google Pixel Watch 3 (41mm)
+	At 365-day low price
+Deals shown here include top picks from
+[1] (234,152)<a class='dhw-slider-disclosure-link' href='https://dealhunt.com'>DealHunt />
+.
+Prices shown may not reflect current prices, availability, or final checkout prices.
+In another
+[2] (177,218)<a href='https://x.com/_mohansolo/status/2057656550286885284?s=20'>update posted today />
+, Mohan announced that Google is again tripling weekly Gemini quotas across all paid plans in Antigravity and even resetting them.
+[3] (554,372)<a class='e_Zn' href='https://x.com/_mohansolo/status/2057656550286885284?s=20'>Varun Mohan / X />
+If you’re keeping count, that effectively works out to a massive 9x increase compared to where limits landed after the original nerf. And honestly, that kind of rapid reversal says a lot.
+This means people are using Antigravity far more aggressively than Google expected. Mohan said the company saw a huge jump in users building projects after the first quota increase, while many others worried they’d burn through their weekly allowance after just a couple of work sessions.
+
+</current_dom>

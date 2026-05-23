@@ -1,0 +1,198 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,500)<div  />
+	新鲜事一网打尽
+	X 上的用户能够抢先知道。
+	[1] (860,950)<a class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-2yi16 r-1qi8awa r-3pj75a r-o7ynqc r-6416eg r-1ny4l3l r-1loqt21' href='/login' role='link' />
+		[2] (860,950)<div  />
+			[3] (860,950)<div  />
+				[4] (860,950)<span  />
+					[5] (860,950)<span >登录 />
+	[6] (932,950)<a class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-2yi16 r-1qi8awa r-3pj75a r-o7ynqc r-6416eg r-1ny4l3l r-1loqt21' href='/i/flow/signup' role='link' />
+		[7] (932,950)<div  />
+			[8] (932,950)<div  />
+				[9] (932,950)<span  />
+					[10] (932,950)<span >注册 />
+	[11] (64,38)<h1 class='css-175oi2r r-1awozwy r-1pz39u2 r-1loqt21 r-6koalj r-16y2uox r-1777fci r-4wgw6l' role='heading' />
+		[12] (64,38)<a aria-label='X' class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-19yznuf r-64el8z r-o7ynqc r-6416eg r-1ny4l3l r-1loqt21' href='/' role='link' />
+			[13] (64,38)<div  />
+	[14] (390,36)<div  />
+		[15] (390,36)<div  />
+			[16] (390,36)<div  />
+				[17] (390,36)<div  />
+					[18] (390,36)<div  />
+						[19] (148,36)<div  />
+							[20] (131,36)<button aria-label='返回' class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-2yi16 r-1qi8awa r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l' role='button' />
+								[21] (131,36)<div  />
+						[22] (390,36)<div  />
+							[23] (390,36)<div  />
+								[24] (194,36)<h2 class='css-146c3p1 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-adyw6z r-135wba7 r-b88u0q r-1559e4e' role='heading' />
+									[25] (194,36)<span >帖子 />
+						[26] (632,36)<div  />
+	对话
+	[27] (390,362)<div  />
+		[28] (390,361)<article class='css-175oi2r r-18u37iz r-1udh08x r-1c4vpko r-1c7gwzm r-1ny4l3l' role='article' />
+			[29] (390,361)<div  />
+				[30] (141,116)<a class='css-175oi2r r-1pi2tsx r-13qz1uu r-o7ynqc r-6416eg r-1ny4l3l r-1loqt21' href='/_mohansolo' role='link' />
+					[31] (141,116)<div  />
+						[32] (141,116)<div  />
+				[33] (223,103)<a class='css-175oi2r r-1wbh5a2 r-dnmrzs r-1ny4l3l r-1loqt21' href='/_mohansolo' role='link' />
+					[34] (223,103)<div  />
+						[35] (213,103)<div  />
+							[36] (213,103)<span  />
+								[37] (213,103)<span >Varun Mohan />
+						[38] (268,103)<div  />
+							[39] (268,103)<span  />
+				[40] (213,130)<a class='css-175oi2r r-1wbh5a2 r-dnmrzs r-1ny4l3l r-1loqt21' href='/_mohansolo' role='link' />
+					[41] (213,130)<div  />
+						[42] (213,130)<span >@_mohansolo />
+				[43] (649,103)<button aria-label='更多' class='css-175oi2r r-1777fci r-bt1l66 r-bztko3 r-lrvibr r-1loqt21 r-1ny4l3l' role='button' />
+					[44] (649,103)<div  />
+						[45] (649,103)<div  />
+				[46] (167,179)<button aria-label='显示翻译' class='css-175oi2r r-xoduu5 r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-1ut7uwi r-ad9o1y r-12sks89 r-1y7e96w r-n7gxbd r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l' role='button' />
+					[47] (167,179)<span  />
+						[48] (167,179)<div  />
+							[49] (167,179)<span  />
+								[50] (167,179)<span >显示翻译 />
+				Yesterday, we 3x’d limits on Antigravity and are seeing you build so much more. One thing we heard was people are worried about hitting their weekly limits after a couple work sessions. To give you more runway, we’re 3x’ing the weekly Gemini quotas AGAIN on all paid plans.
+
+We’ve also gone ahead and reset Gemini quotas on all paid plans. Don’t stop building!
+				[51] (211,465)<a aria-label='上午10:55 · 2026年5月22日' class='css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3 r-xoduu5 r-1q142lx r-1w6e6rj r-9aw3ui r-3s2u2q r-1loqt21' href='/_mohansolo/status/2057656550286885284' role='link' />
+					[52] (211,465)<time >上午10:55 · 2026年5月22日 />
+				·
+				[53] (340,465)<a class='css-146c3p1 r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-a023e6 r-rjixqe r-16dba41 r-1loqt21' href='/_mohansolo/status/2057656550286885284/analytics' role='link' />
+					[54] (325,465)<div  />
+						[55] (325,465)<span  />
+							[56] (325,465)<span  />
+								[57] (325,465)<span >79万 />
+					[58] (356,465)<span  />
+						[59] (356,465)<span >查看 />
+				[60] (151,534)<button aria-label='376 回复。回复' class='css-175oi2r r-1777fci r-bt1l66 r-bztko3 r-lrvibr r-1loqt21 r-1ny4l3l' role='button' />
+					[61] (151,534)<div  />
+						[62] (136,534)<div  />
+						[63] (161,534)<div  />
+							[64] (161,534)<span  />
+								[65] (161,535)<span  />
+									[66] (161,535)<span >376 />
+				[67] (278,534)<button aria-label='254 次转帖。转帖' class='css-175oi2r r-1777fci r-bt1l66 r-bztko3 r-lrvibr r-1loqt21 r-1ny4l3l' role='button' />
+					[68] (278,534)<div  />
+						[69] (263,534)<div  />
+						[70] (289,534)<div  />
+							[71] (289,534)<span  />
+								[72] (289,535)<span  />
+									[73] (289,535)<span >254 />
+				[74] (408,534)<button aria-label='2176 喜欢次数。喜欢' class='css-175oi2r r-1777fci r-bt1l66 r-bztko3 r-lrvibr r-1loqt21 r-1ny4l3l' role='button' />
+					[75] (408,534)<div  />
+						[76] (390,534)<div  />
+						[77] (419,534)<div  />
+							[78] (419,534)<span  />
+								[79] (419,535)<span  />
+									[80] (419,535)<span >2,176 />
+				[81] (532,534)<button aria-label='234 书签。加入书签' class='css-175oi2r r-1777fci r-bt1l66 r-bztko3 r-lrvibr r-1loqt21 r-1ny4l3l' role='button' />
+					[82] (532,534)<div  />
+						[83] (517,534)<div  />
+						[84] (543,534)<div  />
+							[85] (543,534)<span  />
+								[86] (543,535)<span  />
+									[87] (543,535)<span >234 />
+				[88] (644,534)<button aria-label='分享帖子' class='css-175oi2r r-1777fci r-bt1l66 r-bztko3 r-lrvibr r-1loqt21 r-1ny4l3l' role='button' />
+					[89] (644,534)<div  />
+						[90] (644,534)<div  />
+				[91] (390,608)<button class='css-175oi2r r-1ets6dv r-1867qdf r-rs99b7 r-13awgt0 r-bx70bn r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l' role='button' />
+					[92] (390,608)<div  />
+						[93] (406,608)<div  />
+							[94] (210,608)<span >查看 376 条回复 />
+	[95] (830,50)<div  />
+		X 的新用户？
+	立即注册，获取你自己的个性化时间线！
+	[96] (831,226)<button class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-6gpygo r-eu3ka r-c7nlyc r-2yi16 r-1qi8awa r-3pj75a r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l' role='button' />
+		[97] (831,226)<div  />
+			[98] (843,226)<div  />
+				[99] (843,226)<span  />
+					[100] (843,226)<span >使用 Apple 注册 />
+	[101] (831,297)<a class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-eu3ka r-c7nlyc r-2yi16 r-1qi8awa r-3pj75a r-o7ynqc r-6416eg r-1ny4l3l r-1loqt21' href='/i/flow/signup' role='link' />
+		[102] (831,297)<div  />
+			[103] (831,297)<div  />
+				[104] (831,297)<span  />
+					[105] (831,297)<span >创建账号 />
+	注册即表示同意
+	[106] (816,357)<a class='css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3 r-1loqt21' href='https://x.com/tos' role='link' />
+		[107] (816,357)<span >服务条款 />
+	及
+	[108] (878,357)<a class='css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3 r-1loqt21' href='https://x.com/privacy' role='link' />
+		[109] (878,357)<span >隐私政策 />
+	，其中包括
+	[110] (766,379)<a class='css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3 r-1loqt21' href='https://help.x.com/rules-and-policies/twitter-cookies' role='link' />
+		[111] (766,379)<span >Cookie 使用条款 />
+	。
+	[112] (830,469)<div  />
+		相关用户
+	[113] (830,577)<li class='css-175oi2r r-1mmae3n r-3pj75a r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l' role='listitem' />
+		[114] (830,577)<div  />
+			[115] (728,577)<div  />
+				[116] (728,546)<div  />
+					[117] (728,546)<div  />
+						[118] (728,546)<div  />
+							[119] (728,546)<div  />
+								[120] (728,546)<div  />
+									[121] (728,546)<div  />
+										[122] (728,546)<a class='css-175oi2r r-1pi2tsx r-13qz1uu r-o7ynqc r-6416eg r-1ny4l3l r-1loqt21' href='/_mohansolo' role='link' />
+											[123] (728,546)<div  />
+												[124] (728,546)<div  />
+			[125] (853,577)<div  />
+				[126] (853,547)<div  />
+					[127] (810,547)<div  />
+						[128] (810,547)<div  />
+							[129] (810,533)<div  />
+								[130] (810,533)<a class='css-175oi2r r-1wbh5a2 r-dnmrzs r-1ny4l3l r-1loqt21' href='/_mohansolo' role='link' />
+									[131] (810,533)<div  />
+										[132] (800,533)<div  />
+											[133] (800,533)<span  />
+												[134] (800,532)<span >Varun Mohan />
+										[135] (855,533)<div  />
+											[136] (855,533)<span  />
+							[137] (810,561)<div  />
+								[138] (800,561)<div  />
+									[139] (800,561)<a class='css-175oi2r r-1wbh5a2 r-dnmrzs r-1ny4l3l r-1loqt21' href='/_mohansolo' role='link' />
+										[140] (800,561)<div  />
+											[141] (800,561)<div  />
+												[142] (800,561)<span >@_mohansolo />
+					[143] (923,547)<div  />
+						[144] (923,547)<button aria-label='关注 @_mohansolo' class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-15ysp7h r-4wgw6l r-3pj75a r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l' role='button' />
+							[145] (923,547)<div  />
+								[146] (923,547)<div  />
+									[147] (923,547)<span  />
+										[148] (923,546)<span >关注 />
+				[149] (853,605)<div  />
+					[150] (782,594)<span >building />
+					[151] (850,594)<div  />
+						[152] (850,594)<span  />
+							[153] (850,594)<a class='css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3 r-1wvb978 r-1loqt21' href='/antigravity' role='link'>@antigravity />
+					[154] (818,621)<div  />
+						[155] (818,621)<span  />
+							[156] (818,621)<a class='css-1jxf684 r-bcqeeo r-1ttztb7 r-qvutc0 r-poiln3 r-1wvb978 r-1loqt21' href='/GoogleDeepMind' role='link'>@GoogleDeepMind />
+	出错了。请尝试重新加载。
+	[157] (830,783)<button class='css-175oi2r r-sdzlij r-1phboty r-rs99b7 r-lrvibr r-2yi16 r-1qi8awa r-3pj75a r-1loqt21 r-o7ynqc r-6416eg r-1ny4l3l' role='button' />
+		[158] (830,783)<div  />
+			[159] (842,783)<div  />
+				[160] (842,783)<span  />
+					[161] (842,783)<span >重试 />
+	[162] (729,874)<a class='css-146c3p1 r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-1gkfh8e r-56xrmm r-16dba41 r-1loqt21' href='https://x.com/tos' role='link' />
+		[163] (729,874)<span >服务条款 />
+	|
+	[164] (793,874)<a class='css-146c3p1 r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-1gkfh8e r-56xrmm r-16dba41 r-1loqt21' href='https://x.com/privacy' role='link' />
+		[165] (793,874)<span >隐私政策 />
+	|
+	[166] (863,874)<a class='css-146c3p1 r-bcqeeo r-1ttztb7 r-qvutc0 r-37j5jr r-1gkfh8e r-56xrmm r-16dba41 r-1loqt21' href='https://support.x.com/articles/20170514' role='link' />
+		[167] (863,874)<span >Cookie 政策 />
+	|
+	辅助功能
+	|
+	广告信息
+	|
+	更多
+	© 2026 X Corp.
+
+</current_dom>

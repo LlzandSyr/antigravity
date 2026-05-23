@@ -1,0 +1,7 @@
+# Search Status
+
+Failed to start browser session. `open_browser_url` failed with connection and timeout errors.
+
+## Details:
+- Attempt 1: `failed to scan newly created browser page: setup CDP world: failed to enable Page domain: cdp.Page: Enable: rpcc: the connection is closing: websocket: close 1006 (abnormal closure): unexpected EOF`
+- Attempt 2: `action timed out`
