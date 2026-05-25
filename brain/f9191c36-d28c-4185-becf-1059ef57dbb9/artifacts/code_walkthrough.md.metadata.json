@@ -1,0 +1,6 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary":  "A comprehensive, easy-to-understand code walkthrough of D:\\project_stm32\\main.c, detailing how each block works, why it is designed that way, and its core role in STM32 USART communication with Bluetooth modules. Updated to include full unabridged code for usart1_init and usart3_init.",
+  "updatedAt":  "2026-05-25T11:50:31.392535200Z",
+  "version":  "1"
+}
