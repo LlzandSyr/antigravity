@@ -1,0 +1,125 @@
+# 🌟 STM32 进阶网络开发笔记
+## 🏷️ 主题：ESP8266 WiFi 模块 SoftAP 局域网搭建与无线控灯
+
+> [!NOTE]
+> 本笔记详细记录了如何将 **`ESP8266（ESP8266 WiFi System on Chip，ESP8266无线局域网单芯片系统）`** 模块配置为软无线访问接入点，使电脑或手机加入其专属无线局域网，并通过网络数据包无线遥控 **`STM32（STMicroelectronics 32-bit Microcontroller，意法半导体32位微控制器）`** 开发板物理引脚的完整技术闭环。
+
+---
+
+## 🧭 一、 物理大局观白话解密
+
+```mermaid
+graph TD
+    A["💻 电脑网络调试助手\n(发送指令 'led2=0')"] -- "📡 WiFi无线电波\n(局域网: LLZ-WiFi)" --> B["🔌 ESP8266 WiFi模块\n(SoftAP热点模式\nIP: 192.168.4.1)"]
+    B -- "🔌 USART3 串口总线\n(PB10-TX / PB11-RX)" --> C["🧠 STM32 微控制器\n(触发 USART3_IRQHandler)"]
+    C -- "⚡ GPIOF 物理引脚\n(PF10 输出低电平)" --> D["🔴 LED1 红灯\n(物理点亮！\nled2=0亮 / led2=1灭)"]
+```
+
+*   **变身“微型路由器”**：开发板上的 **`ESP8266（ESP8266 WiFi System on Chip，ESP8266无线局域网单芯片系统）`** 物理模块，通过配置自己发射一个名为 **`LLZ-WiFi`** 的热点信号，无需借助家里的路由器。
+*   **物理入网与握手**：电脑通过 **`WiFi（Wireless Fidelity，无线保真/无线局域网技术）`** 物理网卡直接连入该热点，双方共同接入同一网段。
+*   **网络开门营业**：单片机搭建 **`TCP（Transmission Control Protocol，传输控制协议）`** 局域网服务器，守候在 `8080` 端口。电脑发起连接，通信管道彻底通车！
+
+---
+
+## 📜 二、 老大专属名 `LLZ` 黄金配置 AT 指令流
+
+| 序号 | 物理作用 | 核心 AT 配置指令 | 模块响应 | 大白话物理含义 |
+| :--- | :--- | :--- | :--- | :--- |
+| **1** | **工作模式切换** | `AT+CWMODE=2\r\n` | `OK` | **“变身路由器！”** 开启 **`SoftAP（Software Access Point，软无线访问接入点）`** 模式，开始自主广播。 |
+| **2** | **热点参数定义** | `AT+CWSAP="LLZ-WiFi","88888888",1,4\r\n` | `OK` | **“贴上霸气门牌！”** 广播名字为 `LLZ-WiFi`，连网暗号是 `88888888`，射频频带使用信道 1，采用 WPA2 安全加密。 |
+| **3** | **多连接管理** | `AT+CIPMUX=1\r\n` | `OK` | **“开辟多个分身！”** 开启多路连接模式，允许老大的手机与电脑同时与板子连线交互。 |
+| **4** | **服务器部署** | `AT+CIPSERVER=1,8080\r\n` | `OK` | **“前台客服开门营业！”** 正式架设网络 **`TCP（Transmission Control Protocol，传输控制协议）`** 服务器，物理守候并在 `8080` 端口监听连接。 |
+| **5** | **终极保存重启** | `AT+RESET\r\n` | `OK\nPower On` | **“参数刻盘，开机广播！”** 物理重启 WiFi 模块，使上方所有改动物理生效，进入广播态。 |
+
+---
+
+## 💻 三、 电脑端网络调试助手操作规范
+
+连通局域网并无线发送控制命令的规范三步走：
+
+1.  **物理加入热点**：
+    *   物理拔掉板载蓝牙，**换插上黑色 ESP8266 WiFi 模块**并插上电脑通电；
+    *   打开电脑无线网络列表，连接 **`LLZ-WiFi`**，输入密码 **`88888888`**。
+2.  **网络助手连接**：
+    *   打开电脑的网络调试助手软件，协议选择 **`TCP Client（传输控制协议客户端）`**；
+    *   目标 **`IP（Internet Protocol，网际协议/网络地址码）`** 输入模块大本营默认地址：**`192.168.4.1`**；
+    *   目标端口输入：**`8080`**；
+    *   点击 **“连接/Connect”**。
+3.  **发送物理指令**：
+    *   在网络调试助手发送框里打入字符串：`led2=0`（注意后面不要加任何换行或空格）；
+    *   点击发送！此时开发板上的红色 **`LED（Light Emitting Diode，发光二极管灯）`** 灯泡将瞬间物理亮起！
+
+---
+
+## 🛠️ 四、 C 语言源码级逻辑实现示例
+
+这是直接运行在 **`STM32（STMicroelectronics 32-bit Microcontroller，意法半导体32位微控制器）`** 主芯片上的网络初始化及串口接收中断控制框架：
+
+```c
+#include "stm32f4xx.h"
+
+// 1. 初始化并命令模块变身热点
+void esp8266_ap_init(void)
+{
+    // 延时等待模块硬件自检稳定
+    delay_ms(1000);
+    
+    // 设置SoftAP模式
+    usart_send_string(USART3, "AT+CWMODE=2\r\n");
+    delay_ms(500);
+    
+    // 创建LLZ专属热点，名字为"LLZ-WiFi"，密码"88888888"
+    usart_send_string(USART3, "AT+CWSAP=\"LLZ-WiFi\",\"88888888\",1,4\r\n");
+    delay_ms(500);
+    
+    // 允许复数多设备接入连接
+    usart_send_string(USART3, "AT+CIPMUX=1\r\n");
+    delay_ms(500);
+    
+    // 架设TCP服务器，端口守候为8080
+    usart_send_string(USART3, "AT+CIPSERVER=1,8080\r\n");
+    delay_ms(500);
+}
+
+// 2. 串口3接收中断服务函数（无线控灯的神经中枢）
+void USART3_IRQHandler(void)
+{
+    static char rx_buf[64] = {0};
+    static uint8_t rx_cnt = 0;
+    uint8_t temp = 0;
+
+    if (USART_GetITStatus(USART3, USART_IT_RXNE) == SET)
+    {
+        temp = USART_ReceiveData(USART3);
+        
+        // 数据缓存，形成完整指令串
+        if (rx_cnt < 63)
+        {
+            rx_buf[rx_cnt++] = temp;
+        }
+        
+        // 关键逻辑匹配：如果在接收数据中搜索到了控制协议暗号
+        if (strstr(rx_buf, "led2=0") != NULL)
+        {
+            PFout(10) = 0; // PF10引脚拉低，点亮红色LED1
+            memset(rx_buf, 0, sizeof(rx_buf));
+            rx_cnt = 0;
+        }
+        else if (strstr(rx_buf, "led2=1") != NULL)
+        {
+            PFout(10) = 1; // PF10引脚拉高，熄灭红色LED1
+            memset(rx_buf, 0, sizeof(rx_buf));
+            rx_cnt = 0;
+        }
+        
+        // 定期超时防止缓冲区溢出
+        if (rx_cnt >= 60)
+        {
+            memset(rx_buf, 0, sizeof(rx_buf));
+            rx_cnt = 0;
+        }
+
+        USART_ClearITPendingBit(USART3, USART_IT_RXNE);
+    }
+}
+```
