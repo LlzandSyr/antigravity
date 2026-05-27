@@ -1,276 +1,462 @@
-# 🏆 STM32 蓝牙串口通信源码核心精讲指南
+# STM32 蓝牙透传与智能控制系统数据流向深度 Walkthrough（LLZ 专属通关指南）
 
-欢迎来到单片机底层开发的世界！这套代码是标准的 **STM32F4（STMicroelectronics 32-bit Microcontroller，意法半导体32位微控制器）** 标准外设库工程。它的核心目标是：**搭建两条通信桥梁，实现单片机、个人电脑和蓝牙模块的三向无缝数据互通。**
-
-为了让你轻松成为“代码掌控者”，我们将整篇代码划分为 **8 大核心黄金板块** 进行深度解密！
+> **作者**：LLZ
+> **文档属性**：基于数据流向（Data Flow）的源码精讲与注释手册
+> **更新时间**：2026-05-26
+> **关联文件**：[main.c](file:///d:/project_stm32/main.c)
 
 ---
 
-## 🧭 核心架构全景图
+## 🧭 第一部分：系统 4 大核心数据流向图谱
 
-在阅读代码前，请先在脑海中建立起下面这幅完美的**数据流动图**：
+本系统围绕 **数据在单片机与外设之间的流动路线**，划分为以下 4 条核心数据流向主线：
 
 ```mermaid
-graph LR
-    PC["💻 个人电脑 (串口助手)"] <-->|波特率 115200| USART1["🔌 串口 1 (PA9/PA10)"]
-    USART1 <-->|STM32 核心路由桥接| USART3["🔌 串口 3 (PB10/PB11)"]
-    USART3 <-->|波特率 115200 (新设置)| BT["📡 蓝牙模块 (BT24-HID)"]
+graph TD
+    subgraph 主线一：有线控制流 (PC -> LED1)
+        PC_Tx[PC发送数据] -->|1. 串行电平| U1_Rx[USART1 接收寄存器]
+        U1_Rx -->|2. 逐字节中断拼装| U1_Buf[g_usart1_buf 缓冲区]
+        U1_Buf -->|3. 检测到 # 摇红旗| U1_Ready[g_usart1_ready = 1]
+        U1_Ready -->|4. main轮询并解析| Parser1[parse_and_respond]
+        Parser1 -->|5. 修改 CCR1 寄存器| TIM14_PWM[TIM14 通道1 PWM输出]
+        TIM14_PWM -->|6. PF9 脉宽改变| LED1[LED1 D1灯变亮/变暗]
+        Parser1 -->|7. 拼装 duty set ok| U1_Tx[USART1 发送寄存器]
+        U1_Tx -->|8. 回传| PC_Rx[PC接收回显]
+    end
+
+    subgraph 主线二：无线控制与数据透传流 (手机 -> LED1/PC)
+        Phone_Tx[手机发送数据] -->|1. 无线蓝牙| BT_Tx[蓝牙模块 TX]
+        BT_Tx -->|2. 串行电平| U3_Rx[USART3 接收寄存器]
+        U3_Rx -->|3. 中断瞬间透传回显| U1_Tx2[USART1 发送寄存器 -> PC显示]
+        U3_Rx -->|4. 逐字节中断拼装| U3_Buf[g_usart3_buf 缓冲区]
+        U3_Buf -->|5. 检测到 # 摇红旗| U3_Ready[g_usart3_ready = 1]
+        U3_Ready -->|6. main轮询并解析| Parser2[parse_and_respond]
+        Parser2 -->|7. 物理输出占空比| TIM14_PWM
+        Parser2 -->|8. 拼装应答| U3_Tx[USART3 发送寄存器]
+        U3_Tx -->|9. 无线回传| Phone_Rx[手机APP回显]
+    end
+
+    subgraph 主线三：温湿度采集查询流 (查询 -> PG9 -> 上报)
+        Parser_Q[匹配 temp?# 或 humi?#] -->|1. 启动采集| D11_Start[dht11_read 发起起始时序]
+        D11_Start -->|2. PG9输出拉低18ms/释放| DHT_Sensor[DHT11 芯片响应]
+        DHT_Sensor -->|3. 40us极简位判定输入| D11_Buf[dht_buf 接收校验5字节]
+        D11_Buf -->|4. 转换浮点数/Mock容错| Parser_Q
+        Parser_Q -->|5. 组装数据| Send_Port[对应有线/无线发送串口]
+    end
+
+    subgraph 主线四：蓝牙连接状态双重指示流 (连接断开 -> D4灯)
+        subgraph 硬件 EXTI 支流
+            BT_State[蓝牙 STATE 引脚电平跳变 0/1] -->|1. PE6 输入电平| EXTI_6[EXTI Line 6 外部中断]
+            EXTI_6 -->|2. 位带读取 PEin 6| EXTI_ISR[EXTI9_5_IRQHandler 中断服务]
+            EXTI_ISR -->|3. 位带直接输出| PE14_LED[PEout 14 直接点亮/熄灭 D4灯]
+        end
+        subgraph 软件串口拦截支流 (无物理接线双保险)
+            U3_Rx -->|1. 收到系统状态字符流| U3_Buf2[g_usart3_buf 追加 \0 形成临时串]
+            U3_Buf2 -->|2. strstr 检索 OK+LOST 或 OK+CONN| Intercept[实时拦截器]
+            Intercept -->|3. 重置 cnt 指针并丢弃| PE14_LED
+        end
+    end
+
+    classDef mcu fill:#1f4e5b,stroke:#00ffd2,stroke-width:2px,color:#fff;
+    classDef hw fill:#2d3748,stroke:#a0aec0,stroke-width:1px,color:#edf2f7;
+    classDef pc fill:#0b3c5d,stroke:#328cc1,stroke-width:2px,color:#fff;
+    class U1_Rx,U3_Rx,U1_Buf,U3_Buf,Parser1,Parser2,EXTI_ISR,Intercept mcu;
+    class TIM14_PWM,LED1,DHT_Sensor,PE14_LED hw;
+    class PC_Tx,PC_Rx,Phone_Tx,Phone_Rx pc;
 ```
 
 ---
 
-## 📚 8 大核心黄金板块逐行拆解
+## 📂 第二部分：核心数据流向源码精讲与“流向注释”
 
-### 第一板块：寄存器快捷位带映射区（快速 IO 访问）
-```c
-#define PAin(n)     (*(volatile uint32_t *)(0x42000000 + (GPIOA_BASE + 0x10 - 0x40000000)*32 + n*4))
-#define PEout(n)    (*(volatile uint32_t *)(0x42000000 + (GPIOE_BASE + 0x14 - 0x40000000)*32 + n*4))
-```
-*   **这是什么**：这是基于 **Cortex-M4（ARM 32位微处理器内核）** 架构的“位带操作（Bit-Banding）”公式。它将每一位 IO 的读写控制，映射到了一个专属的 32 位内存地址上。
-*   **为什么要这样写**：
-    *   在标准的标准库中，如果想让某个引脚输出高电平，需要调用极其冗长的函数：`GPIO_SetBits(GPIOF, GPIO_Pin_9)`。
-    *   而通过位带映射后，我们只需要写：`PFout(9) = 0;`（点亮灯）或 `PFout(9) = 1;`（熄灭灯），代码极其简洁！
-*   **核心作用**：**大幅缩短代码长度，并让 CPU（Central Processing Unit，中央处理器） 能够以单周期指令极速读写引脚，效率提升十倍！**
+下面我们按照 **数据流动线路**，将散落在代码各处的初始化、中断、主循环与解析部分聚合在一起，边注释流向边深度精讲！
 
 ---
 
-### 第二板块：`printf` 重定向重写区（调试神器）
+### 2.2 数据流向主线一：有线控制流（PC 上位机控制 LED1 占空比）
+
+本主线实现：PC端下发 `duty=50#` ➔ 串口1中断接收 ➔ 前台解析 ➔ 改变 PWM 占空比 ➔ 串口1回送应答。
+
+#### 📥 步骤 1：配置接收数据通道（有线串口 1 初始化）
+当有线串口 1 准备就绪时，数据可以通过 `PA10(RX)` 进入单片机：
 ```c
-int fputc(int ch, FILE *f) 
-{
-    USART_SendData(USART1, ch);
-    while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
-    return ch;
-}
-```
-*   **这是什么**：这是 C 语言标准库函数 `fputc`（字符输出底层函数）的**改写（Override）**。
-*   **为什么要这样写**：
-    *   默认情况下，你在代码里调用 `printf("Hello")`，系统开发环境根本不知道要把这串字符打印到哪里（因为单片机本身没有物理显示器）。
-    *   我们通过重写 `fputc`，告诉编译器：**“以后只要代码里调用了 `printf`，你就把字符塞给串口 1（USART1），并等待发送完成！”**
-*   **核心作用**：**借用 C 标准库的 `printf` 格式化输出能力，将单片机内部的调试数据源源不断地以中文字符的形式喷涌到个人电脑的屏幕上！**
-
----
-
-### 第三板块：精准微秒/毫秒硬件延时区
-```c
-void delay_ms(uint32_t n)
-{
-    while(n--)
-    {
-        SysTick->CTRL = 0; // 关闭定时器
-        SysTick->LOAD = 168000-1; // 计数值 (168MHz 时钟下，1ms 计数 168000 次)
-        SysTick->VAL = 0; // 清空计数器
-        SysTick->CTRL = 5; // 开启定时器并使用系统时钟
-        while ((SysTick->CTRL & 0x00010000)==0); // 等待计数完成标志置位
-    }
-}
-```
-*   **这是什么**：基于内核自带的 **SysTick（System Tick Timer，系统滴答定时器）** 实现的精准阻塞延时。
-*   **为什么要这样写**：
-    *   传统的软件空循环延时（如 `for(int i=0; i<1000; i++);`）非常不准，会被 CPU 的主频变化、编译器优化以及中断打乱。
-    *   SysTick 定时器是单片机内部最精准的“沙漏”，无论单片机在干什么，它的倒计时速度都是恒定的。
-*   **核心作用**：**为串口初始化、蓝牙握手等强时间敏感性操作提供极其精准的微秒/毫秒级等待时间。**
-
----
-
-### 第四板块：串口 1 初始化区（连接个人电脑）
-```c
+// 数据流向：外部有线电平 -> PA10 (RX) -> USART1 硬件接收器
 void usart1_init(uint32_t baud)
 {
-	//使能端口A硬件时钟
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
+	// 1. 开辟 GPIOA 和 USART1 时钟通道
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 	
-	//使能串口1硬件时钟
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);
-	
-	
-	//配置PA9、PA10为复用功能引脚
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_9|GPIO_Pin_10;
-	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Speed = GPIO_High_Speed;
+	// 2. 引脚物理连接：PA9 为有线发送 TX，PA10 为有线接收 RX
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_10;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF; // 复用模式以供串口接管
+	GPIO_InitStructure.GPIO_Speed = GPIO_Low_Speed;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_NOPULL;	
-	GPIO_Init(GPIOA,&GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);	
 	
-	//将PA9、PA10连接到USART1的硬件
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9,  GPIO_AF_USART1);
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1);
+	// 3. 建立引脚到串口 1 外设的路由映射
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1);
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1);	
 	
-	
-	//配置USART1的相关参数：波特率、数据位、校验位
-	USART_InitStructure.USART_BaudRate = baud;//波特率
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//8位数据位
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;//1位停止位
-	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件流控制
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;//允许串口发送和接收数据
+	// 4. 配置波特率等协议参数
+	USART_InitStructure.USART_BaudRate = baud; 					
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;	
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;		
+	USART_InitStructure.USART_Parity = USART_Parity_No;			
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 	USART_Init(USART1, &USART_InitStructure);
 	
-	
-	//使能串口接收到数据触发中断
+	// 5. 开启接收中断：有数据流进入触发中断
 	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 	
+	// 6. 配置中断通道，使得数据流能打断主线程
 	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
-	//使能串口1工作
-	USART_Cmd(USART1,ENABLE);
+	USART_Cmd(USART1, ENABLE); // 串口1正式拉起运行
 }
 ```
-*   **逐行拆解与意图**：
-    1.  `RCC_AHB1PeriphClockCmd` & `RCC_APB2PeriphClockCmd`：**给硬件供电**！开启端口A和串口1的硬件外设主频时钟。
-    2.  `GPIO_InitStructure` 参数设定 ➔ `GPIO_Init(GPIOA)`：将 **PA9** 与 **PA10** 两个引脚的物理输入输出模式强制更改为 **`GPIO_Mode_AF`（复用特殊功能模式）**。
-    3.  `GPIO_PinAFConfig`：建立芯片内部物理链路，将引脚直接映射接通到串口1的专用数据收发线上。
-    4.  `USART_InitStructure` 参数设定 ➔ `USART_Init(USART1)`：设定波特率为指定的参数（例如 115200），无奇偶校验，1 位停止位。
-    5.  `USART_ITConfig(USART1, USART_IT_RXNE)`：开启串口接收数据中断。一旦有数据，中断系统会瞬间捕获。
-    6.  `NVIC_InitStructure` ➔ `NVIC_Init`：配置 **NVIC（Nested Vectored Interrupt Controller，嵌套向量中断控制器）** 的优先级，让内核开始监控此串口中断信道。
-    7.  `USART_Cmd(USART1)`：串口开启工作命令！
-*   **核心作用**：**打通单片机与个人电脑的 115200 高速通信线，作为数据的主控制调试台。**
 
----
-
-### 第五板块：串口 3 初始化区（连接蓝牙模块）
+#### 📥 步骤 2：中断拼装数据流（`USART1_IRQHandler` 中断成包）
+字符由上位机串行进入，中断负责将流式字节聚合成包：
 ```c
-void usart3_init(uint32_t baud)
+// 数据流向：USART1接收寄存器 DR -> 临时变量 d -> 缓冲队列 g_usart1_buf -> 摇红旗就绪
+void USART1_IRQHandler(void)
 {
-	//使使能端口B硬件时钟
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE);
-	
-	//使使能串口3硬件时钟
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3,ENABLE);
-	
-	
-	//配置PB10、PB11为复用功能引脚
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_10|GPIO_Pin_11;
-	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Speed = GPIO_High_Speed;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_NOPULL;	
-	GPIO_Init(GPIOB,&GPIO_InitStructure);
-	
-	//将PB10、PB11连接到USART3的硬件
-	GPIO_PinAFConfig(GPIOB, GPIO_PinSource10, GPIO_AF_USART3);
-	GPIO_PinAFConfig(GPIOB, GPIO_PinSource11, GPIO_AF_USART3);
-	
-	
-	//配置USART1的相关参数：波特率、数据位、校验位
-	USART_InitStructure.USART_BaudRate = baud;//波特率
-	USART_InitStructure.USART_WordLength = USART_WordLength_8b;//8位数据位
-	USART_InitStructure.USART_StopBits = USART_StopBits_1;//1位停止位
-	USART_InitStructure.USART_Parity = USART_Parity_No;//无奇偶校验
-	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;//无硬件流控制
-	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;//允许串口发送和接收数据
-	USART_Init(USART3, &USART_InitStructure);
-	
-	
-	//使使能串口接收到数据触发中断
-	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
-	
-	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-	
-	//使能串口3工作
-	USART_Cmd(USART3,ENABLE);
+	uint8_t d; // 临时承接 1 字节数据流
+	if(USART_GetITStatus(USART1, USART_IT_RXNE) == SET)
+	{
+		d = USART_ReceiveData(USART1); // 【流向】：读取 1 字节，硬件自动清除接收就绪标志
+		
+		if (g_usart1_ready == 0) // 如果上一个命令包已被主循环处理完
+		{
+			if (g_usart1_cnt < sizeof(g_usart1_buf) - 1)
+			{
+				g_usart1_buf[g_usart1_cnt++] = d; // 【流向】：逐字节拼入全局缓冲区，指针 cnt 自动累加右移
+				if (d == '#') // 检测到结束符 '#'
+				{
+					g_usart1_buf[g_usart1_cnt] = '\0'; // 【流向】：追加字符串结束标志，形成合法 C 语言字符串
+					g_usart1_ready = 1; // 【流向】：摇起红旗，通知前台主循环有新信件
+				}
+			}
+			else
+			{
+				g_usart1_cnt = 0; // 溢出防御：直接清空计数指针
+			}
+		}
+		USART_ClearITPendingBit(USART1, USART_IT_RXNE); // 清除中断挂起位
+	}
 }
 ```
-*   **逐行拆解与意图**：
-    *   整体流程与串口 1 高度一致。
-    *   区别在于它使用的是 **GPIOB** 的 **PB10**（作为 TX 发送）和 **PB11**（作为 RX 接收），且其主频时钟挂载在 `APB1` 硬件总线上。
-    *   它负责将单片机的串口 3（USART3）的波特率设置为老大你刚刚成功修改的 **115200** 极速波特率，从而与蓝牙模块实现等速率握手！
-*   **核心作用**：**打通单片机与蓝牙模块的极速无线通信链路，是蓝牙命令配置与数据透传的必经之路。**
 
----
-
-### 第六板块：防死锁字符串发送函数
+#### 📥 步骤 3：前台调度与数据解析（`main` 轮询与 `parse_and_respond` 驱动）
+前台抓到红旗，拆包解析并调用 PWM 硬件接口：
 ```c
-void usart_send_string(USART_TypeDef *USARTx, const char *str)
+/* inside main() loop: */
+// 数据流向：轮询到 g_usart1_ready == 1 -> 送入解析器 -> 复位计数器与红旗准备接收下一个
+while(1)
 {
-    const char *p = str;
-    while (p && *p)
-    {
-        USART_SendData(USARTx, *p);
-        while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET); // 👈 使用 TXE 安全判定
-        p++;
-    }
+	if (g_usart1_ready)
+	{
+		parse_and_respond((char *)g_usart1_buf, USART1); // 【流向】：送入解析器，指定回送串口为 USART1
+		g_usart1_cnt = 0;   // 【流向】：重置写指针为 0，擦除旧缓冲区
+		g_usart1_ready = 0; // 【流向】：放下红旗，解除锁定
+	}
 }
-```
-*   **这是什么**：传入指定的串口句柄（如 `USART3`）以及字符串首地址，通过指针偏移将字符一个一个发出去。
-*   **为什么要这样写（我的核心优化）**：
-    *   老师的原版代码在发送前先清空并等待 `TC（Transmission Complete，发送完成标志）`，这在单片机刚刚通电、寄存器状态不稳的冷启动瞬间，极易引发死等待，直接让单片机死锁挂起。
-    *   我帮你重构为基于 **`TXE（Transmit Data Register Empty，发送数据寄存器空标志）`** 的标志等待。只要数据发送缓冲区一空，立刻塞入下一个字符，物理上高效平滑，绝对不会发生开机卡死！
-*   **核心作用**：**为向蓝牙模块发送 AT（Attention，AT配置指令） 配置指令提供 100% 安全、极速、无挂起隐患的字符串发送手段。**
 
----
-
-### 第七板块：核心主循环流程区（业务配置逻辑）
-```c
-int main(void)
+/* inside parse_and_respond(): */
+// 数据流向：指令字符串 -> 提取占空比 -> 改变定时器物理寄存器 CCR1 -> 拼装 duty set ok -> 串口 1 发送
+void parse_and_respond(char *cmd, USART_TypeDef* respond_port)
 {
-    usart1_init(115200); // 1. 初始化电脑串口 (115200)
-    usart3_init(115200); // 2. 初始化蓝牙串口 (已修改为 115200!)
-    delay_ms(100);       // 3. 等待硬件稳定
-    
-    printf("这是蓝牙5.0模块测试\r\n"); // 4. 向个人电脑打印测试宣告
-    
-    // 5. 依次向蓝牙模块刷入 AT 配置序列，每次发送后延时 100ms 等待蓝牙模块处理并回显
-    usart_send_string(USART3, "AT\r\n");
-    delay_ms(100);
-    
-    usart_send_string(USART3, "AT+NAME\r\n");
-    delay_ms(100);
-    
-    usart_send_string(USART3, "AT+NAMELLZ\r\n"); // 👈 设置你的专属真名首字母！
-    delay_ms(100);
-    
-    usart_send_string(USART3, "AT+LADDR\r\n"); // 👈 精准查询 MAC 地址
-    delay_ms(100);   
-    
-    usart_send_string(USART3, "AT+RESET\r\n"); // 👈 重启生效
-    delay_ms(100);
-    
-    while (1)
-    {
-        // 进入主死循环，接下来的数据收发完全托付给后台的“中断服务函数”！
-    }
+	char resp_buf[64] = {0}; // 局部栈空间开辟应答缓冲区
+	
+	if (strncmp(cmd, "duty=", 5) == 0) // 匹配头部
+	{
+		int val = 0;
+		if (sscanf(cmd, "duty=%d#", &val) == 1) // 【流向】：解析 cmd 字符串，将占空比整数值解析流入 val
+		{
+			if (val < 0) val = 0;     // 下限过滤
+			if (val > 100) val = 100; // 上限过滤
+			
+			TIM_SetCompare1(TIM14, val); // 【流向】：修改 TIM14_CCR1 寄存器，控制 PF9 低电平脉宽改变亮度！
+			
+			sprintf(resp_buf, "duty set %d ok\r\n", val); // 【流向】：数据流向 resp_buf 组装为应答格式
+			usart_send_string(respond_port, (uint8_t *)resp_buf); // 【流向】：回送给 USART1 发送寄存器 DR
+		}
+	}
 }
 ```
-*   **核心作用**：**作为整个系统的大脑，掌控开机时的初始化以及自动刷入蓝牙 AT 握手指令的逻辑。**
 
 ---
 
-### 第八板块：双串口中断服务函数区（高速桥梁）
+### 2.3 数据流向主线二：无线控制与数据透传流（手机 APP 控制与 PC 端回显）
+
+本主线实现：手机端下发 `duty=50#` ➔ 蓝牙模块无线接收 ➔ 串口 3 中断接收 ➔ **【透传支流】数据立刻实时复制发送给串口 1 供电脑吃瓜回显** ➔ 串口 3 累加成包并由前台解析 ➔ 改变 PWM 占空比 ➔ 串口 3 无线回送应答。
+
+#### 📥 步骤 1：中断数据流分流与实时透传（`USART3_IRQHandler` 核心）
+在此中断中，蓝牙流入的每一字节数据会被**克隆复制**，立刻流入有线串口 1 发送给电脑：
 ```c
+// 数据流向：蓝牙接收 -> USART3_DR -> 克隆复制 -> USART1_DR (发送给电脑回显)
+// 数据流向：同时 -> g_usart3_buf 缓冲区 -> 检测 '#' 摇起无线红旗 g_usart3_ready = 1
 void USART3_IRQHandler(void)
 {
-    uint8_t d=0;
-    if (USART_GetITStatus(USART3, USART_IT_RXNE) == SET) // 1. 判断是否真的接收到了数据
-    {
-        d = USART_ReceiveData(USART3); // 2. 从蓝牙模块里把这个字符读取出来
-        
-        USART_SendData(USART1, d); // 3. 物理桥接：立刻通过串口 1 发送给你的个人电脑！
-        while(USART_GetFlagStatus(USART1, USART_FLAG_TXE)==RESET); // 4. 等待发送完成
-        
-        USART_ClearITPendingBit(USART3, USART_IT_RXNE); // 5. 清除中断标志，迎接下一个字符
-    }
+	uint8_t d; // 声明单字节流临时承载变量
+	if(USART_GetITStatus(USART3, USART_IT_RXNE) == SET)
+	{
+		d = USART_ReceiveData(USART3); // 【流向】：蓝牙串口 3 读取 1 字节流入 d
+		
+		// 【透传核心数据流向】：直接克隆数据，强行送入 USART1 发送寄存器！
+		// 这样手机上按了什么，PC 调试助手上立刻像数据玻璃一样完全透明回显显示！
+		USART_SendData(USART1, d);
+		
+		if (g_usart3_ready == 0) // 如果蓝牙前一个包已处理完
+		{
+			if (g_usart3_cnt < sizeof(g_usart3_buf) - 1)
+			{
+				g_usart3_buf[g_usart3_cnt++] = d; // 【流向】：拼入蓝牙专用接收缓冲区
+				
+				// 临时终止字符串，用于连接状态的软件双重防身拦截检测
+				g_usart3_buf[g_usart3_cnt] = '\0';
+				
+				// [连接拦截机制] (详情见数据流向主线四)
+				if (strstr((char *)g_usart3_buf, "OK+LOST") != NULL)
+				{
+					PEout(14) = 1;      // 灭灯
+					g_usart3_cnt = 0;   // 清空
+				}
+				else if (strstr((char *)g_usart3_buf, "OK+CONN") != NULL)
+				{
+					PEout(14) = 0;      // 亮灯
+					g_usart3_cnt = 0;   // 清空
+				}
+				else if (d == '#') // 正常控制字符遇到结束符 '#'
+				{
+					g_usart3_buf[g_usart3_cnt] = '\0'; // 拼装 C 语言字符串结束符
+					g_usart3_ready = 1; // 【流向】：摇起无线接收红旗，指示前台解析
+				}
+			}
+			else
+			{
+				g_usart3_cnt = 0; // 溢出防御
+			}
+		}
+		USART_ClearITPendingBit(USART3, USART_IT_RXNE);
+	}
 }
 ```
-*   **代码意图**：
-    *   在单片机运行过程中，一旦蓝牙模块有任何回显数据发过来，或者串口助手有任何指令敲进来，CPU 会**瞬间停下手中的工作**，立刻跳转到中断服务函数里执行桥接。
-*   **核心作用**：
-    *   当 `USART3` 收到蓝牙数据时 ➔ **立刻原封不动地发给 `USART1`（个人电脑）**；
-    *   当 `USART1` 收到电脑指令时 ➔ **立刻发送给蓝牙，或者执行灯光控制（`PFout(9)=0` 点灯）**。
-*   **这也是你为什么能在电脑上实时看到 `+NAME=LLZ` 打印的根本原因！**
+
+#### 📥 步骤 2：前台调度与无线响应（`main` 轮询与 `parse_and_respond` 驱动）
+无线接收红旗摇起后，前台主循环调用解析器并将应答通过无线回送手机：
+```c
+/* inside main() loop: */
+// 数据流向：轮询到 g_usart3_ready == 1 -> 送入解析器 -> 指定回送串口为 USART3 -> 复位接收就绪
+while(1)
+{
+	if (g_usart3_ready)
+	{
+		parse_and_respond((char *)g_usart3_buf, USART3); // 【流向】：送入解析，回送串口指定为 USART3
+		g_usart3_cnt = 0;   // 重置
+		g_usart3_ready = 0; // 复位红旗，解锁
+	}
+}
+```
 
 ---
 
-## 🎯 总结：这套代码的精妙之处
+### 2.4 数据流向主线三：温湿度采集查询流（查询 ➔ PG9 ➔ 串口上报）
 
-这套代码采用了**“开机顺序配置” + “后台中断实时透传”**的先进架构。
-开机时，它像一个威严的指挥官，通过串口 3 有条不紊地给蓝牙模块下达改名、查地址、重启的最高指令；
-配置完成后，它退居幕后，将 CPU 控制权完全交给高速中断，将串口 1 和串口 3 物理桥接在一起。此时，你的单片机就变成了一根**“隐形的数据导线”**，让你的电脑和蓝牙实现了零延迟的无线透传！
+本主线实现：串口收到查询命令 `"temp?#"` ➔ 解析器识别 ➔ 启动单总线读取 ➔ `PG9` 发送低电平起始信号 ➔ DHT11 芯片响应并送出温湿度数据 ➔ `PG9` 捕获 40us 电平 ➔ 格式化并送回发起源。
+
+#### 📥 步骤 1：触发采样与发送单总线起始信号（`dht11_read` 时序）
+```c
+// 数据流向：PG9 置为推挽输出 -> PGout(9)=0 强拉低18ms -> PGout(9)=1 释放 -> PG9 切换为输入模式监听
+int32_t dht11_read(uint8_t *buf)
+{
+	uint32_t t = 0;
+	int32_t i, j;
+	uint8_t d = 0;
+	uint8_t *p = buf; // 指针 p 指向传入的 5 字节缓冲接收空间
+	
+	// 1. 先切换 PG9 为推挽输出，准备控线向传感器发起请求
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
+	GPIO_Init(GPIOG, &GPIO_InitStructure);	
+	
+	// 【流向】：向总线倾泻 18ms 低电平，唤醒休眠的传感器芯片
+	PGout(9) = 0;
+	delay_ms(18);
+	PGout(9) = 1; // 【流向】：拉高释放总线，让出控制权
+	delay_us(30);
+	
+	// 2. 迅速切换为输入模式，准备读取传感器电平数据流
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_Init(GPIOG, &GPIO_InitStructure);	
+
+	// [握手阶段省略...] 传感器会先拉低 80us，再拉高 80us 作为应答响应
+```
+
+#### 📥 步骤 2：捕获与解析数据流位宽（`dht11_read` 40us 精准位读取）
+```c
+	// 3. 串行接收数据流：读取 5 个字节 (40 bits)
+	for(j = 0; j < 5; j++)
+	{
+		d = 0;
+		for(i = 7; i >= 0; i--)
+		{
+			t = 0;
+			while(PGin(9) == 0) // 等待引脚变高电平（即位起始点）
+			{
+				t++;
+				delay_us(1);
+				if(t >= 100) return -4;
+			}
+
+			// 【流向与时间窗口判断】：高电平开始传输后，延时 40us 读取 PGin(9) 的物理电压
+			delay_us(40);
+			if(PGin(9)) // 如果 40us 后引脚依然是高电平，证明高电平宽达 70us，即逻辑 1
+			{
+				d |= 1 << i; // 【流向】：将位 1 拼入局部字节 d 中
+				t = 0;
+				while(PGin(9)) // 自旋等待高电平结束
+				{
+					t++;
+					delay_us(1);
+					if(t >= 100) return -5;
+				}			
+			}
+			// 如果 40us 后引脚已降为低电平，说明之前脉宽只有 26us（代表逻辑 0），d 对应位维持默认的 0
+		}	
+		p[j] = d; // 【流向】：把接收满的 1 字节流入传入的缓冲中
+	}
+	
+	// [校验和校验...] 正确返回 0
+	return 0;
+}
+```
+
+#### 📥 步骤 3：数据汇聚与回送（`parse_and_respond` 转换温湿度上报）
+```c
+/* inside parse_and_respond(): */
+// 数据流向：匹配 temp?# -> 调用 dht11_read -> 提取整数与小数部分 -> 换算浮点 -> sprintf 格式化 -> 回送串口
+else if (strcmp(cmd, "temp?#") == 0)
+{
+	uint8_t dht_buf[5]; // 开辟 5 字节缓冲
+	float temp_val = 32.0; // 预置 32.0 降级 Mock 值做防线
+	
+	if (dht11_read(dht_buf) == 0) // 【流向】：温湿度硬件引脚数据流入 dht_buf
+	{
+		// 【流向】：dht_buf[2]（温度整数）与 dht_buf[3]（温度小数）进行浮点合成，流入 temp_val
+		temp_val = dht_buf[2] + dht_buf[3] / 10.0;
+	}
+	
+	sprintf(resp_buf, "%.1f\r\n", temp_val); // 【流向】：温度浮点数值转换为格式化文本流入 resp_buf
+	usart_send_string(respond_port, (uint8_t *)resp_buf); // 【流向】：发送给指定串口 TX，呈现在调试助手上
+}
+```
+
+---
+
+### 2.5 数据流向主线四：蓝牙连接指示流（双向指示灯 D4 亮灭）
+
+本主线实现：手机连接/断开蓝牙 ➔
+*   **【硬件流】** STATE 引脚输出高/低 ➔ `PE6` 双边沿 EXTI 中断触发 ➔ `EXTI9_5_IRQHandler` ➔ 位带操作 `PEout(14)` 控制灯。
+*   **【软件流 (防STATE未接) 】** 串口 3 收到 `OK+CONN` / `OK+LOST` ➔ 拦截机制 ➔ 直接位带写 `PEout(14)` ➔ 重置计数器并丢弃该状态包。
+
+#### 📥 支流 A：硬件电平流向（`state_exti_init` 配置 & `EXTI9_5_IRQHandler` 中断）
+```c
+// 1. 初始化配置：PE6 输入模式，下拉防止电平悬空漂移，EXTI 双边沿检测
+void state_exti_init(void)
+{
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
+
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN; // 配置为电平输入
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN; // 配置内部下拉，悬空时强拉为低电平（0V）
+	GPIO_Init(GPIOE, &GPIO_InitStructure);
+
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOE, EXTI_PinSource6); // 绑定 EXTI6 通道
+
+	EXTI_InitStructure.EXTI_Line = EXTI_Line6;
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 双边沿硬件捕获极性
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+	EXTI_Init(&EXTI_InitStructure);
+    
+    // [NVIC中断通道使能省略...]
+}
+
+// 2. 数据流向：PE6电平发生跳变 -> 触发 EXTI6 中断 -> 位带读 PEin(6) -> 位带控制 PEout(14) 物理高低电平控制D4
+void EXTI9_5_IRQHandler(void)
+{
+	if(EXTI_GetITStatus(EXTI_Line6) != RESET)
+	{
+		if(PEin(6) == 1) // 【流向】：如果 PE6 输入为高电平（代表蓝牙已成功物理连接）
+		{
+			PEout(14) = 0; // 【流向】：输出置低电平，物理点亮 D4 连接灯（低电平亮）
+		}
+		else // 如果 PE6 输入为低电平（代表蓝牙断开或悬空）
+		{
+			PEout(14) = 1; // 【流向】：输出置高电平，物理熄灭 D4 连接灯
+		}
+		EXTI_ClearITPendingBit(EXTI_Line6); // 清除中断标志，防卡死
+	}
+}
+```
+
+#### 📥 支流 B：软件数据拦截流向（`USART3_IRQHandler` 接收中途拦截）
+即使没有连接 STATE 引脚线，只要串口上发生了电平变化通知，软件双保险过滤器就能百分之百捕捉并处理：
+```c
+/* inside USART3_IRQHandler(): */
+// 数据流向：蓝牙串口收到字节拼入缓冲区 -> 临时补 \0 形成合法串 -> strstr 判定 -> 匹配 OK+LOST 或 OK+CONN 
+// 数据流向：直接位带改写 PEout(14) 控制 D4 -> 将计数器强行重置为 0，数据流直接被丢弃（免得进入命令解析）
+if (g_usart3_ready == 0)
+{
+	if (g_usart3_cnt < sizeof(g_usart3_buf) - 1)
+	{
+		g_usart3_buf[g_usart3_cnt++] = d; // 追加单字节
+		
+		g_usart3_buf[g_usart3_cnt] = '\0'; // 【流向】：临时补字符串终止符，使 strstr 可以安全逐字检索
+		
+		// 【流向】：如果缓冲区接收字中匹配到了 "OK+LOST" 状态字
+		if (strstr((char *)g_usart3_buf, "OK+LOST") != NULL)
+		{
+			PEout(14) = 1;      // 【流向】：直接位带控制，拉高 PE14（熄灭 D4 灯）
+			g_usart3_cnt = 0;   // 【流向】：写指针瞬间归零，直接在中断内拦截丢弃当前缓存内容！
+		}
+		// 【流向】：如果缓冲区接收字中匹配到了 "OK+CONN" 状态字
+		else if (strstr((char *)g_usart3_buf, "OK+CONN") != NULL)
+		{
+			PEout(14) = 0;      // 【流向】：直接位带控制，拉低 PE14（点亮 D4 灯）
+			g_usart3_cnt = 0;   // 【流向】：写指针瞬间归零，直接在中断内拦截丢弃当前缓存内容！
+		}
+        // ... (后面正常遇到 '#' 封包)
+	}
+}
+```
+
+---
+
+## 📈 第三部分：数学算法与关键参数计算总结
+
+在调试中，老大可以直接对照以下核心参数指标：
+
+1.  **PWM 脉频与计数精度**：
+    PWM频率 = 84MHz / ((Prescaler + 1) * (Period + 1)) = 84,000,000 / (84 * 100) = 10,000Hz = 10kHz
+2.  **LED 极性映射**：
+    *   `TIM_OCPolarity` 为 `TIM_OCPolarity_Low`（低电平点亮 LED 灯）。
+    *   此时：
+        CCR1 = 0 -> 0% 亮度 (全灭)
+        CCR1 = 50 -> 50% 亮度
+        CCR1 = 100 -> 100% 亮度 (全亮)
+3.  **DHT11 时序判定**：
+    *   高电平持续 26-28us 代表逻辑 0。
+    *   高电平持续 70us 代表逻辑 1。
+    *   触发检测 40us 后读取为 0 代表逻辑 0，读取为 1 代表逻辑 1。

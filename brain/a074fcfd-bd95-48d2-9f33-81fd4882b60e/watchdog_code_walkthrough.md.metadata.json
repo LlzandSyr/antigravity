@@ -1,0 +1,5 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary":  "This is a detailed code walkthrough explaining the Watchdog Timer (WDT) on STM32, specifically the Independent Watchdog (IWDG). It details how to calculate the watchdog time, configure the peripheral registers using standard library functions, write a simple main-loop feeding routine, and implement a highly reliable multi-tasking monitoring scheme using a timer-based system tick counter. All abbreviations are strictly expanded.",
+  "updatedAt":  "2026-05-26T06:24:03.379329900Z"
+}

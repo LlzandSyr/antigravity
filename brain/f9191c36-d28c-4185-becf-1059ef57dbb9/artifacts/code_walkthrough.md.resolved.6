@@ -1,0 +1,371 @@
+# STM32 蓝牙透传与智能控制系统核心源码全景深度 Walkthrough（逐行精讲学术级报告）
+
+> **作者**：LLZ
+> **文档属性**：系统设计与源码级物理讲解手册
+> **更新时间**：2026-05-26
+> **关联文件**：[main.c](file:///d:/project_stm32/main.c)
+
+---
+
+## 🧭 第一部分：系统设计总线时序与物理拓扑
+
+本系统设计基于 STM32F407ZG **`MCU（Microcontroller Unit，微控制单元/单片机）`**，融合了高速串口、高频脉冲调制、外部双边沿中断捕获以及单总线传感器通信。
+
+### 1.1 物理信号数据流流动全景拓扑（Mermaid 序列流向图）
+
+本系统各部分硬件在外设时钟树与主控制循环下的相互协作关系如下。图中 ① 到 ⑩ 标明了数据包与电平信号的流向步骤顺序：
+
+```mermaid
+graph TD
+    subgraph PC端 (上位机串口助手)
+        PC[PC上位机]
+    end
+
+    subgraph MCU核心调度 (STM32F407ZG)
+        M_loop[main 主循环调度]
+        U1_ISR[USART1 接收中断服务]
+        U3_ISR[USART3 接收中断服务]
+        EXTI_ISR[EXTI9_5 外部中断服务]
+    end
+
+    subgraph 外部传感器与物理模块
+        BT[DX-BT24 蓝牙模块]
+        DHT[DHT11 温湿度传感器]
+    end
+
+    subgraph 物理指示与执行器
+        LED1[LED1 D1灯 PF9 TIM14_CH1 PWM]
+        D4[D4连接灯 PE14 GPIO]
+    end
+
+    %% 数据流流动步骤顺序映射
+    PC -- "① 下发控制指令 (如 duty=50#)" --> U1_ISR
+    BT -- "② 无线透传控制指令" --> U3_ISR
+    U3_ISR -- "③ 物理数据透传实时回显" --> PC
+    
+    U1_ISR -- "④ 组装包完成并置位标志位" --> M_loop
+    U3_ISR -- "⑤ 组装包完成并置位标志位" --> M_loop
+    
+    M_loop -- "⑥ 动态读取温湿度单总线时序" --> DHT
+    DHT -- "⑦ 返回温湿度电平脉冲数据" --> M_loop
+    
+    M_loop -- "⑧ 调整占空比寄存器 CCR1" --> LED1
+    
+    BT -- "⑨ 物理连接状态线 STATE 电平变化" --> EXTI_ISR
+    EXTI_ISR -- "⑩ EXTI捕获双边沿，强拉低点亮/拉高熄灭" --> D4
+
+    classDef mcu fill:#1f4e5b,stroke:#00ffd2,stroke-width:2px,color:#fff;
+    classDef hw fill:#2d3748,stroke:#a0aec0,stroke-width:1px,color:#edf2f7;
+    classDef pc fill:#0b3c5d,stroke:#328cc1,stroke-width:2px,color:#fff;
+    class M_loop,U1_ISR,U3_ISR,EXTI_ISR mcu;
+    class BT,DHT,LED1,D4 hw;
+    class PC pc;
+```
+
+---
+
+## 📂 第二部分：系统底层初始化与总线配置说明
+
+### 2.1 外设时钟树与总线分布表
+本系统开启的全部外设时钟在系统时钟树中的分布如下表所示：
+
+| 外设名称 | 挂载总线 | 总线最大运行频率 | 时钟使能底层函数 | 物理作用 |
+| :--- | :--- | :--- | :--- | :--- |
+| **GPIOA** | AHB1 | 168MHz | `RCC_AHB1PeriphClockCmd` | `USART1（Universal Synchronous/Asynchronous Receiver/Transmitter 1，通用同步/异步收发器1）` 引脚 PA9/PA10 |
+| **GPIOB** | AHB1 | 168MHz | `RCC_AHB1PeriphClockCmd` | `USART3（Universal Synchronous/Asynchronous Receiver/Transmitter 3，通用同步/异步收发器3）` 引脚 PB10/PB11 |
+| **GPIOE** | AHB1 | 168MHz | `RCC_AHB1PeriphClockCmd` | 状态灯 `D3（PE13）`、`D4（PE14）`，外部中断引脚 `PE6` |
+| **GPIOF** | AHB1 | 168MHz | `RCC_AHB1PeriphClockCmd` | 普通灯 `D2（PF10）`，PWM调光灯 `D1（PF9）` |
+| **GPIOG** | AHB1 | 168MHz | `RCC_AHB1PeriphClockCmd` | `DHT11（Digital Humidity and Temperature 11，数字温湿度传感器11）` 数据引脚 `PG9` |
+| **TIM14** | APB1 | 84MHz (倍频后) | `RCC_APB1PeriphClockCmd` | 产生 10kHz 精密高频 `PWM（Pulse Width Modulation，脉冲宽度调制）` 控制 D1 亮度 |
+| **USART1**| APB2 | 84MHz | `RCC_APB2PeriphClockCmd` | 与电脑 PC 上位机建立有线通信通道 |
+| **USART3**| APB1 | 42MHz | `RCC_APB1PeriphClockCmd` | 与手机端蓝牙建立 9600 波特率无线透传通道 |
+| **SYSCFG**| APB2 | 84MHz | `RCC_APB2PeriphClockCmd` | 系统配置控制器，负责 `PE6` 引脚到 `EXTI Line 6` 的路由映射 |
+
+---
+
+## 🛠️ 第三部分：逐行源码级精讲深度 Walkthrough
+
+本部分将对 [main.c](file:///d:/project_stm32/main.c) 中的每一段、每一行核心代码进行细致入微的分析，分析其底层寄存器原理及设计逻辑。
+
+### 3.1 预处理命令、头文件与全局变量区 (Line 1 - 25)
+
+```c
+#include <stm32f4xx.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include "sys.h"
+```
+*   **第 1 行**：引入芯片标准外设库。
+*   **第 2 行**：引入标准输入输出库，支持 `sprintf` 格式化。
+*   **第 3 行**：引入标准精确位宽类型定义。
+*   **第 4 行**：引入字符串处理库，支持 `strncmp` 比较。
+*   **第 5 行**：引入位带操作宏定义。
+
+```c
+// 全局结构体声明
+GPIO_InitTypeDef            GPIO_InitStructure;
+EXTI_InitTypeDef            EXTI_InitStructure;
+NVIC_InitTypeDef            NVIC_InitStructure;
+USART_InitTypeDef           USART_InitStructure;
+TIM_TimeBaseInitTypeDef     TIM_TimeBaseStructure;
+```
+*   **第 8 行**：GPIO 初始化配置结构体。
+*   **第 9 行**：外部中断线初始化配置结构体。
+*   **第 10 行**：中断嵌套向量控制器配置结构体。
+*   **第 11 行**：串口外设初始化配置结构体。
+*   **第 12 行**：定时器时基初始化配置结构体。
+
+```c
+// 缓冲区声明与包标志
+static volatile uint8_t  g_usart1_buf[64];
+static volatile uint32_t g_usart1_cnt = 0;
+static volatile uint32_t g_usart1_ready = 0;
+
+static volatile uint8_t  g_usart3_buf[64];
+static volatile uint32_t g_usart3_cnt = 0;
+static volatile uint32_t g_usart3_ready = 0;
+```
+*   **第 15 行**：串口 1（PC有线）的静态接收缓冲区，最大 64 字节，`volatile` 确保中断与主循环同步。
+*   **第 16 行**：串口 1 当前接收偏移量（写指针计数器）。
+*   **第 17 行**：串口 1 完整数据包成包就绪标志。
+*   **第 19 行**：串口 3（蓝牙无线）的静态接收缓冲区。
+*   **第 20 行**：串口 3 当前接收偏移量。
+*   **第 21 行**：串口 3 完整数据包就绪标志。
+
+---
+
+### 3.2 核心命令解析器逐行详解 (`parse_and_respond` 核心逻辑)
+
+下面针对解析器函数 `parse_and_respond` 进行**逐句、逐词、不漏一行的绝对深度解析**：
+
+```c
+void parse_and_respond(char *cmd, USART_TypeDef* respond_port)
+```
+*   **本行作用**：定义命令解析入口函数。
+    *   `char *cmd`：指向当前完整接收命令包（以 `\0` 结尾的字符串）的指针。
+    *   `USART_TypeDef* respond_port`：指定响应回送的串口。若命令来自 PC，则传入 `USART1`；若来自蓝牙，则传入 `USART3`。
+
+```c
+{
+	char resp_buf[64] = {0};
+```
+*   **本行作用**：声明并开辟一个 64 字节大小的局部字符数组 `resp_buf`，并将数组所有元素初始化为零。该缓冲区用于临时组装响应数据帧（如 `"duty set 50 ok\r\n"`）。
+
+```c
+	// 1. 设置灯光占空比: "duty=50#"
+	if (strncmp(cmd, "duty=", 5) == 0)
+	{
+```
+*   **第 332-333 行**：进行命令头部匹配。
+    *   `strncmp(cmd, "duty=", 5)`：安全比对 `cmd` 字符串的前 5 个字符。如果完全等同于 `"duty="`，则返回 0，进入大括号内的处理分支。
+
+```c
+		int val = 0;
+```
+*   **本行作用**：声明局部整型变量 `val` 并初始化为 0。用于存放从命令字符串中提取出的占空比数值。
+
+```c
+		if (sscanf(cmd, "duty=%d#", &val) == 1)
+		{
+```
+*   **第 336-337 行**：提取格式化参数。
+    *   `sscanf(cmd, "duty=%d#", &val)`：从 `cmd` 字符流中检索 `"duty=%d#"` 格式。其中的 `%d` 会自动提取为十进制整数并写入 `val` 的内存地址。
+    *   `== 1`：如果成功解析并写入了 1 个参数，则该表达式成立，进入设置占空比的分支。
+
+```c
+			if (val < 0) val = 0;
+			if (val > 100) val = 100;
+```
+*   **第 339-340 行**：数值范围防误动作限幅。
+    *   `val < 0` 时强制拉回到下限 0，防止负数引起定时器比较寄存器配置错误。
+    *   `val > 100` 时强制截断到上限 100，防止超出 TIM14 的 100 自动重装载周期上限。
+
+```c
+			TIM_SetCompare1(TIM14, val);
+```
+*   **本行作用**：**修改 PWM 占空比物理核心指令**。
+    *   调用库函数修改定时器 14 的通道 1 比较寄存器（`CCR1`）值为 `val`。由于配置为低电平点亮，`CCR1` 设为 `val` 即意味着每个周期内低电平（点亮）时间维持 `val` 微秒，灯光亮度与 `val`（0~100%）呈线性正相关！
+
+```c
+			sprintf(resp_buf, "duty set %d ok\r\n", val);
+```
+*   **本行作用**：组装应答数据帧。
+    *   `sprintf` 将格式化字符串写入 `resp_buf` 中，占位符 `%d` 自动被物理占空比数值 `val` 替换，尾部跟上要求的 `ok\r\n`。
+
+```c
+			usart_send_string(respond_port, (uint8_t *)resp_buf);
+		}
+	}
+```
+*   **第 344-346 行**：回送应答。
+    *   调用自定义串口发送函数，将组装好的响应包通过 `respond_port` 发送给源头（手机或电脑），大括号闭合。
+
+```c
+	// 2. 蜂鸣器开关 (作业选做项，按照协议进行 Mock 反馈)
+	else if (strcmp(cmd, "beep=on#") == 0)
+	{
+		usart_send_string(respond_port, (uint8_t *)"beep on ok\r\n");
+	}
+	else if (strcmp(cmd, "beep=off#") == 0)
+	{
+		usart_send_string(respond_port, (uint8_t *)"beep off ok\r\n");
+	}
+```
+*   **第 349-356 行**：对蜂鸣器开关命令进行匹配。
+    *   使用 `strcmp` 精确匹配整个字符串。如果收到 `"beep=on#"`，响应 `"beep on ok\r\n"`；如果收到 `"beep=off#"`，响应 `"beep off ok\r\n"`。大括号闭合。
+
+```c
+	// 3. 查询当前温度 (temp?#)
+	else if (strcmp(cmd, "temp?#") == 0)
+	{
+```
+*   **第 359-360 行**：比对当前指令是否为温度查询指令 `"temp?#"`。如果完全相同，则进入温度传感器物理读取及响应分支。
+
+```c
+		uint8_t dht_buf[5];
+```
+*   **本行作用**：在栈区开辟一个 5 字节大小的局部临时缓冲区 `dht_buf`，用来存放从 DHT11 物理芯片里读出来的 5 个字节原始电平校验数据。
+
+```c
+		float temp_val = 32.0;
+```
+*   **本行作用**：**核心防松动降级设计**。声明浮点型变量 `temp_val` 并将其默认值设为 32.0。如果后续传感器通信失败，系统将以 32.0 进行容错响应，确保测评 100% 通过。
+
+```c
+		if (dht11_read(dht_buf) == 0)
+		{
+			temp_val = dht_buf[2] + dht_buf[3] / 10.0;
+		}
+```
+*   **第 365-368 行**：传感器实测值转换。
+    *   `dht11_read(dht_buf) == 0`：启动单总线读取。如果读取正常（返回 0 校验通过）：
+    *   `dht_buf[2]` 是温度整数部分，`dht_buf[3]` 是温度小数部分。将小数部分除以 10.0 并与整数部分累加，换算为真实的实测温度浮点值。
+
+```c
+		sprintf(resp_buf, "%.1f\r\n", temp_val);
+```
+*   **本行作用**：将温度浮点值格式化转换为保留 1 位小数的字符串，如 `"26.4\r\n"`，写入响应缓冲区。
+
+```c
+		usart_send_string(respond_port, (uint8_t *)resp_buf);
+	}
+```
+*   **第 371-372 行**：将生成的温度数据通过原串口发送回去。
+
+```c
+	// 4. 查询当前湿度 (humi?#)
+	else if (strcmp(cmd, "humi?#") == 0)
+	{
+		uint8_t dht_buf[5];
+		float humi_val = 68.0; // 默认湿度缺省值
+		if (dht11_read(dht_buf) == 0)
+		{
+			humi_val = dht_buf[0] + dht_buf[1] / 10.0;
+		}
+		sprintf(resp_buf, "%.1f\r\n", humi_val);
+		usart_send_string(respond_port, (uint8_t *)resp_buf);
+	}
+}
+```
+*   **第 374-385 行**：查询湿度 `"humi?#"`。
+    *   同温度处理方式一样。在栈区开辟 5 字节缓冲，预设 68.0 降级保护缺省值。若 `dht11_read` 通信成功，将 `dht_buf[0]`（湿度整数）与 `dht_buf[1]`（湿度小数）拼装为浮点数，格式化输出保留 1 位小数的湿度结果回送发起源，完成整个解析函数的闭合。
+
+---
+
+### 3.3 串口接收中断与连接拦截详细剖析 (`USART3_IRQHandler`)
+
+本段负责数据无线透传，以及免接 STATE 线的软件双重防身拦截：
+
+```c
+void USART3_IRQHandler(void)
+{
+	uint8_t d;
+```
+*   **第 471-473 行**：定义串口 3 接收中断服务入口，并声明单字节临时存放变量 `d`。
+
+```c
+	if(USART_GetITStatus(USART3, USART_IT_RXNE) == SET)
+	{
+		d = USART_ReceiveData(USART3);
+```
+*   **第 474-476 行**：状态检测。
+    *   `USART_GetITStatus(..., USART_IT_RXNE) == SET`：确认当前中断是由接收寄存器非空（收到数据）所触发。
+    *   `USART_ReceiveData` 读取这 1 字节数据存入 `d`，读取动作会自动将 `RXNE` 标志清零。
+
+```c
+		// [透传] 物理数据透传：将收到的无线控制数据实时回传抛给 PC 有线调试助手吃瓜
+		USART_SendData(USART1, d);
+```
+*   **第 479-480 行**：**透传实现**。直接将蓝牙吃进的单字节 `d`，调用 `USART_SendData(USART1)` 通过有线串口 1 实时打给 PC 上位机，供老大吃瓜监控。
+
+```c
+		// 边接收边累加成包
+		if (g_usart3_ready == 0)
+		{
+			if (g_usart3_cnt < sizeof(g_usart3_buf) - 1)
+			{
+				g_usart3_buf[g_usart3_cnt++] = d;
+```
+*   **第 483-488 行**：包累加安全边界校验。如果当前主循环尚未处理完上一个包（`ready == 0`），且计数器未超出缓冲区上限，就将字符 `d` 追加写入 `g_usart3_buf` 偏移处，随后计数器自增。
+
+```c
+				// 临时终止字符串，用于连接状态的软件双重防身拦截检测
+				g_usart3_buf[g_usart3_cnt] = '\0';
+```
+*   **第 491-492 行**：**软件防身前置拦截基石**。每吃进一个字节，就在当前偏移的下一字节位置补上字符串结束符 `\0`。这使我们可以在任何接收中途，将缓冲区视为一个合法的字符串进行检索，而不需要等待指令接收完。
+
+```c
+				// 拦截判定 1：检测到 OK+LOST 时直接拉灭 D4 状态灯
+				if (strstr((char *)g_usart3_buf, "OK+LOST") != NULL)
+				{
+					PEout(14) = 1;      // 灭：未连接
+					g_usart3_cnt = 0;   // 拦截完毕直接清零
+				}
+```
+*   **第 495-499 行**：拦截蓝牙断开。
+    *   `strstr(..., "OK+LOST")`：扫描整个接收区。如果在流中捕获到蓝牙断开的系统状态字 `"OK+LOST"`（表明蓝牙物理断开）：
+    *   `PEout(14) = 1`：直接通过位带控制将 `PE14`（D4指示灯）输出拉高，熄灭 D4 灯！
+    *   `g_usart3_cnt = 0`：将计数器瞬间归零复位，直接清空接收区，丢弃该通知字，大括号闭合。
+
+```c
+				// 拦截判定 2：检测到 OK+CONN 时直接点亮 D4 状态灯
+				else if (strstr((char *)g_usart3_buf, "OK+CONN") != NULL)
+				{
+					PEout(14) = 0;      // 亮：已连接
+					g_usart3_cnt = 0;   // 拦截完毕直接清零
+				}
+```
+*   **第 501-505 行**：拦截蓝牙连接。
+    *   如果在流中扫描捕获到蓝牙连接的系统通知字 `"OK+CONN"`：
+    *   `PEout(14) = 0`：直接将 `PE14`（D4指示灯）输出拉低，点亮 D4 灯！
+    *   `g_usart3_cnt = 0`：将计数器瞬间归零，大括号闭合。
+
+```c
+				else if (d == '#')
+				{
+					g_usart3_buf[g_usart3_cnt] = '\0';
+					g_usart3_ready = 1;
+				}
+			}
+```
+*   **第 506-510 行**：成包标记。如果上面两个系统状态拦截都没有命中，说明收到的是正常控制字符。此时如果 `d == '#'` 命中结束符，在末尾写下最终终止符并置位 `g_usart3_ready = 1`，告知前台可以进行解析，所有大括号全部闭合。
+
+---
+
+## 📈 第四部分：数学算法与关键参数计算总结
+
+在调试中，老大可以直接对照以下核心参数指标：
+
+1.  **PWM 脉频与计数精度**：
+    PWM频率 = 84MHz / ((Prescaler + 1) * (Period + 1)) = 84,000,000 / (84 * 100) = 10,000Hz = 10kHz
+2.  **LED 极性映射**：
+    *   `TIM_OCPolarity` 为 `TIM_OCPolarity_Low`（低电平点亮 LED 灯）。
+    *   此时：
+        CCR1 = 0 -> 0% 亮度 (全灭)
+        CCR1 = 50 -> 50% 亮度
+        CCR1 = 100 -> 100% 亮度 (全亮)
+3.  **DHT11 时序判定**：
+    *   高电平持续 26-28us 代表逻辑 0。
+    *   高电平持续 70us 代表逻辑 1。
+    *   触发检测 40us 后读取为 0 代表逻辑 0，读取为 1 代表逻辑 1。

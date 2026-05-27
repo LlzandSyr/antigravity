@@ -1,0 +1,5 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_OTHER",
+  "summary":  "This artifact documents three efficient ways to batch format graduation theses: Word's native Styles system, a fully automated VBA macro script, and a python-docx batch script. These are tailored to the user's software formatting requirements.",
+  "updatedAt":  "2026-05-26T07:15:02.358609700Z"
+}

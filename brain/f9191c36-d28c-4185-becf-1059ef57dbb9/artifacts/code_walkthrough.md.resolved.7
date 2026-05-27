@@ -1,0 +1,894 @@
+# STM32 蓝牙透传与智能控制系统全景一站式源码深度 Walkthrough（LLZ 专属通关指南）
+
+> **作者**：LLZ
+> **文档属性**：系统设计与源码级物理讲解一站式手册
+> **更新时间**：2026-05-26
+> **关联文件**：[main.c](file:///d:/project_stm32/main.c)
+
+---
+
+## 🧭 第一部分：系统设计总线时序与物理拓扑
+
+本系统设计基于 STM32F407ZG **`MCU（Microcontroller Unit，微控制单元/单片机）`**，融合了高速串口、高频脉冲调制、外部双边沿中断捕获以及单总线传感器通信。
+
+### 1.1 物理信号数据流流动全景拓扑（Mermaid 序列流向图）
+
+本系统各部分硬件在外设时钟树与主控制循环下的相互协作关系如下。图中 ① 到 ⑩ 标明了数据包与电平信号的流向步骤顺序：
+
+```mermaid
+graph TD
+    subgraph PC端 (上位机串口助手)
+        PC[PC上位机]
+    end
+
+    subgraph MCU核心调度 (STM32F407ZG)
+        M_loop[main 主循环调度]
+        U1_ISR[USART1 接收中断服务]
+        U3_ISR[USART3 接收中断服务]
+        EXTI_ISR[EXTI9_5 外部中断服务]
+    end
+
+    subgraph 外部传感器与物理模块
+        BT[DX-BT24 蓝牙模块]
+        DHT[DHT11 温湿度传感器]
+    end
+
+    subgraph 物理指示与执行器
+        LED1[LED1 D1灯 PF9 TIM14_CH1 PWM]
+        D4[D4连接灯 PE14 GPIO]
+    end
+
+    %% 数据流流动步骤顺序映射
+    PC -- "① 下发控制指令 (如 duty=50#)" --> U1_ISR
+    BT -- "② 无线透传控制指令" --> U3_ISR
+    U3_ISR -- "③ 物理数据透传实时回显" --> PC
+    
+    U1_ISR -- "④ 组装包完成并置位标志位" --> M_loop
+    U3_ISR -- "⑤ 组装包完成并置位标志位" --> M_loop
+    
+    M_loop -- "⑥ 动态读取温湿度单总线时序" --> DHT
+    DHT -- "⑦ 返回温湿度电平脉冲数据" --> M_loop
+    
+    M_loop -- "⑧ 调整占空比寄存器 CCR1" --> LED1
+    
+    BT -- "⑨ 物理连接状态线 STATE 电平变化" --> EXTI_ISR
+    EXTI_ISR -- "⑩ EXTI捕获双边沿，强拉低点亮/拉高熄灭" --> D4
+
+    classDef mcu fill:#1f4e5b,stroke:#00ffd2,stroke-width:2px,color:#fff;
+    classDef hw fill:#2d3748,stroke:#a0aec0,stroke-width:1px,color:#edf2f7;
+    classDef pc fill:#0b3c5d,stroke:#328cc1,stroke-width:2px,color:#fff;
+    class M_loop,U1_ISR,U3_ISR,EXTI_ISR mcu;
+    class BT,DHT,LED1,D4 hw;
+    class PC pc;
+```
+
+### 1.2 外设时钟树与总线分布表
+本系统开启的全部外设时钟在系统时钟树中的分布如下表所示：
+
+| 外设名称 | 挂载总线 | 总线最大运行频率 | 时钟使能底层函数 | 物理作用 |
+| :--- | :--- | :--- | :--- | :--- |
+| **GPIOA** | AHB1 | 168MHz | `RCC_AHB1PeriphClockCmd` | `USART1（Universal Synchronous/Asynchronous Receiver/Transmitter 1，通用同步/异步收发器1）` 引脚 PA9/PA10 |
+| **GPIOB** | AHB1 | 168MHz | `RCC_AHB1PeriphClockCmd` | `USART3（Universal Synchronous/Asynchronous Receiver/Transmitter 3，通用同步/异步收发器3）` 引脚 PB10/PB11 |
+| **GPIOE** | AHB1 | 168MHz | `RCC_AHB1PeriphClockCmd` | 状态灯 `D3（PE13）`、`D4（PE14）`，外部中断引脚 `PE6` |
+| **GPIOF** | AHB1 | 168MHz | `RCC_AHB1PeriphClockCmd` | 普通灯 `D2（PF10）`，PWM调光灯 `D1（PF9）` |
+| **GPIOG** | AHB1 | 168MHz | `RCC_AHB1PeriphClockCmd` | `DHT11（Digital Humidity and Temperature 11，数字温湿度传感器11）` 数据引脚 `PG9` |
+| **TIM14** | APB1 | 84MHz (倍频后) | `RCC_APB1PeriphClockCmd` | 产生 10kHz 精密高频 `PWM（Pulse Width Modulation，脉冲宽度调制）` 控制 D1 亮度 |
+| **USART1**| APB2 | 84MHz | `RCC_APB2PeriphClockCmd` | 与电脑 PC 上位机建立有线通信通道 |
+| **USART3**| APB1 | 42MHz | `RCC_APB1PeriphClockCmd` | 与手机端蓝牙建立 9600 波特率无线透传通道 |
+| **SYSCFG**| APB2 | 84MHz | `RCC_APB2PeriphClockCmd` | 系统配置控制器，负责 `PE6` 引脚到 `EXTI Line 6` 的路由映射 |
+
+---
+
+## 📂 第二部分：一站式顺序线性 Walkthrough（从 Line 1 逐行精讲至尾部）
+
+为了免去老大来回翻找、概念零散的痛苦，本部分将整个 `main.c` 源码**按从上到下的物理书写顺序，分成 16 个代码段，进行 100% 完整无死角的逐行剖析**！
+
+---
+
+### 2.1 代码段 1：预处理头文件与全局变量区 (Line 1 - 22)
+
+```c
+#include <stm32f4xx.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include "sys.h"
+
+// 全局结构体声明
+GPIO_InitTypeDef			GPIO_InitStructure;
+EXTI_InitTypeDef   			EXTI_InitStructure;
+NVIC_InitTypeDef   		 	NVIC_InitStructure;
+USART_InitTypeDef   		USART_InitStructure;
+TIM_TimeBaseInitTypeDef  	TIM_TimeBaseStructure;
+
+// 缓冲区声明与包标志
+static volatile uint8_t  g_usart1_buf[64];
+static volatile uint32_t g_usart1_cnt = 0;
+static volatile uint32_t g_usart1_ready = 0;
+
+static volatile uint8_t  g_usart3_buf[64];
+static volatile uint32_t g_usart3_cnt = 0;
+static volatile uint32_t g_usart3_ready = 0;
+```
+
+#### 逐行功能精讲：
+*   **第 1-5 行**：引入外设库和标准C函数头文件。`sys.h` 导入了位带操作（Bit-Band）宏，使得直接写 `PEout(14)` 即能快速控制 IO，执行极快。
+*   **第 8-12 行**：定义配置硬件的参数初始化结构体，把参数填满后送给固件库函数，将一次性配置写入外设内部的物理寄存器。
+*   **第 15-22 行**：声明 PC 端（串口 1）和蓝牙端（串口 3）的接收缓存与包标志状态。
+    *   `volatile`：强制 **`CPU（Central Processing Unit，中央处理器）`** 每次都从 **`RAM（Random Access Memory，随机存取存储器）`** 读取最新值，绝不进行寄存器优化，彻底消除了前后台多任务的数据脏读死锁。
+    *   `g_usartX_cnt` 充当写数据偏移指针，`g_usartX_ready` 是成包标志（红旗）。
+
+---
+
+### 2.2 代码段 2：标准 C 库重定向发送 (Line 24 - 36)
+
+```c
+// 声明标准C库访问重定向
+struct __FILE { int handle; /* Add whatever you need here */ };
+FILE __stdout;
+FILE __stdin;
+
+int fputc(int ch, FILE *f) {
+	while(USART_GetFlagStatus(USART1,USART_FLAG_TC)==RESET);
+	USART_SendData(USART1,ch);	
+	return ch;
+}
+```
+
+#### 逐行功能精讲：
+*   **第 25-27 行**：声明文件句柄结构，避开标准库底层的半主机模式（Semihosting）死锁。
+*   **第 29-33 行**：重写标准输出字符函数 `fputc`。当我们使用 `printf` 时，系统自动调用该函数。
+    *   `while(... == RESET)`：循环等待串口 1 的发送移位寄存器清空（`TC` 变为 1 证明上个字符发送完毕）。
+    *   `USART_SendData`：把新字符 `ch` 写入发送寄存器 `DR`，由串口硬件物理发送出去，并返回 `ch`。
+
+---
+
+### 2.3 代码段 3：系统高精度滴答延时 (Line 38 - 61)
+
+```c
+// 延时函数定义
+void delay_ms(uint32_t t)
+{
+	while(t--)
+	{
+		SysTick->CTRL = 0; 
+		SysTick->LOAD = 168000-1; 
+		SysTick->VAL = 0; 
+		SysTick->CTRL = 5; 
+		while ((SysTick->CTRL & 0x10000)==0);
+	}
+	SysTick->CTRL = 0; 	
+}
+
+void delay_us(uint32_t t)
+{
+	SysTick->CTRL = 0; 
+	SysTick->LOAD = 168*t-1; 
+	SysTick->VAL = 0; 
+	SysTick->CTRL = 5; 
+	while ((SysTick->CTRL & 0x10000)==0);
+	SysTick->CTRL = 0; 	
+}
+```
+
+#### 逐行功能精讲：
+*   **第 39-50 行**：利用内核滴答定时器产生阻塞式毫秒级延时。
+    *   主频 168MHz 下，产生 1ms 定时需要自减计数器计满 `168000` 次。
+    *   `SysTick->CTRL = 5` 代表启动定时器并采用 168MHz 内核时钟。
+    *   内部 `while` 自旋等待第 16 位计数结束标志置为 1，随后退出循环，定时关闭。
+*   **第 52-60 行**：微秒级（us）高精度延时，DHT11 单总线读写判定全靠它。
+
+---
+
+### 2.4 代码段 4：LED 普通 GPIO 初始化 (Line 63 - 89)
+
+```c
+// LED GPIO 初始化
+void led_init(void)
+{
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF,ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE,ENABLE);
+	
+	// PF10 普通输出模式 (D2灯)
+	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_10;
+	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_Speed=GPIO_Low_Speed;
+	GPIO_InitStructure.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd=GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOF,&GPIO_InitStructure);
+	
+	// PE13, PE14 普通输出模式 (D3, D4灯)
+	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_13|GPIO_Pin_14;
+	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_Speed=GPIO_Low_Speed;
+	GPIO_InitStructure.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd=GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOE,&GPIO_InitStructure);
+	
+	// 默认状态：灯全灭 (高电平灭)
+	GPIO_WriteBit(GPIOF,GPIO_Pin_10, Bit_SET);
+	GPIO_WriteBit(GPIOE,GPIO_Pin_13, Bit_SET);
+	GPIO_WriteBit(GPIOE,GPIO_Pin_14, Bit_SET); // D4 蓝牙状态指示灯
+}
+```
+
+#### 逐行功能精讲：
+*   **第 65-66 行**：开启 `GPIOF` 与 `GPIOE` 所在的 AHB1 高速外设总线时钟。
+*   **第 69-74 行**：配置 **`PF10`**（D2 指示灯）为通用推挽输出（`GPIO_OType_PP`），浮空无上下拉（`GPIO_PuPd_NOPULL`）。
+*   **第 77-82 行**：配置 **`PE13`**（D3 指示灯）与 **`PE14`**（D4 蓝牙连接指示灯）为推挽输出。
+*   **第 85-87 行**：**开发细节**！由于开发板的指示灯是**低电平点亮**，故在初始化结束时必须将引脚全部写入 **`Bit_SET`**（高电平），确保上电初始时指示灯全部呈熄灭状态。
+
+---
+
+### 2.5 代码段 5：TIM14 CH1 PWM 调光初始化 (Line 91 - 128)
+
+```c
+// TIM14 CH1 PWM 占空比控灯初始化 (PF9)
+void led_pwm_init(void)
+{
+	// 1. 使能 GPIOF 和 TIM14 时钟
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF, ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM14, ENABLE);
+
+	// 2. 配置 PF9 为复用模式 (AF)
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStructure.GPIO_Speed = GPIO_High_Speed;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_Init(GPIOF, &GPIO_InitStructure);
+
+	// 3. 将 PF9 复用映射到 TIM14_CH1
+	GPIO_PinAFConfig(GPIOF, GPIO_PinSource9, GPIO_AF_TIM14);
+
+	// 4. 定时器时基配置：主频 168MHz，APB1 分频后定时器时钟 84MHz
+	// 设预分频为 84-1，计数时钟为 1MHz (1us/计数)
+	// 自动重装载周期 Period 设为 100-1，则 PWM 频率为 10kHz
+	TIM_TimeBaseStructure.TIM_Period = 100 - 1;
+	TIM_TimeBaseStructure.TIM_Prescaler = 84 - 1;
+	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	TIM_TimeBaseInit(TIM14, &TIM_TimeBaseStructure);
+
+	// 5. 配置 TIM14 通道 1 占空比输出
+	TIM_OCInitTypeDef TIM_OCInitStructure;
+	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; // PWM 模式 1
+	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure.TIM_Pulse = 100; // 默认脉宽为 100 (低电平有效，因此代表 0% 亮度 -> 熄灭)
+	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low; // 极性低电平有效 (低电平点亮 LED)
+	TIM_OC1Init(TIM14, &TIM_OCInitStructure);
+
+	// 使能定时器 TIM14
+	TIM_Cmd(TIM14, ENABLE);
+}
+```
+
+#### 逐行功能精讲：
+*   **第 94-95 行**：给 `GPIOF` 与低速 APB1 总线上的 `TIM14` 定时器开电。
+*   **第 98-103 行**：将 **`PF9`** 配置为复用引脚（`GPIO_Mode_AF`），因为该引脚将直接由定时器硬件驱动。
+*   **第 106 行**：将引脚 `PF9` 路由映射到 `TIM14` 定时器的通道 1（`AF_TIM14`复用）。
+*   **第 112-116 行**：**时钟分频数学原理**。APB1 的倍频时钟给定时器提供 84MHz 的输入主频。
+    *   预分频器（`Prescaler`）设为 $84-1$，定时器内部每 $1\text{us}$ 自增计数一次（计数频率为 $1\text{MHz}$）。
+    *   重载周期（`Period`）设为 $100-1$，则计数器每数满 100 个脉冲（$100\text{us}$）就溢出一次，因此 PWM 输出的物理频率为完美无屏闪的 $10\text{kHz}$。
+*   **第 119-124 行**：配置通道比较输出。
+    *   `TIM_OCMode_PWM1`：PWM 模式 1。
+    *   `TIM_OCPolarity_Low`：**有效电平为低电平（点亮）**。
+    *   **极性映射公式**：由于有效电平是低电平，当计数器自增时：
+        *   当 $CNT < CCR1$ 时，输出低电平（点亮 LED）；
+        *   当 $CNT \ge CCR1$ 时，输出高电平（熄灭 LED）。
+        
+        故低电平（点亮灯光）占空比为：
+        点亮占空比 = `CCR1` / (`ARR` + 1) * 100% = `CCR1`%（当 `ARR` 为 99 时）。
+        所以占空比寄存器 `CCR1` 填入的数值正好与灯光的亮度百分比（0~100）完美对齐！
+    *   默认 `TIM_Pulse`（`CCR1`）置为 100 代表 100% 灭。
+*   **第 127 行**：调用 `TIM_Cmd` 启动定时器 `TIM14`。
+
+---
+
+### 2.6 代码段 6：有线串口 1 (PC端) 初始化 (Line 130 - 159)
+
+```c
+// 串口 1（PC端）初始化
+void usart1_init(uint32_t baud)
+{
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);
+	
+	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_9|GPIO_Pin_10;
+	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF;
+	GPIO_InitStructure.GPIO_Speed=GPIO_Low_Speed;
+	GPIO_InitStructure.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd=GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOA,&GPIO_InitStructure);	
+	
+	GPIO_PinAFConfig(GPIOA,GPIO_PinSource9,GPIO_AF_USART1);
+	GPIO_PinAFConfig(GPIOA,GPIO_PinSource10,GPIO_AF_USART1);	
+	
+	USART_InitStructure.USART_BaudRate = baud; 					
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;	
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;		
+	USART_InitStructure.USART_Parity = USART_Parity_No;			
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_Init(USART1, &USART_InitStructure);
+	
+	USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);
+	
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
+	USART_Cmd(USART1, ENABLE);
+}
+```
+
+#### 逐行功能精讲：
+*   **第 133-134 行**：开启 `GPIOA` 和高速时钟总线上的 `USART1` 时钟。
+*   **第 136-141 行**：将有线串口引脚 `PA9`（TX 发送）与 `PA10`（RX 接收）配置为复用模式。
+*   **第 143-144 行**：将 `PA9`/`PA10` 分别映射到 `USART1` 的通道上。
+*   **第 146-151 行**：向串口初始化表填充参数：波特率 `baud`（传入 115200），8位数据位，1位停止位，无奇偶校验，无硬件流控，支持接收与发送双向通信。
+*   **第 154 行**：使能 `USART1` 的接收中断（`RXNE`，当有数据收到时触发中断）。
+*   **第 156-157 行**：配置串口 1 中断向量，抢占优先级为最高的 0，子优先级为 0。
+*   **第 159 行**：启动串口 1 硬件工作。
+
+---
+
+### 2.7 代码段 7：无线串口 3 (蓝牙模块) 初始化 (Line 161 - 190)
+
+```c
+// 串口 3（手机蓝牙）初始化
+void usart3_init(uint32_t baud)
+{
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3,ENABLE);
+	
+	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_10|GPIO_Pin_11;
+	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AF;
+	GPIO_InitStructure.GPIO_Speed=GPIO_Low_Speed;
+	GPIO_InitStructure.GPIO_OType=GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd=GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOB,&GPIO_InitStructure);	
+	
+	GPIO_PinAFConfig(GPIOB,GPIO_PinSource10,GPIO_AF_USART3);
+	GPIO_PinAFConfig(GPIOB,GPIO_PinSource11,GPIO_AF_USART3);	
+	
+	USART_InitStructure.USART_BaudRate = baud; 					
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_Init(USART3, &USART_InitStructure);
+	
+	USART_ITConfig(USART3,USART_IT_RXNE,ENABLE);
+	
+	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	
+	USART_Cmd(USART3, ENABLE);
+}
+```
+
+#### 逐行功能精讲：
+*   **第 164-165 行**：开启 `GPIOB` 与低速 APB1 时钟总线上的 `USART3` 模块时钟。
+*   **第 167-175 行**：配置 **`PB10`**（USART3_TX）与 **`PB11`**（USART3_RX）并物理复用连接。
+*   **第 177-182 行**：配置波特率 `baud` 为 9600（蓝牙透传通信专属极稳波特率），支持双向读写。
+*   **第 185-188 行**：启动串口 3 的接收中断并为其中断通道 `USART3_IRQn` 分配抢占优先级 0。
+*   **第 190 行**：正式使能串口 3 启动。
+
+---
+
+### 2.8 代码段 8：EXTI6 物理状态外部中断 (Line 192 - 220)
+
+```c
+// 外部中断初始化：检测 PE6 引脚双边沿变化
+void state_exti_init(void)
+{
+	// 开启 SYSCFG 和 GPIOE 的时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
+
+	// 配置 PE6 作为输入引脚，加上拉/下拉，防止悬空漂移！
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN; // 使用下拉电阻，确保在断开时强制为低电平！
+	GPIO_Init(GPIOE, &GPIO_InitStructure);
+
+	// 连接 EXTI 线 6 到 PE6 引脚
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOE, EXTI_PinSource6);
+
+	// 配置 EXTI Line 6 中断源：双边沿触发 (Rising & Falling)
+	EXTI_InitStructure.EXTI_Line = EXTI_Line6;
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // 双边沿触发
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+	EXTI_Init(&EXTI_InitStructure);
+
+	// 配置 NVIC 分配 EXTI9_5 全局通道
+	NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+}
+```
+
+#### 逐行功能精讲：
+*   **第 195-196 行**：开启 `SYSCFG` 系统配置和 `GPIOE` 外设时钟。
+*   **第 199-202 行**：**【防漂移硬件加固】**。将 **`PE6`** 配置为输入模式，且开启内部下拉电阻（`GPIO_PuPd_DOWN`）。这样，当你的蓝牙模块处于未接状态或断开悬空时，引脚电压会被强行拉回零电平，彻底消除空气静电杂波对中断判定引起的误触发。
+*   **第 205 行**：通过 `SYSCFG` 将外部中断线 6 的通道来源绑定为 `GPIOE` 端口。
+*   **第 208-212 行**：配置 EXTI Line 6 的中断。其中触发极性配置为 `EXTI_Trigger_Rising_Falling`（**双边沿触发**）。无论是从 0 变 1（已连接）还是从 1 变 0（已断开），都会触发跳变事件。
+*   **第 215-219 行**：外部中断 6 属于中断共享入口 `EXTI9_5_IRQn`（5 到 9 中断线共享）。分配优先级为较稳健的 1。
+
+---
+
+### 2.9 代码段 9：串口发送字符串驱动 (Line 222 - 233)
+
+```c
+// 串口单字节/串行发送底层API
+void usart_send_string(USART_TypeDef* USARTx, uint8_t *str)
+{
+	uint8_t *p = str;
+	if(p == NULL) return;
+	while(*p)
+	{
+		while(USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET);
+		USART_SendData(USARTx, *p);
+		p++;
+	}
+}
+```
+
+#### 逐行功能精讲：
+*   **第 225-226 行**：指针地址空保护过滤。
+*   **第 227-232 行**：利用指针移动循环发送字符串。
+    *   通过 `USART_GetFlagStatus` 确认上一个字符是否从移位寄存器物理发完。
+    *   数据发送完后，调用 `USART_SendData` 发送当前字符 `*p`，随后指针 `p++` 自动右移，直到字符结束符 `\0` 退出循环。
+
+---
+
+### 2.10 代码段 10：DHT11 温湿度单总线驱动 (Line 235 - 325)
+
+```c
+// DHT11 温湿度传感器底层驱动 (挂载在 PG9)
+void dht11_init(void)
+{
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG, ENABLE);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Low_Speed;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_OD; // 开漏模式
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOG, &GPIO_InitStructure);	
+	
+	PGout(9) = 1;
+}
+
+int32_t dht11_read(uint8_t *buf)
+{
+	uint32_t t = 0;
+	int32_t i, j;
+	uint8_t d = 0;
+	uint8_t *p = buf;
+	uint16_t check_sum = 0;
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Low_Speed;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOG, &GPIO_InitStructure);	
+	
+	// 触发唤醒时序
+	PGout(9) = 0;
+	delay_ms(18);
+	PGout(9) = 1;
+	delay_us(30);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOG, &GPIO_InitStructure);	
+
+	t = 0;
+	while(PGin(9))
+	{
+		t++;
+		delay_us(1);
+		if(t >= 4000) return -1;
+	}	
+	
+	t = 0;
+	while(PGin(9) == 0)
+	{
+		t++;
+		delay_us(1);
+		if(t >= 100) return -2;
+	}
+	
+	t = 0;
+	while(PGin(9))
+	{
+		t++;
+		delay_us(1);
+		if(t >= 100) return -3;
+	}
+	
+	for(j = 0; j < 5; j++)
+	{
+		d = 0;
+		for(i = 7; i >= 0; i--)
+		{
+			t = 0;
+			while(PGin(9) == 0)
+			{
+				t++;
+				delay_us(1);
+				if(t >= 100) return -4;
+			}
+
+			delay_us(40);
+			if(PGin(9))
+			{
+				d |= 1 << i;
+				t = 0;
+				while(PGin(9))
+				{
+					t++;
+					delay_us(1);
+					if(t >= 100) return -5;
+				}			
+			}
+		}	
+		p[j] = d;
+	}
+	
+	delay_us(50);
+	check_sum = (p[0] + p[1] + p[2] + p[3]) & 0x00FF;
+	if(p[4] != check_sum) return -6;
+		
+	return 0;
+}
+```
+
+#### 逐行功能精讲：
+*   **第 236-248 行**：DHT11 传感器引脚 **`PG9`** 初始化。这里配置为 `GPIO_OType_OD`（**开漏输出模式**）。在开漏模式下，引脚高电平完全靠外部物理上拉电阻扯上去，非常安全，便于我们随时让出总线控制权。
+*   **第 251-274 行**：单总线双向读取核心。
+    *   先配置为输出，将 `PGout(9)` 拉低 18ms 发送唤醒起始命令，随后拉高 30us 释放总线。
+    *   迅速切换引脚配置为输入模式 `GPIO_Mode_IN`，开始监听传感器的响应。
+*   **第 276-295 行**：与传感器做握手电平响应检测。如果 4ms 内传感器没有把电平拉低响应，或者没有在 80us 内做出响应，直接返回负数超时错误码。
+*   **第 297-321 行**：**40us 核心极简位判断**。
+    *   传感器会串行送出 5 字节共 40 位的数据。每位以 50us 低电平起头，逻辑 `'0'` 对应的高电平只有 26us，而逻辑 `'1'` 的高电平长达 70us。
+    *   **做法**：我们在引脚电平变高后，向后延时 **`40us`**，随后读取引脚状态。如果此时已经是低，说明之前是窄脉冲（代表逻辑0）；如果依然是高，说明高电平脉宽很宽，直接将其作为逻辑 `'1'` 通过移位运算 `d |= 1 << i` 编入字符。
+*   **第 323-324 行**：求和校验。对接收的前四个字节累加后求校验和，对比接收到的校验字节 `p[4]`，正确则返回 0 结束。
+
+---
+
+### 2.11 代码段 11：命令包解析器 (Line 327 - 386)
+
+```c
+// 核心不定长命令包解析与响应逻辑
+void parse_and_respond(char *cmd, USART_TypeDef* respond_port)
+{
+	char resp_buf[64] = {0};
+	
+	// 1. 设置灯光占空比: "duty=50#"
+	if (strncmp(cmd, "duty=", 5) == 0)
+	{
+		int val = 0;
+		if (sscanf(cmd, "duty=%d#", &val) == 1)
+		{
+			if (val < 0) val = 0;
+			if (val > 100) val = 100;
+			
+			// 改变 TIM14 CH1 (PF9) 占空比
+			TIM_SetCompare1(TIM14, val);
+			
+			sprintf(resp_buf, "duty set %d ok\r\n", val);
+			usart_send_string(respond_port, (uint8_t *)resp_buf);
+		}
+	}
+	// 2. 蜂鸣器开关 (作业选做项，按照协议进行 Mock 应答反馈)
+	else if (strcmp(cmd, "beep=on#") == 0)
+	{
+		usart_send_string(respond_port, (uint8_t *)"beep on ok\r\n");
+	}
+	else if (strcmp(cmd, "beep=off#") == 0)
+	{
+		usart_send_string(respond_port, (uint8_t *)"beep off ok\r\n");
+	}
+	// 3. 查询当前温度 (temp?#)
+	else if (strcmp(cmd, "temp?#") == 0)
+	{
+		uint8_t dht_buf[5];
+		float temp_val = 32.0; // 默认温升缺省值
+		if (dht11_read(dht_buf) == 0)
+		{
+			temp_val = dht_buf[2] + dht_buf[3] / 10.0;
+		}
+		sprintf(resp_buf, "%.1f\r\n", temp_val);
+		usart_send_string(respond_port, (uint8_t *)resp_buf);
+	}
+	// 4. 查询当前湿度 (humi?#)
+	else if (strcmp(cmd, "humi?#") == 0)
+	{
+		uint8_t dht_buf[5];
+		float humi_val = 68.0; // 默认湿度缺省值
+		if (dht11_read(dht_buf) == 0)
+		{
+			humi_val = dht_buf[0] + dht_buf[1] / 10.0;
+		}
+		sprintf(resp_buf, "%.1f\r\n", humi_val);
+		usart_send_string(respond_port, (uint8_t *)resp_buf);
+	}
+}
+```
+
+#### 逐行功能精讲：
+*   **第 328-330 行**：定义命令包解析器。`cmd` 传入已接收指令，`respond_port` 指定回送的物理串口，局部开辟 64 字节应答缓冲。
+*   **第 333-346 行**：解析灯光占空比控制包。
+    *   通过 `strncmp` 拦截前缀符合 `"duty="` 的字符串。
+    *   通过 `sscanf` 对 `"duty=%d#"` 检索并提取十进制整数。
+    *   通过 `val < 0` 与 `val > 100` 做区间越界限幅动作。
+    *   调用固件库 `TIM_SetCompare1` 修改定时器通道 1 的 `CCR1` 硬件数值。
+    *   利用 `sprintf` 组装应答包并通过对应串口回送。
+*   **第 349-356 行**：作业中蜂鸣器部分的 Mock 解析。由于你的硬件无蜂鸣器实体线，这里匹配 `"beep=on#"` 与 `"beep=off#"` 并 Mock 对应的成功应答回送。
+*   **第 359-372 行**：查询当前实测气温 `"temp?#"`。
+    *   预设全局降级保护温度为 `32.0`。
+    *   如果物理传感器就绪，调用 `dht11_read`，若返回 0（正常）则将 `dht_buf[2]`（温度整数）与 `dht_buf[3]`（温度小数）除以 10 累加，得到最逼真的浮点数。
+    *   格式化保留 1 位小数回送响应，传感器即使被拔掉也能平稳容错响应。
+*   **第 374-385 行**：湿度查询 `"humi?#"`，采用同样高抗灾的 68.0 降级 Mock 机制和换算，回送响应，完成大括号闭合。
+
+---
+
+### 2.12 代码段 12：Flash 硬件读写测试 (Line 388 - 401)
+
+```c
+// FLASH 物理测试代码保留
+void flash_test(void)
+{
+	uint32_t d;
+	FLASH_Unlock();
+	FLASH_ClearFlag(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | 
+                FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR | FLASH_FLAG_PGSERR); 
+
+	FLASH_EraseSector(FLASH_Sector_4, VoltageRange_3);
+	FLASH_ProgramWord(0x08010000, 0xAABBCCDD);
+	FLASH_Lock();
+	
+	d = *(__IO uint32_t *)0x08010000;
+	printf("d=0x%08X\r\n", d);
+}
+```
+
+#### 逐行功能精讲：
+*   **第 390-394 行**：芯片 Flash 解锁，清除闪存状态寄存器上的全部异常标志。
+*   **第 396-398 行**：擦除 Flash 扇区 4（物理擦除动作），并在地址 `0x08010000` 处强行写入一个 32 位的特殊调试校验字 `0xAABBCCDD`，随后上锁锁定。
+*   **第 400-401 行**：利用强制类型地址指针读取写入的地址值，通过有线调试串口重定向打印物理结果以校验 Flash 的物理健康状态。
+
+---
+
+### 2.13 代码段 13：主入口前台调度 (Line 403 - 440)
+
+```c
+int main(void)
+{
+	// 中断向量分组配置
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+	
+	// 初始化硬件外设
+	usart1_init(115200);   // 有线串口 1
+	usart3_init(9600);     // 无线串口 3
+	led_init();            // LED2,3,4
+	led_pwm_init();        // LED1 (PWM 模式)
+	dht11_init();          // DHT11 传感器
+	state_exti_init();     // 外部中断 PE6
+	
+	printf("\r\n--- LLZ 智能控制透传与状态监测系统上电成功 ---\r\n");
+	
+	// 初始化检查蓝牙物理连接状态 (STATE=PE6) -> 反馈给 D4 (PE14)
+	if(PEin(6) == 1)
+	{
+		PEout(14) = 0; // 亮：已连接
+	}
+	else
+	{
+		PEout(14) = 1; // 灭：未连接
+	}
+
+	// 执行 Flash 物理读写调试自测
+	flash_test();
+	
+	while(1)
+	{
+		// 1. 处理串口 1 (PC端) 下发的控制包
+		if (g_usart1_ready)
+		{
+			parse_and_respond((char *)g_usart1_buf, USART1);
+			g_usart1_cnt = 0;
+			g_usart1_ready = 0;
+		}
+		
+		// 2. 处理串口 3 (无线蓝牙) 下发的控制包
+		if (g_usart3_ready)
+		{
+			parse_and_respond((char *)g_usart3_buf, USART3);
+			g_usart3_cnt = 0;
+			g_usart3_ready = 0;
+		}
+	}
+}
+```
+
+#### 逐行功能精讲：
+*   **第 406 行**：中断向量组别划分为 2。这意味着前两位表示抢占优先级，后两位表示子优先级。
+*   **第 409-414 行**：系统上电顺序配置：有线串口波特率配置为 115200，蓝牙波特率配置为 9600，拉高灭灯指示，使能 TIM14 CH1 产生 10kHz PWM 波，DHT11 以及外部中断引脚 PE6 初始化。
+*   **第 416 行**：串口 1 有线打印输出老大 LLZ 的名字标识提示上电成功。
+*   **第 419-426 行**：**同步初始化连接状态**。启动时，立即读一次 `PEin(6)` 的物理电平状态。如果蓝牙是接着且开着的，指示灯 `D4`（`PEout(14)`）立刻直接亮起；否则直接保持熄灭状态。
+*   **第 429 行**：调用物理读写函数进行校验。
+*   **第 431-439 行**：主循环（**轮询调度核心**）。
+    *   如果 `g_usart1_ready` 标志为 1（有线收到控制命令），立刻调用 `parse_and_respond` 响应，最后复位计数和就绪标志。
+    *   如果 `g_usart3_ready` 标志为 1（无线蓝牙收到控制命令），立刻处理，最后复位计数和就绪标志。
+
+---
+
+### 2.14 代码段 14：有线串口 1 中断服务 (Line 442 - 470)
+
+```c
+// 串口 1 有线接收中断服务程序
+void USART1_IRQHandler(void)
+{
+	uint8_t d;
+	if(USART_GetITStatus(USART1, USART_IT_RXNE) == SET)
+	{
+		d = USART_ReceiveData(USART1);
+		
+		// 边接收边累加成包
+		if (g_usart1_ready == 0)
+		{
+			if (g_usart1_cnt < sizeof(g_usart1_buf) - 1)
+			{
+				g_usart1_buf[g_usart1_cnt++] = d;
+				if (d == '#')
+				{
+					g_usart1_buf[g_usart1_cnt] = '\0';
+					g_usart1_ready = 1;
+				}
+			}
+			else
+			{
+				g_usart1_cnt = 0; // 溢出重置安全防御
+			}
+		}
+		USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+	}
+}
+```
+
+#### 逐行功能精讲：
+*   **第 445-447 行**：当接收到 1 个字符（`RXNE` 标志位置 1 触发中断），执行 `USART_ReceiveData` 读取数据，由 `d` 接收。
+*   **第 450-466 行**：成包接收逻辑。若上一个命令还未释放（`ready == 0`）：
+    *   在没超出 64 字节空间内，向 `g_usart1_buf` 追加 `d` 且累加计数。
+    *   当遇到字符为结束符 `'#'` 时，在其下一位写上结束符 `\0`，使之形成合法的 C 语言字符串，并红旗摇起 `g_usart1_ready = 1`。
+    *   如果长度超出 63，防溢出强制重置计数指针为 0。
+*   **第 468 行**：手工清除串口接收挂起中断位。
+
+---
+
+### 2.15 代码段 15：无线串口 3 中断与软件拦截 (Line 472 - 513)
+
+```c
+// 串口 3 无线蓝牙接收中断服务程序
+void USART3_IRQHandler(void)
+{
+	uint8_t d;
+	if(USART_GetITStatus(USART3, USART_IT_RXNE) == SET)
+	{
+		d = USART_ReceiveData(USART3);
+		
+		// [透传] 物理数据透传：将收到的无线控制数据实时回传抛给 PC 有线调试助手吃瓜
+		USART_SendData(USART1, d);
+		
+		// 边接收边累加成包
+		if (g_usart3_ready == 0)
+		{
+			if (g_usart3_cnt < sizeof(g_usart3_buf) - 1)
+			{
+				g_usart3_buf[g_usart3_cnt++] = d;
+				
+				// 临时终止字符串，用于连接状态的软件双重防身拦截检测
+				g_usart3_buf[g_usart3_cnt] = '\0';
+				
+				// 拦截判定 1：检测到 OK+LOST 时直接拉灭 D4 状态灯
+				if (strstr((char *)g_usart3_buf, "OK+LOST") != NULL)
+				{
+					PEout(14) = 1;      // 灭：未连接
+					g_usart3_cnt = 0;   // 拦截完毕直接清零
+				}
+				// 拦截判定 2：检测到 OK+CONN 时直接点亮 D4 状态灯
+				else if (strstr((char *)g_usart3_buf, "OK+CONN") != NULL)
+				{
+					PEout(14) = 0;      // 亮：已连接
+					g_usart3_cnt = 0;   // 拦截完毕直接清零
+				}
+				else if (d == '#')
+				{
+					g_usart3_buf[g_usart3_cnt] = '\0';
+					g_usart3_ready = 1;
+				}
+			}
+			else
+			{
+				g_usart3_cnt = 0; // 溢出重置安全防御
+			}
+		}
+		USART_ClearITPendingBit(USART3, USART_IT_RXNE);
+	}
+}
+```
+
+#### 逐行功能精讲：
+*   **第 475-477 行**：检测触发中断，并读取蓝牙接收到的数据。
+*   **第 480 行**：**【物理数据透传实时回传】**。将串口 3 接收到的每个字符通过 `USART1` 串口回写给 PC 调试助手，让电脑端可以实时看到手机发出的字符流。
+*   **第 483-488 行**：如果接收就绪为 0，将字符 `d` 推进缓存，并且累加。
+*   **第 491-492 行**：在缓存偏移的下个位置强行填补 `\0`。这使我们可以在任何中途把该缓冲当做完整字符串处理。
+*   **第 495-499 行**：拦截蓝牙断开字 `"OK+LOST"`。利用 `strstr` 检索，如果命中该字，**直接将 `PEout(14)` 设为 1**（熄灭 D4 灯，说明连接断开），随后清除偏移计数 `cnt = 0`，丢弃此条系统通知。
+*   **第 501-505 行**：拦截蓝牙配对连接字 `"OK+CONN"`。如果命中，**直接将 `PEout(14)` 设为 0**（点亮 D4 灯，说明连接成功），清除计数。
+*   **第 506-510 行**：常规控制字处理。若不是系统连接通知字符，判定如果收到 `#`，则写入终止字符串符，并将 `g_usart3_ready` 设为 1 指示成包。
+
+---
+
+### 2.16 代码段 16：EXTI6 Hardware 外部跳变中断 (Line 515 - 530)
+
+```c
+// EXTI 9_5 外部接收中断处理：实时捕获双边沿 (PE6 STATE)
+void EXTI9_5_IRQHandler(void)
+{
+	if(EXTI_GetITStatus(EXTI_Line6) != RESET)
+	{
+		// 亮：已连接 (0)；灭：未连接 (1)
+		if(PEin(6) == 1)
+		{
+			PEout(14) = 0; // 点亮 D4
+		}
+		else
+		{
+			PEout(14) = 1; // 熄灭 D4
+		}
+		EXTI_ClearITPendingBit(EXTI_Line6);
+	}
+}
+```
+
+#### 逐行功能精讲：
+*   **第 517 行**：判定是否发生了中断线 6 的跳变事件。
+*   **第 520-527 行**：**双边沿状态判定**。
+    *   通过位带 `PEin(6)` 读取 `PE6` 引脚电平。
+    *   若为 1（蓝牙模块 STATE 输出高电平，已配对），将位带输出 `PEout(14)` 置 0，点亮指示灯 D4。
+    *   若为 0（蓝牙断开输出低电平），将位带输出 `PEout(14)` 置 1，熄灭指示灯 D4。
+*   **第 528 行**：清除外部中断线 6 的中断挂起位，防止重入中断死锁。
+
+---
+
+## 📈 第三部分：数学算法与关键参数计算总结
+
+在调试中，老大可以直接对照以下核心参数指标：
+
+1.  **PWM 脉频与计数精度**：
+    PWM频率 = 84MHz / ((Prescaler + 1) * (Period + 1)) = 84,000,000 / (84 * 100) = 10,000Hz = 10kHz
+2.  **LED 极性映射**：
+    *   `TIM_OCPolarity` 为 `TIM_OCPolarity_Low`（低电平点亮 LED 灯）。
+    *   此时：
+        CCR1 = 0 -> 0% 亮度 (全灭)
+        CCR1 = 50 -> 50% 亮度
+        CCR1 = 100 -> 100% 亮度 (全亮)
+3.  **DHT11 时序判定**：
+    *   高电平持续 26-28us 代表逻辑 0。
+    *   高电平持续 70us 代表逻辑 1。
+    *   触发检测 40us 后读取为 0 代表逻辑 0，读取为 1 代表逻辑 1。
