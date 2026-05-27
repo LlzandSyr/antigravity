@@ -1,0 +1,5 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary":  "Detailed line-by-line code walkthrough of the STM32 F407 ADC initialization and main execution loops. Explains clock enablement, pin analog mode, independent ADC configurations, sampling rate, right alignment, and direct mathematical voltage conversion formulas in a beginner-friendly manner.",
+  "updatedAt":  "2026-05-27T08:45:16.053345900Z"
+}
