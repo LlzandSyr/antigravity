@@ -1,0 +1,20 @@
+# Task Progress: Explain SPI Teacher Note
+
+## Progress Checklist:
+- [x] Open Youdao Note SPI page
+- [x] Find the main content iframe and inspect DOM
+- [/] Extract markdown formatted text from iframe (First 5000 chars retrieved)
+- [ ] Retrieve full note text (in chunks of ~5000 chars)
+- [ ] Save notes content locally/compile findings
+- [ ] Understand and organize:
+  - SPI Pins
+  - SPI Modes (Motorola & TI)
+  - SPI Registers
+  - Program Design Steps
+  - Hardware Wiring Diagrams
+- [ ] Write detailed summary for the user
+
+## Discoveries:
+- The Youdao Note page contains an iframe with ID `#content-body`.
+- Its source is same-origin, allowing direct evaluation and content extraction.
+- Total length of note's text is 14928 characters.

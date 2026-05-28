@@ -1,0 +1,8 @@
+# Plan: Extract RTC Notes
+
+1. [ ] Navigate to the Youdao Note URL (Done)
+2. [ ] Verify page is loaded (Done)
+3. [ ] Extract content of the note.
+    - Try to scroll and read/screenshot if needed.
+    - Or use JS to extract the full text if possible.
+4. [ ] Summarize and explain RTC based on the extracted notes.
