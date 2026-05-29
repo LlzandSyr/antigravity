@@ -1,0 +1,32 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,500)<div  />
+	[1] (500,216)<div  />
+	[2] (373,337)<div  />
+		[3] (242,337)<div >+86 />
+		[4] (390,337)<input class='ds-input__input' placeholder='请输入手机号' />
+	[5] (373,432)<div  />
+		[6] (332,432)<input class='ds-input__input' placeholder='请输入验证码' />
+		[7] (472,432)<div  />
+			[8] (433,432)<div  />
+			[9] (478,432)<button class='ds-link-button ds-verify-code-input-countdown' />
+				[10] (478,432)<span >发送验证码 />
+	注册登录即代表已阅读并同意我们的
+	[11] (420,505)<a class='ds-a ds-a--link' href='https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html'>用户协议 />
+	与
+	[12] (482,505)<a class='ds-a ds-a--link' href='https://cdn.deepseek.com/policies/zh-CN/deepseek-privacy-policy.html'>隐私政策 />
+	，未注册的手机号将自动注册
+	[13] (373,604)<button class='ds-atom-button ds-basic-button ds-basic-button--primary' role='button' />
+		[14] (373,604)<span >登录 />
+	[15] (312,667)<button class='ds-link-button ds-sign-in-form__social-link' />
+		[16] (312,667)<span >密码登录 />
+	[17] (403,667)<button class='ds-link-button ds-sign-in-form__social-link' />
+		[18] (403,667)<span >使用 Apple 账号登录 />
+	微信扫码登录
+	浙ICP备2023025841号
+	·
+	联系我们
+
+</current_dom>

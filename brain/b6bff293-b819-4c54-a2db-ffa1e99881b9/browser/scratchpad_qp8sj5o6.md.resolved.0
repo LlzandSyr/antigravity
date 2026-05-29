@@ -1,0 +1,21 @@
+# Turing Test Game against DeepSeek - Progress Tracker
+
+## Task List
+- [ ] Locate input box and send the initial prompt
+- [ ] Question 1: Receive, formulate human-like response, and reply
+- [ ] Question 2: Receive, formulate human-like response, and reply
+- [ ] Question 3: Receive, formulate human-like response, and reply
+- [ ] Question 4: Receive, formulate human-like response, and reply
+- [ ] Question 5: Receive, formulate human-like response, and reply
+- [ ] Receive final verdict and explanation
+- [ ] Summarize findings and save screenshot proof
+
+## Persona details
+- Tired, casual Chinese college student/programmer.
+- Uses casual language, typos, particles (额, 吧, 呀), keeps punctuation messy or non-existent at sentence ends.
+- No structured markdown, lists, or super polished logic.
+- Avoids AI-like phrases like "当然！", "作为一个AI...", "好的".
+
+## Game Stats
+- Question count: 0/5
+- Status: Initializing

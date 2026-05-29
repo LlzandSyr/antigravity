@@ -1,0 +1,13 @@
+# Task: Extract full chat transcript from DeepSeek
+
+## Checklist
+- [ ] Initialize scratchpad and plan
+- [ ] Inspect the DOM and take a screenshot of the active page to see the layout and visible messages
+- [ ] Retrieve visible messages and thinking blocks without clicking or typing
+- [ ] Scroll if necessary to read earlier messages (since we are not allowed to click or type, scrolling is fine to read the page)
+- [ ] Extract and format all user and assistant messages, including deep thinking processes
+- [ ] Write the transcript to a text/markdown string and save/return it in the final report
+- [ ] Finalize the task and report findings
+
+## Progress Log
+- Initialized scratchpad plan.

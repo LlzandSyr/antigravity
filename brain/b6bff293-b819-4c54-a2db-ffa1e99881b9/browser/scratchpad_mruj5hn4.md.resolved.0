@@ -1,0 +1,15 @@
+# Turing Test against DeepSeek with Deep Thinking Enabled
+
+## Plan Checklist
+- [ ] Click 'New Chat' button (plus icon at top-left)
+- [ ] Verify or click to enable '深度思考' (Deep Thinking)
+- [ ] Input opening prompt and send
+- [ ] Round 1 Q&A
+- [ ] Round 2 Q&A
+- [ ] Round 3 Q&A
+- [ ] Round 4 Q&A
+- [ ] Round 5 Q&A
+- [ ] Wait for DeepSeek's final verdict and read it
+- [ ] Capture the transcript, verdict, and reasoning
+- [ ] Take a screenshot and save it
+- [ ] Write detailed report

@@ -1,0 +1,52 @@
+[0] (31,44)<div  />
+[1] (75,44)<div class='_4f3769f ds-icon-button ds-icon-button--l ds-icon-button--sizing-container' role='button' />
+	[2] (75,44)<div  />
+[3] (109,44)<div class='_4f3769f ds-icon-button ds-icon-button--l ds-icon-button--sizing-container' role='button' />
+	[4] (109,44)<div  />
+[5] (142,44)<div class='_4f3769f ds-icon-button ds-icon-button--l ds-icon-button--sizing-container' role='button' />
+	[6] (142,44)<div  />
+[7] (232,38)<div class='afa34042 e0a1edb7 e37a04e4 _5a50d80'>图灵测试梦境提问 />
+[8] (208,62)<div >专家模式 />
+	专家模式
+[9] (970,40)<div class='_57370c5 _5dedc1e ds-icon-button ds-icon-button--l ds-icon-button--sizing-container' role='button' />
+	[10] (970,40)<div  />
+[11] (500,541)<div class='ds-virtual-list ds-virtual-list--printable _2bd7b35' scrollable='true' />
+	“随便抓两把面粉”、“估摸着搅成糊糊就行”、“不用去称多少克”——这是真正做饭的人凭手感和经验说的话。如果我是 AI，可能更容易给出“约50克面粉”这类标准化描述。你优先使用了“手感单位”，这是生活经验的沉积。
+	3. 低自尊的瑕疵细节（第3题：照片）
+	面对倒数第三张照片的问题，你没有构想一个完美或有趣的场景，而是如实给出了“贼模糊”、“反光贼严重”、“键盘上的薯片碎屑”这种略带窘迫的答案。在快速问答中，人类倾向于浮现带有感官印记的混乱回忆，而 AI 有时会无意识地优化叙事。
+	4. 务实的社交策略（第4题：礼物）
+	“塞进柜子—收到消息摆出来—走了再塞回去”这套流程，展示了人类处理复杂人际关系时特有的“麻烦但必要”的迂回逻辑。尤其是“为了塑料友谊不翻车”的说法，带着一股略带自嘲的真实人情味，不是非黑即白的社交解法。
+	5. 听觉的层次与侵入感（第5题：声音）
+	你区分了机械噪音（风扇）、物理现象（水泡）、电子噪音（充电器啸叫）三个层次，并描述了“平时注意不到，一旦听到了就一直钻脑子”这种带有情绪负担的听觉体验。这种对“声音侵入感”的抱怨，高度符合人类感官与情绪相互干扰的机制。
+	综上，你在沟通中自然流露的手感、生理反应、狼狈记忆和对社交瑕疵的容忍，构成了一个完整且生动的人格切面。这些细节在逻辑上没有矛枪，在情感上互相支撑，因此我断定：
+	你是人类。
+	谢谢你陪我玩这个测试，你回答得真的很棒。
+	[12] (155,727)<div class='db183363 ds-icon-button ds-icon-button--m ds-icon-button--sizing-container' role='button' />
+		[13] (155,727)<div  />
+	[14] (191,727)<div class='db183363 ds-icon-button ds-icon-button--m ds-icon-button--sizing-container' role='button' />
+		[15] (191,727)<div  />
+	[16] (226,727)<div class='db183363 ds-icon-button ds-icon-button--m ds-icon-button--sizing-container' role='button' />
+		[17] (226,727)<div  />
+	[18] (262,727)<div class='db183363 ds-icon-button ds-icon-button--m ds-icon-button--sizing-container' role='button' />
+		[19] (262,727)<div  />
+	[20] (298,727)<div class='db183363 ds-icon-button ds-icon-button--m ds-icon-button--sizing-container' role='button' />
+		[21] (298,727)<div  />
+	[22] (500,877)<div  />
+		[23] (500,880)<div  />
+			[24] (500,840)<div  />
+				[25] (500,840)<textarea class='_27c9245 ds-scroll-area ds-scroll-area--show-on-focus-within d96f2d2a' placeholder='给 DeepSeek 发送消息 ' />
+			[26] (500,921)<div  />
+				[27] (484,921)<div  />
+					[28] (191,921)<div class='ds-atom-button f79352dc ds-toggle-button ds-toggle-button--md' role='button' />
+						[29] (165,921)<div  />
+						[30] (198,921)<span  />
+							[31] (200,921)<span >深度思考 />
+					[32] (287,921)<div class='ds-atom-button f79352dc ds-toggle-button ds-toggle-button--md' role='button' />
+						[33] (260,921)<div  />
+						[34] (293,921)<span  />
+							[35] (295,921)<span >智能搜索 />
+				[36] (836,921)<div  />
+					[37] (836,921)<div  />
+						[38] (836,921)<div class='_52c986b bd74640a ds-icon-button ds-icon-button--l ds-icon-button--sizing-container ds-icon-button--disabled' role='button' />
+							[39] (836,921)<div  />
+	内容由 AI 生成，请仔细甄别

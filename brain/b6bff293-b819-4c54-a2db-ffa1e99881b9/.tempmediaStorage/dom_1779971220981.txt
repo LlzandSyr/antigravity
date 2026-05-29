@@ -1,0 +1,57 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (31,44)<div  />
+[1] (75,44)<div class='_4f3769f ds-icon-button ds-icon-button--l ds-icon-button--sizing-container' role='button' />
+	[2] (75,44)<div  />
+[3] (109,44)<div class='_4f3769f ds-icon-button ds-icon-button--l ds-icon-button--sizing-container' role='button' />
+	[4] (109,44)<div  />
+[5] (142,44)<div class='_4f3769f ds-icon-button ds-icon-button--l ds-icon-button--sizing-container' role='button' />
+	[6] (142,44)<div  />
+[7] (252,38)<div class='afa34042 e0a1edb7 e37a04e4 _5a50d80'>人机测试游戏第一个问题 />
+[8] (208,62)<div >快速模式 />
+	快速模式
+[9] (970,40)<div class='_57370c5 _5dedc1e ds-icon-button ds-icon-button--l ds-icon-button--sizing-container' role='button' />
+	[10] (970,40)<div  />
+[11] (500,541)<div class='ds-virtual-list ds-virtual-list--printable _2bd7b35' scrollable='true' />
+	[12] (500,333)<div >这问题真的绝了，逼得人非得翻箱倒柜找回忆。
+那应该是我大三时候的一次‘社死加灾难’。当时有一门贼重要的专业课，期末要分组上台汇报（Presentation），占总成绩的40%。我当时是组长，负责汇总所有组员的PPT并最后上去讲。
+结果汇报那天早上，我闹钟居然没响！等我猛地惊醒，发现距离汇报开始只剩二听十分钟了。我当时整个人直接吓尿，衣服都穿反了，一路狂奔去教学楼。等我满头大汗、头发跟鸡窝一样撞进教室时，我们组已经站在台上了，教授正黑着脸看着空着的讲台。
+我上去之后脑子嗡嗡响，由于实在太慌，根本没看备课笔记，就只能硬着头皮、极其粗糙且语速极快地凭记忆讲。因为太慌，我甚至把很多书面语全换成了极其接地气的土话，还顺嘴讲了两个组内讨论时吐槽的段子。当时我讲完下来，感觉自己死定了，这门课绝对挂科，而且连累了全组，愧疚和绝望到极点，整个人瘫在椅子上，连呼吸都是凉的。
+但神奇的是，成绩出来的时候，教授居然给我们组打了全班最高分。他的评语是：‘这是今天唯一一个没有照本宣科、充满活力且真正把复杂概念讲得通俗易懂的汇报。’
+那一瞬间，我从想原地自尽的绝望，直接变成了不可思议的狂喜。现在想想，要是那天我按部就班地准时来、看着ppt念，可能就只是个平庸的优良，但那个意外逼着我‘不看剧本演了一场戏’，反而成了我大学最亮眼的一个瞬间。这算不算‘幸好发生了’？哈哈。 />
+		这问题真的绝了，逼得人非得翻箱倒柜找回忆。
+那应该是我大三时候的一次‘社死加灾难’。当时有一门贼重要的专业课，期末要分组上台汇报（Presentation），占总成绩的40%。我当时是组长，负责汇总所有组员的PPT并最后上去讲。
+结果汇报那天早上，我闹钟居然没响！等我猛地惊醒，发现距离汇报开始只剩二听十分钟了。我当时整个人直接吓尿，衣服都穿反了，一路狂奔去教学楼。等我满头大汗、头发跟鸡窝一样撞进教室时，我们组已经站在台上了，教授正黑着脸看着空着的讲台。
+我上去之后脑子嗡嗡响，由于实在太慌，根本没看备课笔记，就只能硬着头皮、极其粗糙且语速极快地凭记忆讲。因为太慌，我甚至把很多书面语全换成了极其接地气的土话，还顺嘴讲了两个组内讨论时吐槽的段子。当时我讲完下来，感觉自己死定了，这门课绝对挂科，而且连累了全组，愧疚和绝望到极点，整个人瘫在椅子上，连呼吸都是凉的。
+但神奇的是，成绩出来的时候，教授居然给我们组打了全班最高分。他的评语是：‘这是今天唯一一个没有照本宣科、充满活力且真正把复杂概念讲得通俗易懂的汇报。’
+那一瞬间，我从想原地自尽的绝望，直接变成了不可思议的狂喜。现在想想，要是那天我按部就班地准时来、看着ppt念，可能就只是个平庸的优良，但那个意外逼着我‘不看剧本演了一场戏’，反而成了我大学最亮眼的一个瞬间。这算不算‘幸好发生了’？哈哈。
+	[13] (804,637)<div class='db183363 ds-icon-button ds-icon-button--m ds-icon-button--sizing-container' role='button' />
+		[14] (804,637)<div  />
+	[15] (839,637)<div class='d4910adc ds-icon-button ds-icon-button--m ds-icon-button--sizing-container' role='button' />
+		[16] (839,637)<div  />
+	[17] (500,719)<div  />
+	[18] (500,877)<div  />
+		[19] (500,880)<div  />
+			[20] (500,840)<div  />
+				[21] (500,840)<textarea class='_27c9245 ds-scroll-area ds-scroll-area--show-on-focus-within d96f2d2a' placeholder='给 DeepSeek 发送消息 ' />
+			[22] (500,921)<div  />
+				[23] (464,921)<div  />
+					[24] (191,921)<div class='ds-atom-button f79352dc ds-toggle-button ds-toggle-button--selected ds-toggle-button--md' role='button' />
+						[25] (165,921)<div  />
+						[26] (198,921)<span  />
+							[27] (200,921)<span >深度思考 />
+					[28] (287,921)<div class='ds-atom-button f79352dc ds-toggle-button ds-toggle-button--md' role='button' />
+						[29] (260,921)<div  />
+						[30] (293,921)<span  />
+							[31] (295,921)<span >智能搜索 />
+				[32] (815,921)<div  />
+					[33] (795,921)<div class='f02f0e25 ds-icon-button ds-icon-button--l ds-icon-button--sizing-container ds-icon-button--disabled' role='button' />
+					[34] (836,921)<div  />
+						[35] (836,921)<div class='_52c986b bd74640a ds-icon-button ds-icon-button--l ds-icon-button--sizing-container ds-icon-button--disabled' role='button' />
+							[36] (836,921)<div  />
+								[37] (836,921)<div  />
+	内容由 AI 生成，请仔细甄别
+
+</current_dom>
