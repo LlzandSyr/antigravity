@@ -1,0 +1,132 @@
+=== table_0 ===
+| 字段名 | 数据类型 | 长度 | 是否为空 | 是否主键 |
+| --- | --- | --- | --- | --- |
+| id | bigint | 20 | 否 | 是 |
+| userAccount | varchar | 256 | 否 | 否 |
+| userPassword | varchar | 512 | 否 | 否 |
+| userName | varchar | 256 | 是 | 否 |
+| userAvatar | varchar | 1024 | 是 | 否 |
+| userProfile | varchar | 512 | 是 | 否 |
+| userRole | varchar | 256 | 否 | 否 |
+| editTime | datetime | - | 否 | 否 |
+| createTime | datetime | - | 否 | 否 |
+| updateTime | datetime | - | 否 | 否 |
+| isDelete | tinyint | 4 | 否 | 否 |
+| vipExpireTime | datetime | - | 是 | 否 |
+| vipCode | varchar | 128 | 是 | 否 |
+| vipNumber | bigint | 20 | 是 | 否 |
+
+=== table_1 ===
+| 字段名 | 数据类型 | 长度 | 是否为空 | 是否主键 |
+| --- | --- | --- | --- | --- |
+| id | bigint | 20 | 否 | 是 |
+| url | varchar | 512 | 否 | 否 |
+| name | varchar | 128 | 否 | 否 |
+| introduction | varchar | 512 | 是 | 否 |
+| category | varchar | 64 | 是 | 否 |
+| tags | varchar | 512 | 是 | 否 |
+| picSize | bigint | 20 | 是 | 否 |
+| picWidth | int | 11 | 是 | 否 |
+| picHeight | int | 11 | 是 | 否 |
+| picScale | double | - | 是 | 否 |
+| picFormat | varchar | 32 | 是 | 否 |
+| userId | bigint | 20 | 否 | 否 |
+| spaceId | bigint | 20 | 是 | 否 |
+| thumbnailUrl | varchar | 512 | 是 | 否 |
+| picColor | varchar | 16 | 是 | 否 |
+| reviewStatus | int | 11 | 否 | 否 |
+| reviewMessage | varchar | 512 | 是 | 否 |
+| reviewerId | bigint | 20 | 是 | 否 |
+| reviewTime | datetime | - | 是 | 否 |
+| createTime | datetime | - | 否 | 否 |
+| editTime | datetime | - | 否 | 否 |
+| updateTime | datetime | - | 否 | 否 |
+| isDelete | tinyint | 4 | 否 | 否 |
+
+=== table_2 ===
+| 字段名 | 数据类型 | 长度 | 是否为空 | 是否主键 |
+| --- | --- | --- | --- | --- |
+| id | bigint | 20 | 否 | 是 |
+| spaceName | varchar | 128 | 是 | 否 |
+| spaceLevel | int | 11 | 是 | 否 |
+| spaceType | int | 11 | 否 | 否 |
+| maxSize | bigint | 20 | 是 | 否 |
+| maxCount | bigint | 20 | 是 | 否 |
+| totalSize | bigint | 20 | 是 | 否 |
+| totalCount | bigint | 20 | 是 | 否 |
+| userId | bigint | 20 | 否 | 否 |
+| createTime | datetime | - | 否 | 否 |
+| editTime | datetime | - | 否 | 否 |
+| updateTime | datetime | - | 否 | 否 |
+| isDelete | tinyint | 4 | 否 | 否 |
+
+=== table_3 ===
+| 字段名 | 数据类型 | 长度 | 是否为空 | 是否主键 |
+| --- | --- | --- | --- | --- |
+| id | bigint | 20 | 否 | 是 |
+| spaceId | bigint | 20 | 否 | 否 |
+| userId | bigint | 20 | 否 | 否 |
+| spaceRole | varchar | 128 | 是 | 否 |
+| createTime | datetime | - | 否 | 否 |
+| updateTime | datetime | - | 否 | 否 |
+
+=== table_4 ===
+| 用例编号 | 01 | 01 | 01 | 01 |
+| --- | --- | --- | --- | --- |
+| 测试场景 | 校验文生图任务创建与查询 | 校验文生图任务创建与查询 | 校验文生图任务创建与查询 | 校验文生图任务创建与查询 |
+| 测试对象 | 所有登录用户 | 所有登录用户 | 所有登录用户 | 所有登录用户 |
+| 序号 | 操作 | 输入数据 | 预期结果 | 结果 |
+| 1 | 不输入数据，点击创建任务 | prompt=null、size=null、promptExtend=true、n=1 | 提示输入不能为空 | 通过 |
+| 2 | 输入正确提示词与合法参数 | prompt=湖面微波荡漾，远山雪线映天际，晨雾与金色阳光交织，岸边松林随风起伏，整体清亮写意、size=9:16（手机竖屏）、promptExtend=true、n=3 | 返回任务ID；状态 SUCCEEDED；提供图片URL列表 | 通过 |
+| 3 | 输入非法尺寸参数 | prompt=山谷清晨薄雾，淡粉天际渐亮，静水如镜，远处木屋与松林点缀、size=1000xABC、promptExtend=false、n=1 | 参数校验失败；返回错误码 | 通过 |
+| 4 | 随机种子越界 | prompt=湿漉街道倒映霓虹，未来感机器人巡游，红紫蓝灯交错，高对比度清晰主体、size=16:9（宽屏）、promptExtend=true、n=1、seed=2147483648 | 参数校验失败；返回错误码 | 通过 |
+| 5 | 生成数量越界 | prompt=悬浮车穿梭的高架通道，玻璃幕墙反射天空与霓虹，远处巨型广告牌闪烁，冷色科幻风、size=1:1（方形）、promptExtend=true、n=5 | 参数校验失败；返回错误码 | 通过 |
+
+=== table_5 ===
+| 用例编号 | 02 | 02 | 02 | 02 |
+| --- | --- | --- | --- | --- |
+| 测试场景 | 校验文生视频任务创建与查询 | 校验文生视频任务创建与查询 | 校验文生视频任务创建与查询 | 校验文生视频任务创建与查询 |
+| 测试对象 | 所有登录用户 | 所有登录用户 | 所有登录用户 | 所有登录用户 |
+| 序号 | 操作 | 输入数据 | 预期结果 | 结果 |
+| 1 | 不输入提示词，点击创建任务 | prompt=null、size=null、promptExtend=true、seed=123 | 提示输入不能为空 | 通过 |
+| 2 | 输入合法提示词与参数 | prompt=湿润巷道在雨夜中泛光，霓虹灯牌映照水面，远处车灯拖出光轨，镜头低角度强调空间纵深、size=1280*720、promptExtend=true、seed=1234 | 返回任务ID；状态 PENDING 或 RUNNING | 通过 |
+| 3 | 输入非法分辨率 | prompt=晨雾弥漫的山谷，微风拂过草甸，远处木栈道隐现，柔和清新自然风格、size=1234*567、promptExtend=false、seed=5678 | 参数校验失败；返回错误码 | 通过 |
+| 4 | 随机种子越界 | prompt=长焦拍摄的城市大道，雨幕中霓虹与车灯交织，色彩高饱和、影调对比鲜明、size=1280*720、promptExtend=true、seed=2147483648 | 参数校验失败；返回错误码 | 通过 |
+| 5 | 合法参数：纵版分辨率 | prompt=窄巷深处的霓虹雨夜，人物在光影中剪影前行，地面水洼形成镜面反射，电影质感、size=720*1280、promptExtend=true、seed=5678 | 返回任务ID；状态 PENDING 或 RUNNING | 通过 |
+
+=== table_6 ===
+| 用例编号 | 03 | 03 | 03 | 03 |
+| --- | --- | --- | --- | --- |
+| 测试场景 | 校验图生视频任务创建与查询 | 校验图生视频任务创建与查询 | 校验图生视频任务创建与查询 | 校验图生视频任务创建与查询 |
+| 测试对象 | 所有登录用户 | 所有登录用户 | 所有登录用户 | 所有登录用户 |
+| 序号 | 操作 | 输入数据 | 预期结果 | 结果 |
+| 1 | 未选择图片创建任务 | prompt=null、resolution=720P、duration=5、seed=1234、promptExtend=true、imageUrl=null | 提示输入不能为空 | 通过 |
+| 2 | 单图模式：设置合法参数 | prompt=荒野夕阳下的女骑士拔剑，与远处巨龙对峙；暖橙与深蓝对比，低角度、电影级构图、resolution=720P、duration=5、seed=931164829、promptExtend=true、imageUrl=https://suchen-1344411765.cos.ap-guangzhou.myqcloud.com/public/1996139012316274689/2025-12-03_Tc4B6xP0JdKqLmNz.webp | 返回任务ID；状态 PENDING 或 RUNNING | 通过 |
+| 3 | 首尾帧模式：提供首尾帧 | prompt=暮色之下女骑士从静到动的镜头推进；首帧为静态准备，尾帧为决绝前行，镜头语言连贯、resolution=720P、duration=5、seed=931164829、promptExtend=true、firstFrameUrl=https://suchen-1344411765.cos.ap-guangzhou.myqcloud.com/public/1996139014002384897/2025-12-03_Kf2vSeq_first.webp、lastFrameUrl=https://suchen-1344411765.cos.ap-guangzhou.myqcloud.com/public/1996139014002384897/2025-12-03_Kf2vSeq_last.webp | 返回任务ID；状态 PENDING 或 RUNNING | 通过 |
+| 4 | 时长越界 | prompt=荒野夕阳下的女骑士拔剑，与远处巨龙对峙；暖橙与深蓝对比、resolution=720P、duration=2、seed=1234、promptExtend=true、imageUrl=https://suchen-1344411765.cos.ap-guangzhou.myqcloud.com/public/1996139009623531521/2025-12-03_ErrDur_v2.webp | 参数校验失败；返回错误码 | 通过 |
+| 5 | 图片 URL 非法 | prompt=女骑士跃上断桥的瞬间，风卷起披风与尘土，强叙事、动态倾向、resolution=720P、duration=5、seed=1234、promptExtend=true、imageUrl=not-a-url | 参数校验失败；返回错误码 | 通过 |
+
+=== table_7 ===
+| 用例编号 | 04 | 04 | 04 | 04 |
+| --- | --- | --- | --- | --- |
+| 测试场景 | 校验图像拓展任务创建与查询 | 校验图像拓展任务创建与查询 | 校验图像拓展任务创建与查询 | 校验图像拓展任务创建与查询 |
+| 测试对象 | 所有登录用户 | 所有登录用户 | 所有登录用户 | 所有登录用户 |
+| 序号 | 操作 | 输入数据 | 预期结果 | 结果 |
+| 1 | 缺少图片ID | pictureId=null、mode=ratio_expand、quality=normal、limitImageSize=true、scale=2.0 | 提示图片ID不能为空 | 通过 |
+| 2 | 设置合法参数 | pictureId=1996139001012625410、mode=ratio_expand、quality=normal、limitImageSize=true、scale=2.0 | 返回任务ID；状态 PENDING 或 RUNNING | 通过 |
+| 3 | 倍数越界 | pictureId=1996139003705368577、mode=ratio_expand、quality=normal、limitImageSize=true、scale=3.5 | 参数校验失败；返回错误码 | 通过 |
+| 4 | 未设置比例或偏移量 | pictureId=1996139005919961090、mode=pixel_offset、offsets=null、xScale=null、yScale=null | 参数校验失败 | 通过 |
+| 5 | 开启最佳质量 | pictureId=1996139007715123202、mode=ratio_expand、quality=best、limitImageSize=true、scale=2.5 | 返回任务ID；状态 PENDING 或 RUNNING | 通过 |
+
+=== table_8 ===
+| 用例编号 | 05 | 05 | 05 | 05 |
+| --- | --- | --- | --- | --- |
+| 测试场景 | 校验智能对话消息发送与历史查询 | 校验智能对话消息发送与历史查询 | 校验智能对话消息发送与历史查询 | 校验智能对话消息发送与历史查询 |
+| 测试对象 | 所有登录用户 | 所有登录用户 | 所有登录用户 | 所有登录用户 |
+| 序号 | 操作 | 输入数据 | 预期结果 | 结果 |
+| 1 | 发送空消息 | messages=null | 提示输入不能为空 | 通过 |
+| 2 | 模型留空发送消息 | model=null、messages=[{role=user, content=请根据以下场景生成三条检索短语，并给出风格、主体、光线与镜头信息；输出为JSON数组并使用英文键名；场景：雨夜的旧城街区，霓虹反射水面，人物从远处向镜头走来}] | 返回 taskId；状态 PROCESSING | 通过 |
+| 3 | 消息过长超限 | messages=[{role=user, content=在黄昏海港的长镜头叙事中，请基于“类别/风格/主体/场景/光线/镜头”六项维度给出细颗粒描述，并生成 5 条互不重复的检索短语；每条短语需包含主语与修饰语，兼顾可检索性与艺术性；输出 JSON 数组，键名采用英文小写蛇形；不得出现空值；同时评估叙事节奏与镜头调度，并附上取景建议与色彩搭配说明；最后给出三种替代提示词用于风格迁移}] | 参数校验失败；返回错误码 | 通过 |
+| 4 | 模型非法不在白名单 | model=unknown_model、messages=[{role=user, content=请为“雨夜巷道的霓虹反射”生成风格化检索短语，并汇总风格/主体/光线/镜头/色彩的维度标签}] | 参数校验失败；返回错误码 | 通过 |
+| 5 | 未登录访问 | token=null、messages=[{role=user, content=请输出关于“旧城街区的霓虹与湿地反射”的检索短语与标签}] | 返回未授权 | 通过 |
+

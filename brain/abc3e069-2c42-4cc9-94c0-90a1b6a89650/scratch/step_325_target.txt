@@ -1,0 +1,2 @@
+"1.2  国内外研究现状\n　　国外在AIGC技术与应用层面起步较早\n。在底层模型与生成工具方面，OpenAI\n的DALL-E系列、Midjourney和\nStable Diffusion占据了主导地位。然\n而，这些主流工具主要关注“生成
+<truncated 340 bytes>
