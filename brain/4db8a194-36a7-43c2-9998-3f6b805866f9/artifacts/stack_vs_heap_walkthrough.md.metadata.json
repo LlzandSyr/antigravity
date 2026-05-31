@@ -1,0 +1,5 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary":  "A comprehensive study guide and code walkthrough artifact comparing Stack and Heap memory regions, structured as a simulated perfect interview transcript, compiler/architect-level explanations of memory fragmentation, alloca, and growth mechanisms.",
+  "updatedAt":  "2026-05-30T09:25:27.253181300Z"
+}
