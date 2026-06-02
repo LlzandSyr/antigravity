@@ -1,0 +1,6 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary":  "This fully updated, integrated artifact presents a side-by-side comparative Code Walkthrough study guide for Exam 6. It merges the professional/industrial implementations directly with the teacher's official answers and C codes for each individual question, clearly highlighting memory architectures, alignment gaps, recursion limits in embedded stacks, and a catastrophic pointer overflow bug in the teacher's right shift implementation.",
+  "updatedAt":  "2026-06-02T11:43:52.804916100Z",
+  "version":  "3"
+}
