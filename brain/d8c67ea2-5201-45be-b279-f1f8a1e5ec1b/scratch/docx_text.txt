@@ -1,0 +1,943 @@
+=== File: FluxCloud_V2.0_项目功能逐条复盘（含AI扩展）.docx ===
+阶段一+二：FluxFile & FluxCloud 项目功能逐条复盘
+项目根目录：
+FluxFile: 阶段项目1/流光文件FluxFile+李怜哲/lv_port_linux_frame_buffer-release-v8.2/
+FluxCloud: 阶段项目2/李怜哲+流光云盘FluxCloud/lv_port_linux_frame_buffer-release-v8.2/
+Phase1：FluxFile 流光文件浏览器
+以下按功能细分核对表逐条记录实现细节。核心源码文件：dir_file_list/dir_file_list.c（1167行）、dir_file_list/dir_file_list.h、main.c。
+难度一：基础功能与UI框架搭建
+1. 任务一：目录检索与浏览
+1-1 实现指定目录(图库)的图片文件检索，过滤并读取 png/gif 格式
+实现思路：使用 POSIX 标准接口 opendir()→readdir()→closedir() 遍历目录。对每个 DT_REG 普通文件调用 Check_Valid_Pic() 函数，通过 strcmp 比较文件名末尾4字节，匹配 .png 或 .gif 后缀。匹配成功分配主题色（PNG天蓝背景+LV_SYMBOL_IMAGE图标），创建85x85按钮加入右侧文件容器。不匹配的分配淡黄背景+LV_SYMBOL_FILE图标，立即 free 节点不加入链表。
+Dir_Search_Show(): dir_file_list/dir_file_list.c 第489~693行
+  - 第604行: Check_Valid_Pic(complete_path) 调用
+  - 第614行: 不匹配格式立即 free(dii)
+  - 第595~596行: 文件按钮创建 lv_label_set_long_mode(file_lab, LV_LABEL_LONG_SCROLL_CIRCULAR)
+Check_Valid_Pic(): dir_file_list/dir_file_list.c 第787~803行
+  - 第790~798行: strcmp 检测 .png 和 .gif 后缀
+头文件声明: dir_file_list/dir_file_list.h 第93行(Dir_Search_Show)、第123行(Check_Valid_Pic)
+1-2 修复文件类型判断逻辑，确保只处理支持的图片格式
+实现思路：Check_Valid_Pic() 通过比较文件名倒数第4个字符 strcmp(&path[strlen(path)-4], ".png") 或 ".gif" 判断类型。返回 PNG_TYPE(1)/GIF_TYPE(2) 或 -1。Dir_Search_Show() 中调用后根据返回值决定是否加入链表。
+Check_Valid_Pic(): dir_file_list/dir_file_list.c 第787~803行
+宏定义: dir_file_list/dir_file_list.h 第20~22行
+  #define PNG_TYPE 1
+  #define GIF_TYPE 2
+  #define DIR_TYPE 3
+2. 任务二：图片预览功能
+2-1 实现点击图片文件图标或列表项，弹出新窗口显示原图
+实现思路：右侧图片按钮绑定 LV_EVENT_SHORT_CLICKED 事件到 Show_Pic() 回调。Show_Pic() 获取节点信息后创建浅红色 spinner（与目录加载的蓝色区分），启动 pic_win_timer_cb 延时定时器(1000ms)。定时器回调中创建全屏半透明黑色遮罩层(800x480, opacity=50)，在遮罩上通过 lv_win_create(bg_mask, 40) 创建弹窗。根据 file_type 创建 lv_img(PNG) 或 lv_gif(GIF) 控件加载图片。
+Show_Pic(): dir_file_list/dir_file_list.c 第941~960行
+pic_win_timer_cb(): dir_file_list/dir_file_list.c 第809~935行
+  - 第839行: lv_win_create(bg_mask, 40) 创建弹窗
+  - 遮罩层: 800x480全屏, opacity=50, 无边框无圆角
+2-2 图片预览弹窗放大至700x420，增加圆角阴影，支持全向滚动
+实现思路：弹窗实际尺寸在代码中为 lv_obj_set_size(win, 600, 360)（第840行）。弹窗设置圆角10、阴影宽度50(opacity=50)、边框2px浅灰。弹窗内容区域支持滚动。注：核对表写700x420，源码为600x360，可能后续版本调整。
+pic_win_timer_cb(): dir_file_list/dir_file_list.c 第809~935行
+  - 第840行: lv_obj_set_size(win, 600, 360)
+  - 弹窗样式: 圆角10, 阴影50, 边框2px浅灰
+3. 任务三：目录列表交互
+3-1 支持点击左侧目录按钮切换并动态刷新右侧文件容器内容
+实现思路：左侧目录按钮绑定 LV_EVENT_SHORT_CLICKED 事件到 Update_Dir_List() 回调。回调从事件 user_data 获取链表节点 dii，提取目标路径。创建 spinner(1000ms一圈, 60度弧长, 200x200居中)。对 file_container 和 dir_list 执行300ms淡出动画(opacity 255→0)，启动 spinner_timer_cb 定时器(600ms延迟)。定时器回调中清空旧UI、调用 Destroy_List 销毁旧链表、重新调用 Dir_Search_Show 加载新目录、执行500ms淡入动画(opacity 0→255)。
+Update_Dir_List(): dir_file_list/dir_file_list.c 第453~482行
+  - 第462~464行: lv_spinner_create(lv_scr_act(), 1000, 60)
+  - 第466~478行: 淡出动画(300ms, 255→0)
+  - 第481行: lv_timer_create(spinner_timer_cb, 600, dii)
+spinner_timer_cb(): dir_file_list/dir_file_list.c 第403~447行
+  - 第410~414行: 删除spinner
+  - 第431~443行: 淡入动画(500ms, 0→255)
+目录按钮事件绑定: dir_file_list/dir_file_list.c 第674行
+  lv_obj_add_event_cb(dir_btn, Update_Dir_List, LV_EVENT_SHORT_CLICKED, dii)
+3-2 优化左侧目录列表按钮样式：默认背景设为透明，添加8px圆角并去除边框
+实现思路：在 Dir_Search_Show() 中创建目录按钮时设置样式。使用 lv_style_set_bg_opa 设置背景为透明，lv_style_set_radius 设置8px圆角，lv_style_set_border_width 设置为0去除边框。
+Dir_Search_Show(): dir_file_list/dir_file_list.c 第489~693行
+  - 第630~640行附近: 目录按钮样式设置
+  - 透明背景、8px圆角、无边框
+3-3 增加目录按钮点击(PRESSED)状态视觉反馈：呈现半透明淡蓝色
+实现思路：为目录按钮设置 LV_STATE_PRESSED 状态样式。在 pressed 状态下设置 bg_opa 为半透明(约LV_OPA_30)和 bg_color 为淡蓝色，提供点击时的视觉反馈。
+Dir_Search_Show(): dir_file_list/dir_file_list.c
+  - 第630~640行附近: pressed状态样式设置
+  - 半透明淡蓝色反馈
+4. 任务四：界面框架搭建
+4-1 完成主界面、目录列表、文件容器、图片显示及退出界面的基础UI框架
+实现思路：Show_Dirfile_Windows() 函数创建全局上下文 DBI 结构体(malloc)，调用 Create_List_Node() 创建虚拟链表头。构建主界面：全屏背景容器(windows_ptr, 800x480)、顶部状态栏(top_bar, 800x40)、退出按钮(30x30红色圆角)、左侧目录列表(dir_list, 250x420)、右侧文件容器(file_container, 500x420)、图片计数标签。Exit_Pro() 创建退出界面(纯白偏灰背景+爱心图片+英文告别语)。
+Show_Dirfile_Windows(): dir_file_list/dir_file_list.c 第199~384行
+  - 第204~207行: malloc(sizeof(DBI)) 创建全局上下文
+  - 第211行: Create_List_Node() 创建链表头
+  - 第231~236行: 渐变背景设置
+  - 第240~248行: 顶部状态栏(800x40)
+  - 第253~270行: 退出按钮+提示文字
+  - 第339~351行: 左侧目录列表(250x420)
+  - 第354~363行: 右侧文件容器(500x420)
+Exit_Pro(): dir_file_list/dir_file_list.c 第1124~1166行
+4-2 全局背景移除纯深蓝底色，新增从浅蓝(AliceBlue)到淡蓝的垂直渐变色
+实现思路：通过 lv_style_set_bg_color + lv_style_set_bg_grad_color 设置双色，lv_style_set_bg_grad_dir 设置为 LV_GRAD_DIR_VER 垂直渐变方向。
+Show_Dirfile_Windows(): dir_file_list/dir_file_list.c 第231~236行
+  lv_style_set_bg_color -> 淡蓝(AliceBlue)
+  lv_style_set_bg_grad_color -> 更深蓝
+  lv_style_set_bg_grad_dir -> LV_GRAD_DIR_VER
+4-3 左侧目录列表与右侧文件容器采用半透明背景(OPA_90)、圆角及阴影，形成悬浮卡片效果
+实现思路：创建共享样式 style_list，设置 bg_opa=LV_OPA_90(半透明)、radius=10(圆角)、shadow_width=20/shadow_opa=20(阴影)。左侧 dir_list 和右侧 file_container 均应用此样式，形成悬浮卡片视觉效果。右侧容器额外设置淡黄色背景色。
+Show_Dirfile_Windows(): dir_file_list/dir_file_list.c 第339~351行
+  style_list: bg_opa=LV_OPA_90, radius=10, shadow_width=20
+  - 第339行: lv_obj_add_style(dir_list, &style_list, ...)
+  - 第354~363行: file_container 应用相同样式+淡黄背景
+4-4 调整各类文件按钮背景色区分类型，长文件名支持自动循环滚动
+实现思路：Dir_Search_Show() 中根据文件类型分配不同背景色——图片(天蓝背景+LV_SYMBOL_IMAGE图标)、不支持格式(淡黄背景+LV_SYMBOL_FILE图标)、目录(透明背景)。长文件名通过 lv_label_set_long_mode(file_lab, LV_LABEL_LONG_SCROLL_CIRCULAR) 设置跑马灯循环滚动，宽度限制70px。
+Dir_Search_Show(): dir_file_list/dir_file_list.c 第489~693行
+  - 第595~596行: lv_label_set_long_mode(file_lab, LV_LABEL_LONG_SCROLL_CIRCULAR)
+  - 第595行: lv_obj_set_width(file_lab, 70)
+  - 图片按钮: 天蓝背景+LV_SYMBOL_IMAGE
+  - 不支持格式: 淡黄背景+LV_SYMBOL_FILE
+  - 目录按钮: 透明背景+8px圆角
+4-5 修复退出界面文字溢出与布局错位问题，改为绝对定位、极简白底与英文告别语
+实现思路：Exit_Pro() 创建新屏幕，设置纯白偏灰背景。使用绝对定位放置爱心图片(居中，Y偏移+30)，英文告别语"Good bye!"(Y偏移-170)和"See you next time!"(Y偏移+200)，文字使用 lv_font_montserrat_40 大字体。屏幕切换使用 LV_SCR_LOAD_ANIM_MOVE_BOTTOM 动画。
+Exit_Pro(): dir_file_list/dir_file_list.c 第1124~1166行
+  - 第1130行: 创建新屏幕，纯白偏灰背景
+  - 第1135~1140行: 爱心图片绝对定位(居中，Y+30)
+  - 第1142~1146行: "Good bye!" 文字(Y-170)
+  - 第1148~1152行: "See you next time!" 文字(Y+200)
+  - 第1162行: lv_scr_load_anim(new_scr, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 1600, 0, true)
+4-6 开启系统 malloc 并优化主循环提升稳定性，修复 dir_file_list.c 编译错误
+实现思路：全局上下文 DBI 结构体通过 malloc(sizeof(DBI)) 分配在 Show_Dirfile_Windows() 中。每个链表节点通过 Create_List_Node() 调用 malloc+memset 分配。主循环 while(!EXIT_MASK) 中 lv_timer_handler() + usleep(10000) 每10ms刷新LVGL。退出后额外执行100次 lv_timer_handler() 清理动画残留。修复编译错误涉及头文件依赖和类型定义。
+Show_Dirfile_Windows(): dir_file_list/dir_file_list.c 第204~207行
+  malloc(sizeof(DBI)) + memset
+Create_List_Node(): dir_file_list/dir_file_list.c 第154~169行
+  malloc(sizeof(struct dir_btn_irq_inf)) + memset
+main.c 第74~84行: while(!EXIT_MASK) { lv_timer_handler(); usleep(10000); }
+难度二：特效动画与UI完善
+1. 任务一：界面切换特效
+1-1 增加退出按钮点击后进入退出界面的淡出切换动画 (LV_SCR_LOAD_ANIM_MOVE_BOTTOM)
+实现思路：退出按钮绑定 Exit_Pro() 回调。Exit_Pro() 创建新屏幕后调用 lv_scr_load_anim(new_scr, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 1600, 0, true) 执行从下往上推入动画(1600ms)，auto_del=true 自动销毁旧屏幕。同时创建 real_exit_timer_cb 定时器(1500ms)设置 EXIT_MASK=1 结束主循环。
+Exit_Pro(): dir_file_list/dir_file_list.c 第1124~1166行
+  - 第1162行: lv_scr_load_anim(new_scr, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 1600, 0, true)
+  - 第1165行: lv_timer_create(real_exit_timer_cb, 1500, NULL)
+  - real_exit_timer_cb: 第1113行 设置 EXIT_MASK = 1
+1-2 增加左侧目录列表与右侧文件容器切换时的淡出淡入过渡效果
+实现思路：Update_Dir_List() 中对 file_container 和 dir_list 双容器同时执行300ms淡出动画(opacity 255→0)，通过 set_opa_anim_cb 回调设置透明度。spinner_timer_cb() 中刷新完成后对双容器执行500ms淡入动画(opacity 0→255)。使用 lv_anim_set_exec_cb 绑定 set_opa_anim_cb 回调函数。
+Update_Dir_List() 淡出: dir_file_list/dir_file_list.c 第466~478行
+  - lv_anim_set_values(&a, 255, 0); lv_anim_set_time(&a, 300)
+  - 同时对 file_container 和 dir_list 执行
+set_opa_anim_cb(): dir_file_list/dir_file_list.c 第392~397行
+  lv_obj_set_style_opa((lv_obj_t *)var, v, LV_PART_MAIN)
+spinner_timer_cb() 淡入: dir_file_list/dir_file_list.c 第431~443行
+  - lv_anim_set_values(&a, 0, 255); lv_anim_set_time(&a, 500)
+1-3 修复由于弹窗尺寸修改导致的水平居中动画位置偏移问题
+实现思路：弹窗滑入动画中 X 坐标从 -600 滑入到 100，Y 坐标固定在 60。通过调整动画起始值和目标值来适配弹窗实际尺寸(600x360)，确保弹窗始终居中显示。
+pic_win_timer_cb(): dir_file_list/dir_file_list.c 第923~934行
+  - 第925~926行: X轴动画 -600→100
+  - Y轴固定60
+  - 第929行: lv_anim_set_path_cb(&a, lv_anim_path_overshoot)
+2. 任务二：进界面加载动画
+2-1 增加右侧文件容器点击图片或目录时的圆圈加载动画 (spinner)
+实现思路：Update_Dir_List() 中创建 lv_spinner_create(lv_scr_act(), 1000, 60)，参数1000ms一圈、60度弧长。spinner 尺寸200x200居中放置。spinner_timer_cb 中删除屏幕最后一个子节点(即spinner)然后执行刷新操作。图片预览也使用独立的浅红色 spinner 在 Show_Pic() 中创建。
+Update_Dir_List() spinner: dir_file_list/dir_file_list.c 第462~464行
+  lv_obj_t *spinner = lv_spinner_create(lv_scr_act(), 1000, 60);
+  lv_obj_set_size(spinner, 200, 200);
+  lv_obj_center(spinner);
+spinner_timer_cb() 删除spinner: dir_file_list/dir_file_list.c 第410~414行
+Show_Pic() spinner: dir_file_list/dir_file_list.c 第941~960行
+  浅红色spinner (与目录加载的蓝色区分)
+2-2 实现图片预览弹窗从左侧滑入并带 overshoot 回弹效果的动画
+实现思路：pic_win_timer_cb() 中创建 lv_anim_t 动画对象。设置 lv_anim_set_path_cb(&a, lv_anim_path_overshoot) 使用回弹缓动路径。X轴从 -600 滑入到 100，耗时600ms，超出目标值后回弹——模拟iOS风格弹窗效果。Y轴固定60。
+pic_win_timer_cb(): dir_file_list/dir_file_list.c 第923~934行
+  - 第929行: lv_anim_set_path_cb(&a, lv_anim_path_overshoot)
+  - 第925~926行: X轴动画 -600→100, 600ms
+  - Y轴固定60
+2-3 新增：程序启动时的"流光加载页面" (8秒平滑进度条 + 零解码纪念碑谷风格背景图)
+实现思路：Show_Loading_Screen() 函数在 main.c 的 main() 中调用。创建独立 loading_scr 屏幕，铺设纪念碑谷风格背景图（C数组直接渲染，零解码开销）。底部创建600x20圆角进度条，指示器半透明白(opacity=50)、背景纯白(opacity=100)、圆角10px、发光阴影宽度10px。使用 lv_anim_t 动画从0到100推进，设置时间为5000ms(5秒，核对表写8秒)。动画执行回调 set_bar_value_cb 每帧更新进度条值。
+Show_Loading_Screen(): dir_file_list/dir_file_list.c 第47~98行
+  - 第57行: 预构建主界面 Dir_Brower_Demo()
+  - 第62~69行: 创建 loading_scr + 背景图
+  - 第72~80行: 进度条 600x20, 圆角10, 阴影10
+  - 第88~95行: lv_anim_t 动画 0→100
+  - 第91行: lv_anim_set_time(&a, 5000) // 5秒
+  - 第94行: lv_anim_set_ready_cb(&a, loading_anim_ready_cb)
+set_bar_value_cb(): dir_file_list/dir_file_list.c 第24~27行
+main.c 第57行: Show_Loading_Screen()
+2-4 新增：加载页面与主界面之间的 1 秒淡入淡出 (Fade On) 无缝转场
+实现思路：loading_anim_ready_cb() 作为进度条动画完成回调，调用 lv_scr_load_anim(main_scr, LV_SCR_LOAD_ANIM_FADE_ON, 1000, 0, true)。参数1000ms(1秒)淡入，auto_del=true 自动销毁 loading_scr 释放资源。主界面 main_scr 在 Show_Loading_Screen() 中已通过 Dir_Brower_Demo() 预先构建好(后台不可见)。
+loading_anim_ready_cb(): dir_file_list/dir_file_list.c 第33~41行
+  - 第39行: lv_scr_load_anim(main_scr, LV_SCR_LOAD_ANIM_FADE_ON, 1000, 0, true)
+  - 参数: 1000ms淡入, auto_del=true自动销毁loading_scr
+3. 任务三：顶部状态栏与路径显示
+3-1 新增高度为40px的透明顶部状态栏，移入退出按钮、WiFi/蓝牙图标及时间占位符
+实现思路：Show_Dirfile_Windows() 中创建 top_bar 容器(800x40, 顶部, 透明背景无边框)。将退出按钮(30x30红色圆角)和提示文字("点击这里退出程序")移入状态栏左侧。状态栏右侧放置WiFi图标(LV_SYMBOL_WIFI)、蓝牙图标(LV_SYMBOL_BLUETOOTH)和时间标签(初始"00:00:00")。时间通过 pthread_create 创建 rtc_thread_func 线程每秒更新 g_time_str，LVGL定时器 update_time_cb 每500ms刷新标签。
+Show_Dirfile_Windows(): dir_file_list/dir_file_list.c 第199~384行
+  - 第240~248行: 顶部状态栏 top_bar(800x40, 透明)
+  - 第253~270行: 退出按钮+提示文字
+  - 第272~282行: WiFi图标(LV_SYMBOL_WIFI)
+  - 第282~292行: 蓝牙图标(LV_SYMBOL_BLUETOOTH)
+  - 第292~296行: 时间标签(初始"00:00:00")
+rtc_thread_func(): dir_file_list/dir_file_list.c 第115~132行
+  - pthread_create + pthread_detach
+  - time(NULL)→localtime→sprintf→g_time_str[32]
+update_time_cb(): dir_file_list/dir_file_list.c 第135~143行
+  - lv_timer_create(update_time_cb, 500, NULL) 每500ms刷新
+3-2 在状态栏中央对齐新增类"灵动岛"设计的深色半透明胶囊区域，动态显示当前路径
+实现思路：在状态栏中央创建 island 容器(200x30, x=290)，深色半透明背景(bg_opa=LV_OPA_80)、圆角15(胶囊形)、无边框。内部放置 path_label 路径标签，设置跑马灯滚动模式 LV_LABEL_LONG_SCROLL_CIRCULAR。在 Dir_Search_Show() 中每次切换目录时更新 path_label 文本。
+Show_Dirfile_Windows(): dir_file_list/dir_file_list.c 第301~312行
+  island: 200x30, x=290, bg_opa=LV_OPA_80, radius=15
+  - 第310行: lv_obj_add_flag(island, LV_OBJ_FLAG_FLOATING)
+path_label: 第316~320行
+  - 第318行: lv_label_set_long_mode(path_label, LV_LABEL_LONG_SCROLL_CIRCULAR)
+3-3 启用路径标签的重绘色功能(recolor)，格式化文本使 'PATH:' 为白色、实际路径为亮绿色
+实现思路：在 Dir_Search_Show() 中调用 lv_label_set_recolor(path_label, true) 启用recolor功能。使用格式化字符串 "#FFFFFF PATH:# #00FF00 /path#" 设置路径标签文本，其中 "PATH:" 显示为白色(#FFFFFF)、实际路径显示为亮绿色(#00FF00)。每次切换目录时更新此格式化文本。
+Dir_Search_Show(): dir_file_list/dir_file_list.c 第489~693行
+  - 第495~500行附近: lv_label_set_recolor(path_label, true)
+  - 格式化文本: "#FFFFFF PATH:# #00FF00 /actual/path#"
+头文件声明: dir_file_list/dir_file_list.h 第93行
+难度三：高阶功能与性能优化
+1. 任务一：图片信息与总数显示
+1-1 在图片预览界面中，利用标题栏实时显示该图片的完整绝对路径
+实现思路：弹窗情报包 pic_view_info 中包含 title_label 成员。翻页时 Page_Btn_Event() 直接调用 lv_label_set_text(pvi->title_label, 新路径) 更新标题栏文本，而非反复创建新的 Label 控件——这是性能优化的关键设计。弹窗创建时在 pic_win_timer_cb() 中初始化标题栏并存储到情报包。
+pic_win_timer_cb() 创建标题栏: dir_file_list/dir_file_list.c 第809~935行
+Page_Btn_Event() 更新标题: dir_file_list/dir_file_list.c 第968~1087行
+  - lv_label_set_text(pvi->title_label, 新路径)
+pic_view_info 结构体: dir_file_list/dir_file_list.c 第102~110行
+  - lv_obj_t *title_label 成员
+1-2 在主功能界面右侧顶部新增标签，统计并显示当前目录下图片文件的总张数
+实现思路：Show_Dirfile_Windows() 中创建 pic_count_label 标签放置在右上角(x=500, y=10)，蓝色文字支持recolor。Dir_Search_Show() 扫描目录时对每个有效图片执行 pic_count++ 累加，扫描完成后更新标签文本显示总数。切换目录时重新计数。
+Show_Dirfile_Windows(): dir_file_list/dir_file_list.c 第199~384行
+  - 第370~380行附近: pic_count_label 创建
+Dir_Search_Show(): dir_file_list/dir_file_list.c 第489~693行
+  - pic_count 累加逻辑
+  - 最后更新 pic_count_label 文本
+1-3 性能优化：更新路径时直接更新弹窗标题文本，而非反复创建 Label，避免显存暴增及卡顿
+实现思路：翻页时通过情报包中已存储的 title_label 指针直接调用 lv_label_set_text() 更新文本内容。不创建新 Label 对象，避免每次翻页都分配新显存导致内存持续增长和卡顿。这是嵌入式设备 GUI 开发的典型优化策略。
+Page_Btn_Event(): dir_file_list/dir_file_list.c 第968~1087行
+  - lv_label_set_text(pvi->title_label, 新路径) // 复用现有Label，不创建新对象
+2. 任务四：图片翻页功能与防误触遮罩
+2-1 实现基于双向循环链表的图片上下翻页寻路功能
+实现思路：dir_btn_irq_inf 结构体包含 next 和 prev 前后驱指针，真实图片节点通过 Add_List_Node() 头插法形成一个独立闭环（prev 绕开虚拟头节点 head）。Page_Btn_Event() 向下翻沿 next 遍历，向上翻沿 prev 遍历。沿 prev 遍历时必须跳过虚拟头节点 head——通过哨兵判断 if (tmp == tmp->p_dbi->head) { tmp = tmp->prev; continue; } 防止段错误。循环条件 tmp != pvi->current_node 确保绕一圈停止。跳过非图片节点(只认PNG_TYPE/GIF_TYPE)。只有一张图时 target_node == current_node 判定避免原地重复动画。
+dir_btn_irq_inf 结构体: dir_file_list/dir_file_list.h 第132~148行
+  struct dir_btn_irq_inf { P_DBI p_dbi; char new_dir_path[512]; int file_type;
+    struct dir_btn_irq_inf *next; struct dir_btn_irq_inf *prev; }
+Add_List_Node(): dir_file_list/dir_file_list.c 第699~734行
+  - 头插法: new->next = head->next; new->prev = head
+  - 非空时维护闭环: head->next->prev = new; tail->next = new; new->prev = tail
+Page_Btn_Event(): dir_file_list/dir_file_list.c 第968~1087行
+  - 向下翻: tmp = current_node->next 遍历
+  - 向上翻: tmp = current_node->prev 遍历
+  - 哨兵: if (tmp == tmp->p_dbi->head) { tmp = tmp->prev; continue; }
+  - 循环终止: tmp != pvi->current_node
+  - 跳过非图片节点
+2-2 新增图片切换过渡动画：旧图延时飞出，新图加入 ease_out 缓动滑入效果
+实现思路：翻页动画设计遵循"方向感"原则——旧图飞出方向与新图滑入方向相反。向下翻：旧图 Y坐标→-400(向上飞出), 800ms线性, 动画完成回调 lv_obj_del_anim_ready_cb 自动销毁旧图控件。新图 Y:400→居中位置, 1000ms, 使用 lv_anim_path_ease_out 缓出缓动函数。向上翻：旧图 Y坐标→+400(向下飞出), 800ms线性。新图 Y:-400→居中位置, 1000ms ease_out。
+Page_Btn_Event(): dir_file_list/dir_file_list.c 第968~1087行
+  - 旧图飞出(下翻): lv_anim_set_values(&a, 当前Y, -400); 800ms
+  - 旧图飞出(上翻): lv_anim_set_values(&a, 当前Y, 400); 800ms
+  - 旧图动画完成: lv_obj_del_anim_ready_cb 自动销毁
+  - 新图滑入(下翻): lv_anim_set_values(&a, 400, 居中Y); 1000ms; lv_anim_path_ease_out
+  - 新图滑入(上翻): lv_anim_set_values(&a, -400, 居中Y); 1000ms; lv_anim_path_ease_out
+2-3 引入全局半透明防误触遮罩层(g_mask)，支持点击外围遮罩层关闭窗口
+实现思路：pic_win_timer_cb() 中创建 bg_mask 遮罩层(800x480全屏, 半透明黑 opacity=50, 无边框无圆角)。遮罩层绑定 LV_EVENT_CLICKED 事件到 Close_Pic_Win() 回调——点击弹窗外围的遮罩区域即可关闭窗口。弹窗关闭按钮也绑定 Close_Pic_Win()。
+pic_win_timer_cb(): dir_file_list/dir_file_list.c 第809~935行
+  - 遮罩层创建: 800x480, opacity=50, 无边框无圆角
+  - 遮罩点击事件绑定 Close_Pic_Win
+  - 关闭按钮也绑定 Close_Pic_Win
+Close_Pic_Win(): dir_file_list/dir_file_list.c 第1093~1107行
+2-4 动态分配并传递上下文情报包 (pic_view_info)，实现悬浮翻页按钮绑定及事件透传
+实现思路：pic_win_timer_cb() 中 malloc(sizeof(struct pic_view_info)) 分配情报包内存。情报包存储弹窗内所有控件指针(win/cont/img_obj/btn_up/btn_down/title_label)和当前链表节点 current_node。翻页按钮(上翻/下翻，圆形40x40，深灰半透明，分别位于弹窗右侧偏上-10,-50和偏下-10,50)绑定 Page_Btn_Event()，通过情报包获取链表节点和控件指针完成翻页操作。情报包作为事件回调的 user_data 透传。
+pic_view_info 结构体: dir_file_list/dir_file_list.c 第102~110行
+  lv_obj_t *win; lv_obj_t *cont; lv_obj_t *img_obj;
+  lv_obj_t *btn_up; lv_obj_t *btn_down; lv_obj_t *title_label;
+  struct dir_btn_irq_inf *current_node;
+pic_win_timer_cb() 分配情报包: 第809~935行
+  malloc(sizeof(struct pic_view_info))
+翻页按钮创建: 圆形40x40, 深灰半透明
+  - 上翻: 右侧偏上(-10, -50)
+  - 下翻: 右侧偏下(-10, 50)
+2-5 重构UI层级：使用 lv_obj_move_foreground 修复新图片遮挡导致的悬浮按钮失效问题
+实现思路：翻页时新创建的图片控件会默认覆盖在翻页按钮之上，导致按钮无法点击。Page_Btn_Event() 中新图创建后立即调用 lv_obj_move_foreground(btn_up) 和 lv_obj_move_foreground(btn_down) 将翻页按钮强制拉到 Z 轴最顶层，确保按钮始终可点击。
+Page_Btn_Event(): dir_file_list/dir_file_list.c 第968~1087行
+  - 新图创建后: lv_obj_move_foreground(btn_up)
+  - lv_obj_move_foreground(btn_down)
+  - 强制翻页按钮置顶
+2-6 修复核心Bug：修复切换目录时双向链表销毁导致的 double free/corruption 错误（通过断开循环环使其退化为单向链表安全销毁）
+实现思路：双向循环链表是一个闭环，直接遍历 free 会导致同一个节点被释放两次触发 double free 崩溃。Destroy_List() 的解决方案分三步：① current = head->next 获取第一个真实节点；② tail = current->prev 获取队尾节点；③ tail->next = NULL 断开闭环，退化为单向链表。然后 while(current != NULL) 逐个 free，最后 head->next = NULL 重置头节点。
+Destroy_List(): dir_file_list/dir_file_list.c 第741~781行
+  第750行: current = head->next
+  第751行: tail = current->prev
+  第752行: tail->next = NULL // ★断环关键步骤★
+  第753~770行: while(current != NULL) 逐个 free
+  第771行: head->next = NULL 重置
+2-7 修复核心Bug：修复关闭图片窗口时的内存泄漏及UI残留问题（级联销毁遮罩层及关联弹窗情报包）
+实现思路：Close_Pic_Win() 通过 lv_obj_get_parent(pvi->win) 获取遮罩层 bg_mask，调用 lv_obj_del(bg_mask) 级联销毁遮罩层及其所有子节点(包括弹窗本身)。然后调用 free(pvi) 释放动态分配的情报包 pic_view_info 结构体内存。弹窗内旧图的 lv_img 控件在翻页动画完成回调中通过 lv_obj_del_anim_ready_cb 自动销毁。三管齐下实现完整的内存闭环释放。
+Close_Pic_Win(): dir_file_list/dir_file_list.c 第1093~1107行
+  - 第1100行: lv_obj_get_parent(pvi->win) 获取遮罩层
+  - 第1103行: lv_obj_del(bg_mask) 级联销毁
+  - 第1106行: free(pvi) 释放情报包
+旧图销毁: Page_Btn_Event() 中 lv_obj_del_anim_ready_cb 动画完成后自动调用
+Phase2：FluxCloud 流光云盘（阶段二）
+以下按功能细分核对表逐条记录实现细节。核心源码目录：dir_file_list/ (客户端, 2684行)、dir_file_list/server/ (服务端)、dir_file_list/client/ (客户端网络库)。
+难度一：服务器基础结构与客户端文件传输 (60~70分)
+1. 任务一：服务器基础结构与连接
+1-1 [√] 服务器：使用printf界面进行人机交互
+实现思路：服务端 main() 函数中通过 printf 输出服务端启动信息、端口号、客户端连接/断开通知、在线客户端列表等信息。server_run() 中 accept 新连接后调用 show_clients() 打印在线名单。所有交互通过终端 printf 完成，无图形界面。
+服务端入口: dir_file_list/server/main.c 第1~61行
+  - printf 启动信息
+  - server_run() 中 accept 后打印
+show_clients(): dir_file_list/server/server.c
+  - 遍历 client_list_head 打印各客户端 fd+IP+端口
+1-2 [√] 服务器：用数组保存客户端套接字
+实现思路：初版使用固定大小数组存储客户端 fd。后续难度二升级为单向链表 client_node_t 管理，节点包含 fd、struct sockaddr_in addr、next 指针。add_client() 头插法加入，remove_client() 遍历查找删除，所有操作由全局互斥锁 list_mutex 保护。
+client_node_t: dir_file_list/server/server.h
+add_client(): dir_file_list/server/server.c
+remove_client(): dir_file_list/server/server.c
+MAX_CLIENTS 宏: server.h
+1-3 [√] 服务器：支持多客户端连接
+实现思路：server_run() 中无限循环 accept() 新连接。每个新客户端分配独立 fd，加入链表管理，通过线程池 threadpool_add_task() 投递给工作线程处理。client_service() 线程函数中 while(1) 循环 recv 接收 packet_t 包头，switch(pkg.opt) 分发到对应处理函数。客户端断开时 close(fd) + remove_client() 清理资源。
+server_run(): dir_file_list/server/main.c
+  while(1) { accept(); add_client(); threadpool_add_task(); }
+client_service(): dir_file_list/server/server.c 第308~346行
+  - 循环 recv 包头 → switch 分发
+  - 断开时: close(client_fd) + remove_client(client_fd)
+2. 任务二：服务器端文件保存与传输支持
+2-1 [√] 服务器：服务器支持保存客户端上传的文件
+实现思路：handle_upload() 接收 packet_t 包头后拼接 CLOUD_ROOT/fname 路径，open(O_WRONLY|O_CREAT|O_TRUNC, 0777) 创建/覆盖文件。根据 pkg.fsize 指定文件大小，循环 read(client_fd, buf, min(remaining, sizeof(buf))) 接收文件内容，write(fd, buf, n) 写入磁盘。total_recv 累加直到等于 pkg.fsize。
+handle_upload(): dir_file_list/server/server.c 第98~124行
+  - 拼接路径: sprintf(full_path, "%s/%s", CLOUD_ROOT, pkg->fname)
+  - open 创建文件: O_WRONLY|O_CREAT|O_TRUNC
+  - 循环 read+write 直到 total_recv == pkg->fsize
+CLOUD_ROOT 宏: server.h ("cloud_files")
+2-2 [√] 服务器：服务器支持保存文件（文件IO保存）
+实现思路：与2-1相同，通过标准文件IO接口 open/write/close 将客户端上传的数据持久化到磁盘。上传文件统一保存在 CLOUD_ROOT 目录下。文件列表通过 handle_list() 使用 opendir/readdir 遍历该目录获取。
+handle_upload(): dir_file_list/server/server.c 第98~124行
+handle_list(): dir_file_list/server/server.c 第159~221行
+  opendir(CLOUD_ROOT) → readdir → 拼接列表字符串
+2-3 [√] 服务器：服务器支持客户端下载保存的文件
+实现思路：handle_download() 拼接 CLOUD_ROOT/fname 路径，open(O_RDONLY) 打开文件。如果打开失败(status=-1)直接回复失败包。成功则 lseek(fd, 0, SEEK_END) 获取文件大小填入 pkg.fsize，lseek(fd, 0, SEEK_SET) 重置偏移，回复确认包(status=0)。然后循环 read(fd, buf, sizeof(buf)) 读取文件内容，write(client_fd, buf, n) 发送给客户端。
+handle_download(): dir_file_list/server/server.c 第127~156行
+  - open(O_RDONLY) 打开文件
+  - lseek 获取大小 → 回复确认包
+  - 循环 read+write 发送文件内容
+3. 任务三：客户端界面与文件显示
+3-1 [√] 客户端：使用LVGL做界面
+实现思路：客户端复用 FluxFile 的 LVGL 8.2 界面框架。main.c 中 lv_init() + fbdev_init() + evdev_init() 初始化。Dir_Brower_Demo() 作为总入口，Show_Dirfile_Windows() 构建主界面骨架——渐变背景、顶部状态栏、左侧目录列表(250x380)、右侧文件容器(500x380)、灵动岛路径显示、模式切换按钮、连接按钮、天气气泡按钮。支持本地/云端双模式切换。
+main.c: dir_file_list/../main.c 第1~105行
+Dir_Brower_Demo(): dir_file_list/dir_file_list.c
+Show_Dirfile_Windows(): dir_file_list/dir_file_list.c 第564~811行
+  - 第600~620行: 模式切换按钮+连接按钮
+  - 第622~640行: 天气气泡按钮
+  - 第642~660行: 灵动岛
+  - 第680~720行: 左侧dir_list(250x380)
+  - 第730~760行: 右侧file_container(500x380)
+3-2 [√] 客户端：显示上传下载文件列表
+实现思路：Load_Cloud_File_List() 函数发送 OPT_LIST 请求包(含目标路径)，接收服务端回执包头(fsize=列表字符串长度)，malloc 分配缓冲区循环 recv 接收列表字符串。使用 strtok_r(list_buf, "\n", &saveptr) 按换行符分割文件名。以 [DIR] 前缀识别目录——放入左侧 dir_list；普通文件名放入右侧 file_container 网格(85x85按钮，间距95px)。支持短按(查看)和长按(下载)。
+Load_Cloud_File_List(): dir_file_list/dir_file_list.c 第2115~2323行
+  - 第2132~2140行: 发送 OPT_LIST 包
+  - 第2143~2147行: 接收回执包头
+  - 第2161~2177行: malloc+循环recv接收列表字符串
+  - 第2197~2311行: strtok_r 按\n分割, [DIR]前缀识别目录
+4. 任务四：客户端文件上传与下载
+4-1 [√] 客户端：客户端支持把文件上传到服务器
+实现思路：upload_thread() 独立 pthread 线程。open(local_path, O_RDONLY) 打开本地文件，fstat 获取文件大小填入 transfer_info_t.total_size。发送 OPT_UPLOAD 包头(fsize=文件大小, fname=目标文件名)。循环 read(fd, buf, 1024) 读取本地文件1KB块，send(sockfd, buf, n, 0) 发送给服务端。每次发送后更新 transfer_info_t.current_size。主线程通过 transfer_timer_cb LVGL定时器每100ms刷新进度条。
+upload_thread(): dir_file_list/dir_file_list.c 第1817~1854行
+  - open + fstat 获取文件大小
+  - send OPT_UPLOAD 包头
+  - 循环 read 1KB + send
+  - 更新 transfer_info_t.current_size
+transfer_timer_cb(): dir_file_list/dir_file_list.c 第1912~1979行
+  - 每100ms刷新进度条 lv_bar_set_value
+4-2 [√] 客户端：客户端支持从服务器下载文件
+实现思路：download_thread() 独立 pthread 线程。发送 OPT_DOWNLOAD 请求包(fname=目标文件名)。recv 接收服务端确认包(含 fsize 文件大小)。mkdir("downloads", 0777) 创建本地下载目录，open(full_local_path, O_WRONLY|O_CREAT|O_TRUNC, 0777) 创建本地文件。循环 recv(sockfd, buf, sizeof(buf), 0) 接收文件内容，write(fd, buf, n) 写入本地文件。total_recv 累加直到等于 info->total_size。更新 transfer_info_t 进度。
+download_thread(): dir_file_list/dir_file_list.c 第1856~1908行
+  - send OPT_DOWNLOAD 请求
+  - recv 确认包(fsize)
+  - mkdir("downloads") + open 创建本地文件
+  - 循环 recv + write
+  - 更新 transfer_info_t.current_size
+4-3 [√] 客户端：客户端支持保存下载的文件
+实现思路：与4-2相同。下载的文件通过 write(fd, buf, n) 写入本地磁盘 downloads/ 目录。传输进度通过 transfer_info_t 结构体在线程和 LVGL 定时器之间同步。传输完成后弹出成功/失败结果弹窗，用户点击"确定"关闭。
+download_thread(): dir_file_list/dir_file_list.c 第1856~1908行
+  - write(fd, buf, n) 写入本地文件
+  - downloads/ 目录
+Create_Transfer_Dialog(): dir_file_list/dir_file_list.c
+  - 遮罩+弹窗确认界面，确定/取消按钮
+难度二：服务器架构优化与客户端外部功能 (70~90分)
+1. 任务一：服务器端架构与工程优化
+1-1 [√] 服务器新增功能：用链表保存客户端IP和套接字
+实现思路：定义 client_node_t 单向链表结构体(包含 fd、struct sockaddr_in addr、next 指针)。add_client() 头插法加入新节点，remove_client() 遍历查找匹配 fd 的节点并删除。show_clients() 遍历打印在线客户端列表(IP+端口+fd)。全局互斥锁 list_mutex 保护所有链表增删查操作，与任务队列的锁分开减少锁竞争。
+client_node_t: dir_file_list/server/server.h
+add_client(): dir_file_list/server/server.c
+remove_client(): dir_file_list/server/server.c
+show_clients(): dir_file_list/server/server.c
+list_mutex: server.c 全局变量
+1-2 [√] 服务器新增功能：Makefile
+实现思路：项目根目录和 server 子目录下各有 Makefile。服务端 Makefile 使用 gcc 编译，链接 pthread 库(-lpthread)。客户端 Makefile 使用 arm-linux-gcc 交叉编译工具链，链接 LVGL 库。支持 make clean 清理编译产物。
+服务端Makefile: dir_file_list/server/ 目录
+客户端Makefile: 项目根目录 Makefile
+  arm-linux-gcc 交叉编译
+1-3 [√] 服务器新增功能：动态库
+实现思路：客户端网络功能封装为独立动态库 libclient.so。client/client.c 提供 init_net()、close_net()、send_pkg()、upload_file()、download_file()、list_files() 等函数。client/client.h 声明函数接口。Makefile 中通过 -fPIC -shared 编译为 .so 动态库，客户端链接时使用 -lclient。
+client动态库: dir_file_list/client/client.c + client.h
+  init_net()/upload_file()/download_file()/list_files()
+Makefile: -fPIC -shared 编译 .so
+2. 任务二：客户端界面迭代与外部功能
+2-1 [√] 客户端新增功能：使用LVGL做界面 (已实现复杂的双面板、进度条、弹窗交互等演进)
+实现思路：客户端在 FluxFile 基础上迭代，新增云端双面板模式、文件传输进度条弹窗(Create_Transfer_Dialog + transfer_timer_cb 100ms刷新)、登录注册页面(磨砂玻璃容器+拼音输入法)、天气气泡按钮+搜索窗口。整体界面保留渐变背景、灵动岛、悬浮卡片等 FluxFile 的设计语言。
+Show_Dirfile_Windows(): dir_file_list/dir_file_list.c 第564~811行
+Create_Transfer_Dialog(): dir_file_list/dir_file_list.c
+transfer_timer_cb(): dir_file_list/dir_file_list.c 第1912~1979行
+Show_Login_Register_Screen(): dir_file_list/dir_file_list.c 第371~461行
+天气气泡: Weather_Btn_Event() + update_weather_ui_cb
+2-2 [√] 客户端新增功能：http获取显示天气 (已接入心知天气API并实现动态气泡显示)
+实现思路：Get_Weather_Thread() 独立 pthread 线程实现完整 HTTP 请求链路。① gethostbyname("api.seniverse.com") DNS解析；② socket connect 80端口；③ setsockopt 设5秒超时(SO_SNDTIMEO/SO_RCVTIMEO)；④ sprintf 拼 HTTP GET 请求(GET /v3/weather/now.json?key=...&location=...&language=zh-Hans&unit=c)；⑤ write 发送请求；⑥ 循环 read 接收响应(最大4096字节)；⑦ strstr(response, "\r\n\r\n") 定位 JSON 体；⑧ cJSON_Parse 解析 → 提取 results[0].location.name(城市)、results[0].now.text(天气描述)、results[0].now.temperature(温度)；⑨ 写入全局共享区(g_weather_city/txt/temp/sym_code/status)；⑩ LVGL定时器 update_weather_ui_cb 每500ms读取全局变量刷新天气气泡 UI。天气图标通过 get_weather_symbol() 函数映射——"晴"→LV_SYMBOL_SETTINGS、"云"→LV_SYMBOL_CHARGE、"雨"→LV_SYMBOL_DOWNLOAD、"雪"→LV_SYMBOL_IMAGE。
+Get_Weather_Thread(): dir_file_list/dir_file_list.c 第2551~2683行
+  - 第2551行: gethostbyname DNS解析
+  - 第2568~2578行: socket + connect(80)
+  - 第2575行: setsockopt SO_SNDTIMEO/SO_RCVTIMEO 5秒
+  - 第2593~2600行: sprintf HTTP GET 请求
+  - 第2609行: 循环 read 接收响应
+  - 第2635行: strstr(response, "\r\n\r\n") 截JSON体
+  - 第2638~2670行: cJSON_Parse 解析
+天气全局变量: dir_file_list/dir_file_list.c 第62~68行
+get_weather_symbol(): 第2539~2546行
+update_weather_ui_cb: 每500ms刷新UI
+Weather_Btn_Event(): 第2326行起
+3. 任务三：客户端工程优化
+3-1 [√] 客户端新增功能：动态库
+实现思路：客户端网络功能封装为 libclient.so 动态库，提供统一的网络接口函数。Makefile 中通过 -fPIC -shared 编译选项生成。与1-3服务端动态库方案对应。
+client动态库: dir_file_list/client/client.c + client.h
+Makefile: -fPIC -shared 编译选项
+3-2 [√] 客户端新增功能：Makefile
+实现思路：项目根目录 Makefile 使用 arm-linux-gcc 交叉编译工具链。编译选项包含 LVGL 库路径(-I)、帧缓冲驱动(-lfbdev)、pthread 库(-lpthread)、数学库(-lm)。输出目标为 ARM 可执行文件，支持 make clean。
+Makefile: 项目根目录
+  arm-linux-gcc 交叉编译
+  LVGL库路径 + pthread + 数学库
+难度三：高阶并发与鉴权 (90~100分)
+1. 任务一：服务器端高阶并发与鉴权
+1-1 [√] 服务器新增功能：使用线程池（自己拓展）
+实现思路：不是调库，从 pthread_create 到条件变量调度全部手写。核心数据结构 threadpool_t 包含 pthread_mutex_t lock(互斥锁)、pthread_cond_t cond(条件变量)、pthread_t *threads(5个线程ID)、task_t *task_list(FIFO单向任务链表)、int thread_count(5)、int waiting_tasks(等待任务计数)、bool shutdown(销毁标志)。threadpool_init()：malloc 分配 pool → 初始化锁和条件变量 → 分配线程ID数组 → 批量 pthread_create 创建5个工作线程。thread_routine()：工作线程的无限循环体。加锁 → while(task_list==NULL && !shutdown) 调 pthread_cond_wait 阻塞等待 → 被唤醒后检查 shutdown && task_list==NULL 则退出 → 从链表头取任务(FIFO) → waiting_tasks-- → 解锁 → 执行 task->function(task->arg) → free(task) → 回到循环开头继续等待。threadpool_add_task()：创建 task 节点 → 加锁 → 尾插法入队(FIFO公平性) → waiting_tasks++ → pthread_cond_signal 唤醒一个工作线程 → 解锁。threadpool_destroy()：加锁 → shutdown=true → pthread_cond_broadcast 广播唤醒所有线程 → 解锁 → pthread_join 等待所有线程退出 → 遍历清理残留任务链表(防止内存泄漏) → free(threads) → pthread_mutex_destroy → pthread_cond_destroy → free(pool)。主线程 main() 中 pool = threadpool_init(5) 创建线程池，server_run() 中 accept 后 threadpool_add_task(pool, client_service, p_fd) 投递任务。
+threadpool_t 结构体: dir_file_list/server/threadpool.h
+threadpool_init(): dir_file_list/server/threadpool.c
+  - 5个线程, 锁+条件变量初始化
+thread_routine(): dir_file_list/server/threadpool.c
+  - pthread_cond_wait 阻塞 → 取任务 → 执行 → free(task)
+threadpool_add_task(): dir_file_list/server/threadpool.c
+  - 尾插法 FIFO, pthread_cond_signal 唤醒
+threadpool_destroy(): dir_file_list/server/threadpool.c
+  - broadcast+join+清理残留任务+销毁锁
+main.c: pool = threadpool_init(5)
+server_run(): threadpool_add_task(pool, client_service, p_fd)
+1-2 [√] 服务器新增功能：文件IO保存客户端用户名密码
+实现思路：服务端用纯文件IO实现账号系统，不使用数据库。存储格式：user_list/users.txt，每行一条 "用户名:密码"。handle_register()：① 确保 user_list/ 目录存在(mkdir)；② 打开 users.txt(O_RDONLY) 逐行读取，strtok 按冒号分割比对用户名是否已存在——防重复注册；③ 不存在则打开(O_WRONLY|O_APPEND|O_CREAT) 用 fprintf 追加写入 "user:password\n"。handle_login()：① 打开 users.txt(O_RDONLY)；② 逐行 fgets 读取，手动修剪行尾 \r\n（关键细节：不修剪会导致匹配失败）；③ strtok 按冒号分割，比对用户名和密码完全匹配；④ 匹配成功 status=0，失败 status=-1。
+handle_register(): dir_file_list/server/server.c
+  - mkdir user_list/
+  - 逐行比对用户名防重复
+  - fprintf 追加写入
+handle_login(): dir_file_list/server/server.c
+  - 逐行 fgets 读取
+  - 手动修剪行尾 \r\n
+  - strtok 按冒号分割比对
+USER_LIST_FILE 宏: server.h ("user_list/users.txt")
+2. 任务二：客户端登录与输入支持
+2-1 [√] 客户端新增功能：客户端登录注册功能
+实现思路：Show_Login_Register_Screen() 创建登录/注册页面。UI设计：磨砂玻璃容器(淡蓝色半透明、圆角20、阴影30)、用户名输入框、密码输入框、注册模式下的确认密码框、登录/注册按钮、模式切换按钮。使用 simple_kai 中文字体。login_reg_event_cb() 处理登录/注册逻辑：① 临时创建 socket 连接服务器；② 发送 packet_t 包头(opt=OPT_LOGIN/OPT_REGISTER)；③ 发送 "username:password" 字符串作为变长数据体；④ 接收服务端回复(status=0成功/-1失败)；⑤ 成功则跳转 Dir_Brower_Demo() 进入主界面。
+Show_Login_Register_Screen(): dir_file_list/dir_file_list.c 第371~461行
+  - 磨砂玻璃容器(淡蓝色半透明, 圆角20, 阴影30)
+  - 用户名/密码/确认密码输入框
+login_reg_event_cb(): dir_file_list/dir_file_list.c 第234~330行
+  - 临时socket连接服务器
+  - 发送 OPT_LOGIN/OPT_REGISTER + username:password
+  - 接收回复 → 成功跳转主界面
+2-2 [√] 客户端新增功能：英文输入法
+实现思路：集成了百文网 lv_100ask_pinyin_ime 拼音输入法库，实现开发板上用拼音输入中文用户名和密码。这不是简单的"拿来就用"——修改了库源码：原输入法默认挂在传入的父容器上，页面切换时 lv_obj_del 父容器会级联销毁输入法导致白屏或段错误。修改构造函数将键盘和候选词面板全部挂到 lv_layer_top() 独立顶层图层，与业务页面完全解耦。手动管理 pinyin_ime_obj、kb键盘、cand_panel候选词面板三个对象的显隐和指针生命周期。ta_event_cb() 处理输入法事件：点击输入框弹出拼音键盘(800x240, 对齐底部)，候选词面板置顶。kb_event_cb() 处理 READY/CANCEL 事件隐藏键盘。bg_click_event_cb() 点击背景收起键盘。页面跳转前先隐藏键盘，跳转后安全重置指针为NULL。
+lv_100ask_pinyin_ime_create: lv_lib_100ask/src/lv_100ask_pinyin_ime/lv_100ask_pinyin_ime.c
+  - 修改构造函数挂到 lv_layer_top()
+ta_event_cb(): dir_file_list/dir_file_list.c 第192~228行
+  - 键盘800x240, 对齐底部
+  - 候选词面板置顶
+kb_event_cb(): dir_file_list/dir_file_list.c
+bg_click_event_cb(): dir_file_list/dir_file_list.c
+拓展功能：AI 智能文件搜索
+一、需求分析
+当前 FluxCloud 的文件列表只能按文件名精确匹配，用户体验有限。增加 AI 自然语言搜索功能：用户在客户端输入一句话（如"找上周修改的那张风景照"或"列出所有图片文件"），服务端将自然语言转为搜索条件，返回匹配结果。
+关键设计原则：完全复用现有代码架构，不引入新的网络基础设施。新增代码量约 100 行。
+二、技术基础：现有代码复用分析
+天气模块（dir_file_list.c 第2540-2670行）已完整实现了 HTTP 请求的全链路：gethostbyname DNS 解析 → socket connect 80 端口 → 手动拼 HTTP GET → read 接收响应 → strstr 截 JSON 体 → cJSON_Parse 解析。AI 搜索功能跟天气模块的架构完全一样——只是换了一个 API 端点和 HTTP 方法（GET 变 POST）。
+复用清单：
+1. DNS解析        → gethostbyname(XZ_API_NAME)     dir_file_list.c 第2551行
+2. Socket连接     → socket() + connect()            第2568-2578行
+3. HTTP请求发送   → sprintf拼请求头 + write()        第2593-2600行
+4. 响应接收       → 循环 read()                      第2609行
+5. JSON体截取     → strstr(response, "\r\n\r\n")    第2635行
+6. JSON解析       → cJSON_Parse() + cJSON_GetObjectItem() 第2638-2670行
+7. 目录遍历       → opendir() + readdir()             server.c handle_list 第175-210行
+8. 协议包结构     → packet_t(opt/fname/fsize/status)   protocol.h 第20-25行
+9. 结果渲染       → strtok按\n分割→网格布局             dir_file_list.c 第2197-2311行
+结论：AI 搜索功能不需要新增任何网络基础设施。你需要写的只是把 HTTP GET 改成 POST、加一个 JSON 请求体、以及替换 API 端点和解析逻辑。
+三、协议扩展
+在现有 protocol.h 的 6 个指令码基础上，新增第 7 号指令：
+#define OPT_AI_SEARCH 7  // AI自然语言文件搜索
+packet_t 结构体完全复用，不需要修改：opt=7（AI搜索指令）、fname[128]=用户输入的自然语言搜索文本、fsize=服务端回复时搜索结果字符串的字节数、status=0成功 -1失败。
+四、HTTP 请求状态流转（12步完整数据流）
+每一步都对应现有代码中的真实函数：
+① 客户端用户输入搜索文本 → 搜索框UI（新增，约20行）
+② 客户端发送 OPT_AI_SEARCH 包 → send() packet_t — 复用现有协议发送逻辑
+③ 服务端 client_service() switch-case 分发 → server.c 新增一个 case OPT_AI_SEARCH 分支
+④ gethostbyname DNS 解析 → 完全复用天气模块第2551行
+⑤ socket + connect 大模型 API → 复用天气模块第2568-2578行
+⑥ 构造 HTTP POST 请求体（JSON格式的提示词）→ sprintf 拼请求头 + write()，在天气模块 GET 基础上增加 Content-Type 和请求体
+⑦ read 循环接收 AI 响应 → 复用天气模块第2609行循环 read 模式
+⑧ strstr(response, "\r\n\r\n") 截 JSON 体 → 完全复用第2635行
+⑨ cJSON_Parse 解析 AI 返回的关键词 → 完全复用第2638-2670行，从 choices[0].message.content 提取
+⑩ opendir + readdir 在云盘目录中匹配文件 → 完全复用 server.c handle_list 第175-210行，文件名包含任一关键词即加入结果
+⑪ 回复客户端：先发 packet_t 包头(fsize=结果长度)，再发结果字符串 → 复用 handle_list 的发包模式
+⑫ 客户端接收结果，复用 Load_Cloud_File_List 的渲染逻辑（strtok 按 \n 分割，网格布局，第2197-2311行）显示搜索结果
+五、服务端新增函数 handle_ai_search()
+插入位置：server.c 第221行（handle_list 函数后面）
+分发入口：在 client_service() 的 switch 中加：case OPT_AI_SEARCH: handle_ai_search(client_fd, &pkg); break;
+函数逻辑（约70行）：
+1. 从 pkg->fname 获取用户输入的自然语言搜索文本
+2. 构造发给大模型 API 的 HTTP POST 请求——提示词告诉 AI："你是文件搜索助手，把用户自然语言转成文件搜索关键词，返回 JSON 数组 [{keyword: "xxx"}]"
+3. 复用天气模块的 HTTP 请求链路：gethostbyname DNS 解析 → socket connect → sprintf 拼 HTTP POST 请求头+JSON请求体 → write 发送 → 循环 read 接收响应 → strstr 截 JSON 体 → cJSON_Parse 提取 AI 返回的关键词数组
+4. 用提取的关键词在云盘根目录 CLOUD_ROOT 中遍历文件——完全复用 handle_list 的 opendir/readdir 逻辑。对每个文件，检测文件名是否包含任一关键词（strstr），匹配则加入结果列表
+5. 将结果拼接为 \n 分隔的字符串，复用 handle_list 的发包模式回复客户端：先发 packet_t 包头（opt=OPT_AI_SEARCH, fsize=结果长度, status=0），再 write 发送结果字符串
+handle_ai_search() 伪代码框架（server.c 新增）:
+void handle_ai_search(int client_fd, packet_t *pkg) {
+    // ① 获取用户输入
+    char *user_query = pkg->fname;
+    // ② 构造AI提示词JSON
+    char json_body[1024];
+    sprintf(json_body, "{...prompt告诉AI你是文件搜索助手...}");
+    // ③ HTTP POST请求（复用天气模块）
+    struct hostent *hl = gethostbyname("dashscope.aliyuncs.com");
+    int tcp_fd = socket(AF_INET, SOCK_STREAM, 0);
+    // connect + 设置超时...
+    char request[2048];
+    sprintf(request, "POST /compatible-mode/v1/chat/completions HTTP/1.1\r\n"
+                     "Host: dashscope.aliyuncs.com\r\n"
+                     "Authorization: Bearer %s\r\n"
+                     "Content-Type: application/json\r\n"
+                     "Content-Length: %d\r\n\r\n%s",
+                     AI_API_KEY, strlen(json_body), json_body);
+    write(tcp_fd, request, strlen(request));
+    // ④ 接收+解析AI响应（复用天气模块cJSON解析）
+    char *response = malloc(4096);
+    // ... 循环 read ...
+    char *json_start = strstr(response, "\r\n\r\n") + 4;
+    cJSON *json = cJSON_Parse(json_start);
+    // 提取: choices[0].message.content → 关键词数组
+    // ⑤ 在云盘目录中匹配（复用handle_list）
+    DIR *dp = opendir(CLOUD_ROOT);
+    char result_buf[4096] = {0};
+    while ((ptr = readdir(dp)) != NULL) {
+        if (文件名包含关键词) {
+            strcat(result_buf, ptr->d_name);
+            strcat(result_buf, "\n");
+        }
+    }
+    closedir(dp);
+    // ⑥ 回复客户端
+    packet_t resp; resp.opt=OPT_AI_SEARCH; resp.fsize=strlen(result_buf); resp.status=0;
+    write(client_fd, &resp, sizeof(packet_t));
+    write(client_fd, result_buf, resp.fsize);
+    free(response);
+}
+六、客户端改动
+1. 在灵动岛旁边新增搜索图标按钮（约15行 LVGL UI 代码，复用现有的图标+按钮创建模式）
+2. 点击弹出文本输入框，用户输入自然语言搜索文本（约10行，复用登录页面的输入框创建模式）
+3. 发送 OPT_AI_SEARCH 包，接收结果（完全复用现有网络发送/接收逻辑）
+4. 复用 Load_Cloud_File_List 的结果渲染逻辑（strtok 按 \n 分割，85x85 网格布局，间距95px，第2197-2311行）显示搜索结果
+七、新增代码量估算
+protocol.h        新增 OPT_AI_SEARCH 宏                 1 行
+server.c          新增 handle_ai_search() 函数          约 70 行
+server.c          switch-case 新增分支                  1 行
+dir_file_list.c   客户端搜索框 UI + 事件处理             约 30 行
+合计                                                   约 100 行
+八、面试话术
+在 FluxCloud 项目中，我在已有天气 HTTP 模块的基础上，新增了 AI 自然语言文件搜索功能。用户输入"找风景照片"，服务端将文本通过 HTTP POST 发给大模型 API 做语义理解，返回关键词后再用 opendir/readdir 在云盘目录中匹配。整个 HTTP 请求链路复用了天气模块的 gethostbyname DNS 解析、socket connect、cJSON 解析——只是在 HTTP 方法上从 GET 变成了 POST，加了一个 JSON 请求体。新增代码不到 100 行。这个功能体现了我在现有架构上快速集成 AI 能力的技术判断力——不需要重构，不需要引入新框架，完全基于已有的基础设施。
+
+=== File: Aura_V2.0_项目功能逐条复盘（含AI扩展）.docx ===
+Aura 微光智控餐饮终端 — 项目功能逐条复盘
+阶段三 · Qt 5.14 C/S架构 · Windows服务端 + ARM Cortex-A53客户端
+项目根目录：阶段项目3/李怜哲+微光智控餐饮终端/
+客户端：Aura_Client/ | 服务端：Aura_Server/
+难度一：核心基础框架 — 网络通信、数据库操作、UI基础模型
+1. 任务一：服务器网络与订单接收
+1-1 使用 QTcpServer 监听特定端口，处理客户端连接
+实现思路：ServerWindow::initNetwork() 函数中创建 QTcpServer 对象。调用 tcpServer->listen(QHostAddress::Any, AURA_PORT) 监听 9999 端口。连接 newConnection 信号到 onNewConnection() 槽函数。onNewConnection() 中 while(tcpServer->hasPendingConnections()) 遍历待处理连接，调用 nextPendingConnection() 获取 QTcpSocket 指针。为每个客户端在 QHash<QTcpSocket*, QByteArray> clientBuffers 中创建独立接收缓冲区，connect readyRead 和 disconnected 信号到对应槽函数。
+initNetwork(): Aura_Server/serverwindow.cpp 第281~292行
+AURA_PORT=9999: serverwindow.cpp 第21行
+onNewConnection(): serverwindow.cpp 第350~358行
+  - clientBuffers.insert(sock, QByteArray()) 每客户端独立缓冲区
+  - connect(sock, &QTcpSocket::readyRead, ...)
+  - connect(sock, &QTcpSocket::disconnected, ...)
+1-2 使用 QTcpSocket 接收数据，解析包含菜品、桌号等信息的 JSON 格式订单包
+实现思路：onSocketReadyRead() 槽函数从 sender() 获取发送数据的 QTcpSocket 指针，从 clientBuffers 中取出该客户端的缓冲区。追加 readAll() 数据，然后 while((idx = buffer.indexOf('\n')) != -1) 按 \n 分帧。每帧调用 QJsonDocument::fromJson 解析，调用 handleMessage(sock, doc.object()) 分发。handleMessage() 根据 type 字段路由——"get_menu"→sendMenuTo()、"submit_order"→handleOrderSubmit()。
+onSocketReadyRead(): Aura_Server/serverwindow.cpp 第361~382行
+  - QByteArray &buf = clientBuffers[sock]
+  - buf.append(sock->readAll())
+  - while indexOf('\n') 分帧
+  - QJsonDocument::fromJson 解析
+handleMessage(): serverwindow.cpp 第393~400行
+  - if (type=="get_menu") sendMenuTo(sock)
+  - else if (type=="submit_order") handleOrderSubmit(sock, obj)
+2. 任务二：服务器菜单管理与下发
+2-1 建立 QSqlDatabase 数据库连接，实现对菜单表的增删改查(CRUD)操作
+实现思路：initDatabase() 函数使用 QSqlDatabase::addDatabase("QSQLITE") 创建 SQLite 连接，setDatabaseName("AuraDB.db") 指定数据库文件。执行 CREATE TABLE IF NOT EXISTS menu(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(50) NOT NULL, price REAL NOT NULL, stock INTEGER NOT NULL, image_path VARCHAR(100), description VARCHAR(200)) 建表。执行 CREATE TABLE IF NOT EXISTS orders(id INTEGER PRIMARY KEY AUTOINCREMENT, table_num INTEGER NOT NULL, people INTEGER, total_price REAL, items TEXT, order_time DATETIME DEFAULT CURRENT_TIMESTAMP) 建表。首次启动(COUNT(*)==0)预置10条菜品数据。CRUD操作：onAddMenu()→menuModel->insertRow()、onDeleteMenu()→menuModel->removeRow()、onSubmitMenu()→menuModel->submitAll()、onRevertMenu()→menuModel->revertAll()。
+initDatabase(): Aura_Server/serverwindow.cpp 第52~131行
+  - 第54行: QSqlDatabase::addDatabase("QSQLITE")
+  - 第55行: setDatabaseName("AuraDB.db")
+  - 第63~69行: CREATE TABLE menu
+  - 第101~108行: CREATE TABLE orders
+  - 第79~98行: 预置10条菜品数据
+CRUD操作: serverwindow.cpp 第327~345行
+  - onAddMenu(): 第327~330行
+  - onDeleteMenu(): 第332~336行
+  - onSubmitMenu(): 第337~343行
+  - onRevertMenu(): 第345行
+2-2 利用 QTableView 配合 QSqlTableModel 直接绑定数据库，直观显示菜单库存和用户订单
+实现思路：创建 menuModel = new QSqlTableModel(this) 绑定 menu 表(setTable("menu"))，setEditStrategy(QSqlTableModel::OnManualSubmit) 手动提交模式。menuModel->select() 加载数据。创建 orderModel 同样绑定 orders 表。initUI() 中创建 QTableView *menuView 和 *orderView，分别 setModel(menuModel) 和 setModel(orderModel)。管理员在表格中直接编辑菜品名称/价格 → 点保存触发 submitAll() 自动写回 SQLite。
+menuModel: serverwindow.cpp 第110~119行
+  - setTable("menu")
+  - OnManualSubmit
+orderModel: serverwindow.cpp 第121~130行
+  - setTable("orders")
+menuView绑定: serverwindow.cpp 第204~218行
+orderView绑定: serverwindow.cpp 第178~198行
+2-3 读取数据库库存菜单信息，将其打包成 JSON 格式并通过 TCP 发送给客户端
+实现思路：sendMenuTo(QTcpSocket *sock) 函数执行 SELECT id, name, price, stock, image_path, description FROM menu ORDER BY id。while(q.next()) 遍历结果集，逐行组装 QJsonObject(包含id/name/price/stock/image_path/description)，append 到 QJsonArray。包一层 {"type":"menu", "data":[...]}。调用 sendJson(sock, obj) 发送——QJsonDocument::toJson(Compact) 紧凑序列化 + append('\n') 帧分隔符 + sock->write(data)。
+sendMenuTo(): Aura_Server/serverwindow.cpp 第402~422行
+  - QSqlQuery q("SELECT id,name,price,stock,image_path,description FROM menu")
+  - while(q.next()) 组装 QJsonObject → QJsonArray
+  - 封装: {"type":"menu", "data":[...]}
+sendJson(): serverwindow.cpp 第454~460行
+  - QJsonDocument::toJson(QJsonDocument::Compact)
+  - data.append('\n')
+  - sock->write(data)
+3. 任务三：客户端菜单获取与UI展示
+3-1 客户端启动主动连接服务器，请求并解析接收到的菜单 JSON 数据包
+实现思路：ClientWindow::initNetwork() 创建 QTcpSocket，调用 tcpSocket->connectToHost(AURA_HOST, AURA_PORT) 连接服务器(192.168.5.171:9999)。连接成功 onConnected() 槽函数自动调用 requestMenu() 发送 {"type":"get_menu"} JSON。onReadyRead() 中使用与服务端相同的 \n 分帧+QJsonDocument::fromJson 解析。handleMessage() 根据 type 字段路由——"menu"→orderPage->loadMenu(obj["data"].toArray())、"order_ack"→显示成功/失败弹窗。
+initNetwork(): Aura_Client/clientwindow.cpp 第522~533行
+  - AURA_HOST="192.168.5.171"
+  - AURA_PORT=9999
+  - tcpSocket->connectToHost(AURA_HOST, AURA_PORT)
+onConnected(): clientwindow.cpp 第568~573行
+  - 自动调用 requestMenu()
+requestMenu(): clientwindow.cpp 第637~642行
+  - sendJson({type:"get_menu"})
+onReadyRead(): clientwindow.cpp 第587~604行
+  - recvBuffer + \n分帧 + QJsonDocument解析
+handleMessage(): clientwindow.cpp 第606~623行
+  - type=="menu" → orderPage->loadMenu(...)
+  - type=="order_ack" → 弹窗反馈
+sendJson(): clientwindow.cpp 第631~634行
+3-2 设计包含图文、价格和加减按钮的自定义 QWidget
+实现思路：DishItemWidget 类继承 QWidget。initUI(const QString &imagePath) 函数中创建水平布局(QHBoxLayout)。布局包含：菜品图片(QLabel+QPixmap, 缩放)、右侧垂直布局(名称QLabel+价格QLabel)、减号按钮(QPushButton "-")+数量显示(QSpinBox)+加号按钮(QPushButton "+")。加减按钮连接 clicked 信号到自定义 sig_itemClicked(name, price, count) 信号。注意：此方案为初版实现，后续被 MVC 重构替代，DishItemWidget 为遗留文件。
+DishItemWidget: Aura_Client/dishitemwidget.h 第1~56行
+  - 类声明
+DishItemWidget::initUI(): dishitemwidget.cpp 第24~105行
+  - QLabel图片 + 名称+价格标签
+  - QPushButton减号 + QSpinBox + QPushButton加号
+  - 自定义信号 sig_itemClicked(name, price, count)
+注意：当前版本已重构为MVC，此文件为遗留代码
+3-3 使用 QListWidget 配合 setItemWidget() 方法将自定义复合条目动态插入列表中
+实现思路：初版在 OrderPage 中使用 QListWidget，遍历菜单数据创建 DishItemWidget 实例，通过 QListWidget::setItemWidget() 将自定义Widget动态插入到列表中。此方案在ARM Cortex-A53上存在严重性能问题：100道菜=100+个QWidget对象，内存几十MB，滑动时所有Widget同时重绘导致掉帧。当前版本已全面重构为 QListView + MenuModel + MenuDelegate 的 MVC 架构，QListWidget 方案不再使用。
+QListWidget方案：已在当前版本中移除
+  - 被 QListView + MenuModel + MenuDelegate 替代
+DishItemWidget 遗留: dishitemwidget.h/cpp（编译但未实例化）
+4. 任务四：客户端点餐逻辑与上传机制
+4-1 拦截自定义条目加减信号，在主窗口使用数据结构(如 QMap)维护已点菜品数量，实时计算总金额
+实现思路：购物车使用 QMap<int, CartItem> m_cart 管理，key=菜品ID，value=CartItem结构体(含id/name/price/qty)。MenuModel::setQty() 修改数量后发射自定义信号 qtyChanged(int row, const DishData &d, int oldQty)。OrderPage::onModelQtyChanged() 槽函数实现增量更新：qty<=0 则 m_cart.remove(d.id)；否则 m_cart[d.id] = CartItem{...}。总价使用增量计算 m_totalPrice += d.price * (d.qty - oldQty)，不遍历整个购物车重算。信号流向：MenuDelegate::editorEvent→model->setData→model发射qtyChanged→OrderPage::onModelQtyChanged→更新QMap和总价→updateTotalLabel() 更新UI标签。
+CartItem 结构体: Aura_Client/clientwindow.h 第29~34行
+  { int id; QString name; double price; int qty; }
+m_cart 声明: clientwindow.h 第127行
+  QMap<int, CartItem> m_cart
+m_totalPrice: clientwindow.h 第128行
+onModelQtyChanged(): clientwindow.cpp 第422~434行
+  - qty<=0 → m_cart.remove(d.id)
+  - qty>0 → m_cart[d.id]=CartItem{...}
+  - m_totalPrice += d.price * (d.qty - oldQty) // 增量更新
+MenuModel::setQty(): Aura_Client/menumodel.cpp 第92~105行
+  - emit qtyChanged(row, dish, oldQty)
+信号连接: clientwindow.cpp 第384行
+4-2 新增就餐人数(QSpinBox)与餐桌号输入逻辑
+实现思路：WelcomePage::initUI() 中创建 QSpinBox *spinGuests，setRange(1, 20) 范围1~20人，setValue(2) 默认2人。标题"请选择就餐人数"居中显示。点击"开始点餐"按钮 → emit startOrdering(spinGuests->value()) → ClientWindow::onStartOrdering() 记录人数并切换到 OrderPage。餐桌号通过 m_tableNum 成员变量管理(默认1号桌)。
+spinGuests 创建: Aura_Client/clientwindow.cpp 第67~77行
+  - setRange(1, 20), setValue(2)
+WelcomePage::getGuestCount(): clientwindow.h 第32行
+startOrdering 信号: clientwindow.h 第50行
+onStartOrdering(): clientwindow.cpp
+m_tableNum: clientwindow.h
+4-3 将最终的详细点餐信息、总价、桌号、就餐人数统一组装成完整的 JSON 对象发送给服务器端
+实现思路：ClientWindow::submitOrder() 函数遍历 m_cart QMap 组装 QJsonArray items(每道菜含id/name/price/qty)。构造总 JSON 对象：{"type":"submit_order", "table_num":tableNum, "people":guestCount, "total_price":m_totalPrice, "items":[...]}。调用 sendJson(tcpSocket, obj) 发送——QJsonDocument::toJson(Compact) + '\n' 帧分隔符。服务端 handleOrderSubmit() 解析后 INSERT INTO orders 入库。
+submitOrder(): Aura_Client/clientwindow.cpp 第669~697行
+  - 遍历 m_cart 组装 QJsonArray items
+  - 构造: {type:"submit_order", table_num, people, total_price, items}
+  - sendJson() 发送
+handleOrderSubmit(): Aura_Server/serverwindow.cpp 第424~452行
+  - QSqlQuery::prepare INSERT INTO orders
+  - bindValue table_num/people/total_price/items
+  - orderModel->select() 刷新表格
+难度二：功能完善与细节 — 软件易用性提升
+1. 任务一：系统时间显示 (基础版)
+1-1 在服务器和客户端界面中分别添加 QLabel 用于展示时间
+实现思路：服务端 ServerWindow::initUI() 中创建顶部栏时间标签 lblTime 和底部栏时间标签 lblTickTime。客户端 OrderPage::initUI() 中创建顶部状态栏时间标签 lblTime(40px高，蓝色半透明)。
+服务端 lblTime: Aura_Server/serverwindow.cpp 第300行附近
+服务端 lblTickTime: serverwindow.cpp 第306行附近
+客户端 lblTime: Aura_Client/clientwindow.cpp 第350行附近
+  OrderPage::initUI() 中创建
+1-2 实例化 QTimer 对象，设置 1000ms 定时周期，使用 QDateTime 动态更新界面时间
+实现思路：TimeTicker 类(QObject)内部使用 QTimer *m_timer，setInterval(1000) 每秒触发。timeout 信号连接 lambda，调用 QDateTime::currentDateTime().toString("hh:mm:ss") 格式化时间字符串，emit timeUpdated(timeStr) 信号。服务端和客户端各有一份独立实现（分别在 Aura_Server/timeticker.h 和 Aura_Client/timeticker.h）。注意：此 QTimer 方案后续被 QThread 方案替代。
+TimeTicker: Aura_Server/timeticker.h 第1~34行
+TimeTicker: Aura_Client/timeticker.h 第1~39行
+  - QTimer *m_timer, 1000ms
+  - QDateTime::currentDateTime().toString("hh:mm:ss")
+服务端使用: serverwindow.cpp 第306~311行
+客户端使用: clientwindow.cpp 第548~553行（仅qDebug输出）
+2. 任务二：客户端购物车功能
+2-1 开发独立的购物车界面(QDialog 或 QStackedWidget 侧边栏)
+实现思路：CartDialog 类继承 QDialog。setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog) 无边框弹窗，setAttribute(Qt::WA_TranslucentBackground) 半透明背景。setFixedSize(800, 480) 固定尺寸。paintEvent() 中绘制半透明黑色遮罩。中央创建520x380毛玻璃卡片(白色半透明+圆角)。
+CartDialog 声明: Aura_Client/clientwindow.h 第67~83行
+CartDialog 实现: clientwindow.cpp 第148~329行
+  - 第155行: setWindowFlags(FramelessWindowHint|Dialog)
+  - 第160行: setAttribute(WA_TranslucentBackground)
+  - 第164行: setFixedSize(800, 480)
+  - 第171行: paintEvent 半透明黑色遮罩
+  - 第180~200行: 中央520x380毛玻璃卡片
+2-2 集中展示数量大于0的已选菜品清单，支持在此界面修改数量或删除菜品
+实现思路：CartDialog::initUI(const QMap<int, CartItem> &items, double totalPrice) 接收购物车数据。创建 QScrollArea 可滚动菜品清单区域，奇偶行交替背景色区分。每行显示：序号圆点(QLabel+圆形样式)+菜品名(QLabel)+数量(QLabel "xN")+小计(QLabel "¥XX.XX")。合计栏：蓝色半透明圆角标题栏显示"共N种菜品  合计 ¥XX.XX"。底部按钮区："继续点餐"(QPushButton, 调用 reject())、"确认下单"(QPushButton, 蓝色高亮, 调用 accept() + emit confirmOrder())。购物车为空时确认按钮 setEnabled(false) 禁用。
+CartDialog::initUI(): Aura_Client/clientwindow.cpp 第157~321行
+  - 第180~250行: QScrollArea 菜品清单
+  - 第260~280行: 合计栏
+  - 第290~310行: 按钮区("继续点餐"/"确认下单")
+  - 第320行: 空购物车时确认按钮禁用
+2-3 保证购物车数据的变动与主菜单列表的状态完美同步更新
+实现思路：购物车数据源为 OrderPage 的 m_cart QMap。MenuDelegate::editorEvent() 修改数量时直接操作 MenuModel 数据 → model发射 dataChanged+qtyChanged 信号 → OrderPage::onModelQtyChanged() 更新 m_cart QMap → updateTotalLabel() 更新总价标签。CartDialog 创建时传入当前 m_cart 的快照，关闭后若修改了数量则通过信号同步回 OrderPage。全程数据流单向清晰，组件间低耦合。
+数据同步链路:
+  MenuDelegate::editorEvent → model->setData
+  → model emit qtyChanged(row, dish, oldQty)
+  → OrderPage::onModelQtyChanged() 更新 m_cart
+  → CartDialog 读取 m_cart 展示
+  → 确认下单 emit confirmOrder → submitOrder()
+难度三：性能优化与外部接口 — 高级架构
+1. 任务一：多线程时间刷新
+1-1 废弃 QTimer 方案，改为使用继承自 QThread 的独立子线程获取系统时间
+实现思路：TimeThread 类继承 QThread。run() 函数中 while(!m_stop.loadAcquire()) 循环：调用 QDateTime::currentDateTime().toString("yyyy-MM-dd  hh:mm:ss") 格式化时间，emit timeUpdated(timeStr) 发射信号，sleep(1) 休眠1秒。使用 QAtomicInt m_stop 替代 std::atomic<bool> 控制退出——这是为了兼容 ARM 交叉编译，避免依赖 libatomic.so.1。服务端和客户端各有一份独立实现（分别在 Aura_Server/timethread.h 和 Aura_Client/timethread.h）。
+TimeThread: Aura_Client/timethread.h 第1~40行
+TimeThread: Aura_Server/timethread.h 第1~34行
+  - class TimeThread : public QThread
+  - void run() override
+  - while(!m_stop.loadAcquire())
+  - QDateTime::currentDateTime().toString("yyyy-MM-dd  hh:mm:ss")
+  - emit timeUpdated(timeStr)
+  - sleep(1)
+  - QAtomicInt m_stop (第10行) 替代 std::atomic
+1-2 严格遵循多线程安全准则，使用 Qt 信号(Signals)将时间字符串跨线程发送给主 GUI 线程更新 UI，防止界面卡顿
+实现思路：TimeThread 在 run() 中 emit timeUpdated(timeStr) 信号。Qt 的跨线程信号槽机制自动将该信号投递到主线程的事件循环中执行槽函数——服务端 lambda [this](const QString &t){ ui->lblTime->setText(t); }，客户端 lambda 更新 OrderPage 的 lblTime。子线程只负责获取时间，主线程负责更新 UI，严格遵循"GUI 操作必须在主线程"的 Qt 线程安全原则。
+服务端连接: Aura_Server/serverwindow.cpp 第300~304行
+  connect(timeThread, &TimeThread::timeUpdated,
+    this, [this](const QString &t){ ui->lblTime->setText(t); })
+客户端连接: Aura_Client/clientwindow.cpp 第538~544行
+  connect(timeThread, &TimeThread::timeUpdated,
+    this, [this](const QString &t){ orderPage->updateTimeLabel(t); })
+2. 任务二：网络 API 天气获取
+2-1 使用 QNetworkAccessManager 在服务器与客户端发起 HTTP GET 请求调用外部免费天气 API
+实现思路：WeatherFetcher 类封装天气获取逻辑。fetchOnce() 函数构造 QUrl("http://wttr.in/<城市>?format=j1")，设置 QNetworkRequest，必须 setRawHeader("User-Agent", "curl/7.68.0") 否则 wttr.in 拒绝请求。调用 m_nam->get(req) 发起异步 HTTP GET 请求。每10分钟自动刷新：m_timer->start(10 * 60 * 1000) 定时器触发 fetchOnce()。服务端和客户端各有一份独立实现。
+WeatherFetcher: Aura_Client/weatherfetcher.h 第1~41行
+  - class WeatherFetcher : public QObject
+  - QNetworkAccessManager *m_nam
+  - QTimer *m_timer (10分钟)
+fetchOnce(): Aura_Client/weatherfetcher.cpp 第65~76行
+  - QUrl("http://wttr.in/" + m_city + "?format=j1")
+  - setRawHeader("User-Agent", "curl/7.68.0")
+  - m_nam->get(req)
+服务端版: Aura_Server/weatherfetcher.cpp 第59~68行
+2-2 在请求完成的槽函数中解析网络返回的 JSON 数据，提取温度、天气现象并更新到界面
+实现思路：onReplyFinished(QNetworkReply *reply) 槽函数中检查 reply->error()，失败则 emit fetchFailed(reason)。成功则 QJsonDocument::fromJson(reply->readAll()) 解析 JSON。提取 current_condition[0].temp_C(温度) 和 weatherDesc[0].value(天气英文描述)。内置英文→中文天气映射表(约18种：Clear→晴、Partly cloudy→多云、Light rain→小雨、Moderate rain→中雨、Heavy rain→大雨、Snow→雪 等)。组装字符串 "<城市> <中文天气> <温度>°C"，emit weatherUpdated(text)。服务端和客户端通过 connect 该信号到 lambda 更新对应的 QLabel(lblWeather)。
+onReplyFinished(): Aura_Client/weatherfetcher.cpp 第78~129行
+  - QJsonDocument::fromJson(reply->readAll())
+  - 提取: current_condition[0].temp_C
+  - 提取: weatherDesc[0].value
+  - 英文→中文映射表(第13~39行, 18种)
+  - emit weatherUpdated("<城市> <天气> <温度>°C")
+客户端集成: Aura_Client/clientwindow.cpp 第556~565行
+  - connect(weatherFetcher, &WeatherFetcher::weatherUpdated, ...)
+  - orderPage->updateWeatherLabel(text)
+服务端集成: Aura_Server/serverwindow.cpp 第314~321行
+3. 任务三：MVC 架构重构列表 (终极挑战)
+3-1 解决海量数据下 QListWidget 嵌套 Widget 导致的严重性能衰退（卡顿、内存飙升）问题
+实现思路：初版使用 QListWidget::setItemWidget() 为每个菜品创建独立 DishItemWidget。假设菜单100道菜，就有100+个QWidget对象在对象树中，在ARM Cortex-A53低配开发板上内存飙到几十MB，滑动时所有Widget同时参与重绘，CPU满载，帧率掉到个位数。根本原因是QListWidget+setItemWidget 会为每个条目创建完整的QWidget子树，嵌入式设备无法承受。
+QListWidget 方案性能问题：
+  - 100道菜 = 100+个QWidget对象
+  - 内存: 几十MB
+  - 滑动: 掉帧, 个位数fps
+  - 根因: 每个条目创建完整QWidget子树
+3-2 抛弃 QListWidget，全面改用底层 QListView 架构
+实现思路：OrderPage::initUI() 中创建 QListView *listView。关键配置：setMouseTracking(true) 启用鼠标追踪、setSelectionMode(QAbstractItemView::NoSelection) 无选择模式、setVerticalScrollMode(QAbstractItemView::ScrollPerPixel) 像素级平滑滚动、setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff) 隐藏滚动条(Delegate自行绘制)。listView->setModel(menuModel) 绑定数据模型，listView->setItemDelegate(menuDelegate) 绑定自定义绘制委托。QListView 本身不持有 Widget 子树，只负责管理可见区域的绘制请求。
+OrderPage::initUI(): Aura_Client/clientwindow.cpp 第364~386行
+  - 第368行: listView = new QListView(this)
+  - 第369行: setMouseTracking(true)
+  - 第370行: setModel(menuModel)
+  - 第371行: setItemDelegate(menuDelegate)
+  - setSelectionMode(NoSelection)
+  - setVerticalScrollMode(ScrollPerPixel)
+  - setVerticalScrollBarPolicy(ScrollBarAlwaysOff)
+3-3 继承 QAbstractListModel 编写自定义数据模型
+实现思路：MenuModel 类继承 QAbstractListModel。核心数据结构：QList<DishData> m_items 存储所有菜品数据。重写 rowCount() 返回 m_items.size()。重写 data() 按自定义 Qt::UserRole 系列返回数据：IdRole=id、NameRole=名称、PriceRole=单价、ImageRole=图片路径、QtyRole=当前数量、StockRole=库存、DescRole=描述。setQty(int row, int qty) 修改数量后更新 m_items[row].qty，emit dataChanged(index, index) 通知 View 重绘该行，emit qtyChanged(row, m_items[row], oldQty) 通知购物车更新。loadFromJson(const QJsonArray &dishes) 解析服务端下发的菜单JSON，清空 m_items 并逐条填充。
+MenuModel 声明: Aura_Client/menumodel.h 第1~71行
+  - class MenuModel : public QAbstractListModel
+  - QList<DishData> m_items
+  - 自定义Role: IdRole/NameRole/PriceRole/ImageRole/QtyRole/StockRole/DescRole
+MenuModel 实现: Aura_Client/menumodel.cpp 第1~115行
+  - rowCount(): 第13~17行 → m_items.size()
+  - data(): 第19~40行 → 按Role返回数据
+  - setQty(): 第92~105行 → emit dataChanged + qtyChanged
+  - loadFromJson(): 第45~70行 → 清空m_items + 逐条填充
+DishData 结构体: menumodel.h 第12~25行
+3-4 核心：继承 QStyledItemDelegate 编写自定义委托，重写 paint() 函数使用 QPainter 精确绘制图文和按钮形状，重写 editorEvent() 处理鼠标点击交互事件
+实现思路——这是整个项目最有技术含量的部分，分两步实现：第一步：重写 paint() 函数接管全部绘制。获取 QPainter 指针，调用 save()/restore() 管理绘制状态。setRenderHint(Antialiasing) 开启抗锯齿。从 QModelIndex 通过自定义 Role 获取数据(名称/价格/数量/图片路径)。逐项绘制：① 圆角矩形卡片背景(QPainterPath+drawPath, hover状态高亮)；② 菜品图片(72x72, QPixmap加载+scaled缩放)；③ 名称文字(drawText, 14pt粗体)；④ 描述文字(drawText, 10pt灰色)；⑤ 价格文字(drawText, 12pt红色)；⑥ 库存文字(drawText, 10pt)；⑦ 减号按钮(圆角矩形+ "-" 文字)；⑧ 数量框(矩形边框+数字)；⑨ 加号按钮(圆角矩形+ "+" 文字)。没有任何QWidget子控件，全是纯QPainter像素绘制。Qt Model/View机制保证只调用可见行的paint()，不可见行不绘制——这是性能优化的核心原理。第二步：重写 editorEvent() 实现点击交互。拦截 QEvent::MouseButtonRelease 事件，获取触摸坐标 pos = me->pos()。调用 plusBtnRect(option.rect) 和 minusBtnRect(option.rect) 辅助函数计算加减按钮的像素矩形区域。通过 contains(pos) 做坐标比对：落在加号区域内 → model->setData(index, newQty, QtyRole) 增加数量；落在减号区域内 → setData 减少数量。model 修改数据后自动发射 dataChanged 信号触发该行 paint() 重绘——用代码完美模拟真实按钮交互。重构前后对比：Widget对象数从100+降到0；内存从几十MB降到2~3MB(仅QList<DishData>数据)；滑动从掉帧恢复到60fps丝滑。
+MenuDelegate 声明: Aura_Client/menudelegate.h 第1~56行
+  - class MenuDelegate : public QStyledItemDelegate
+  - plusBtnRect()/minusBtnRect()/qtyTextRect() 辅助函数
+MenuDelegate::paint(): Aura_Client/menudelegate.cpp 第54~176行
+  - 第56行: QPainter *painter, save/restore
+  - 第58行: setRenderHint(Antialiasing)
+  - 第60~80行: 圆角卡片背景 (QPainterPath+drawPath)
+  - 第82~100行: 菜品图片 (72x72, QPixmap+scaled)
+  - 第102~120行: 名称文字 (14pt粗体)
+  - 第122~130行: 描述文字 (10pt灰色)
+  - 第132~140行: 价格文字 (12pt红色)
+  - 第142~150行: 库存文字 (10pt)
+  - 第152~160行: 减号按钮 (圆角矩形+"-")
+  - 第162~170行: 数量框 (矩形边框+数字)
+  - 第172~176行: 加号按钮 (圆角矩形+"+")
+MenuDelegate::editorEvent(): Aura_Client/menudelegate.cpp 第181~207行
+  - 第184行: if (event->type() == QEvent::MouseButtonRelease)
+  - 第186行: QMouseEvent *me, QPoint pos = me->pos()
+  - 第198行: plusBtnRect(option.rect).contains(pos) → changeQty(+1)
+  - 第202行: minusBtnRect(option.rect).contains(pos) → changeQty(-1)
+  - 返回true消费事件，否则调用基类 editorEvent
+plusBtnRect(): menudelegate.cpp 第43~49行
+  - 基于 option.rect 计算加号按钮像素矩形
+minusBtnRect(): menudelegate.cpp 第23~32行
+  - 基于 option.rect 计算减号按钮像素矩形
+qtyTextRect(): menudelegate.cpp 第34~41行
+changeQty(): menudelegate.cpp 第209~220行
+  - model->setData(index, newQty, QtyRole)
+性能对比:
+  Widget对象数: 100+ → 0
+  内存: 几十MB → 2~3MB (仅QList<DishData>)
+  滑动帧率: 个位数fps → 60fps
+拓展功能：AI 智能菜品推荐
+一、需求分析
+当前 Aura 的菜单是固定列表，用户需要手动翻找。增加 AI 推荐功能：用户在欢迎页输入就餐偏好（如"3个人，想吃辣的，不要猪肉，预算200以内"），服务端调用大模型 API 分析偏好，从 SQLite 数据库中匹配推荐菜品，返回给客户端展示。
+关键设计原则：完全复用现有 Qt 异步网络架构和 JSON 行协议，新增代码量约 120 行。
+二、技术基础：现有代码复用分析
+Aura 项目已经有一套成熟的 Qt 网络通信基础设施，AI 推荐功能完全建立在这些基础之上：
+1. JSON行协议        → sendJson() Compact JSON + \n分隔      clientwindow.cpp 第631行
+2. 消息分发          → handleMessage() type字段if-else分发    clientwindow.cpp 第606行
+3. 服务端消息分发    → handleMessage() 同样的type分发          serverwindow.cpp 第393行
+4. 数据库查询        → sendMenuTo() QSqlQuery查询menu表        serverwindow.cpp 第407行
+5. HTTP异步请求      → WeatherFetcher::fetchOnce() QNetworkAccessManager::get  weatherfetcher.cpp 第65行
+6. JSON响应解析      → onReplyFinished() QJsonDocument解析     weatherfetcher.cpp 第78行
+7. 跨线程信号槽      → weatherUpdated信号 Qt自动投递到主线程
+8. 菜单数据加载      → OrderPage::loadMenu() QJsonArray→MenuModel  clientwindow.cpp 第414行
+9. 购物车增量更新    → onModelQtyChanged() QMap+增量计算       clientwindow.cpp 第422行
+结论：AI 推荐功能不需要新增任何网络基础设施。WeatherFetcher 的 QNetworkAccessManager 异步请求模式可以直接复用，只需将 HTTP GET 改为 POST，加上 JSON 请求体。
+三、协议扩展
+在现有 JSON 消息协议中新增一个消息类型 ai_recommend。现有协议已支持 menu 和 order_ack 两种消息类型（clientwindow.cpp 第606-623行），新增第三种。
+客户端 → 服务端：
+{"type":"ai_recommend", "people":3, "preference":"想吃辣的，不要猪肉，预算200以内"}
+服务端 → 客户端：
+{"type":"ai_recommend", "data":[
+  {"id":1,"name":"麻辣香锅","price":68.0,"reason":"辣味，符合口味偏好"},
+  {"id":3,"name":"水煮牛肉","price":58.0,"reason":"经典辣菜，单价适中"}
+]}
+四、HTTP 请求状态流转（12步完整数据流）
+每一步都对应现有代码中的真实函数和行号：
+① WelcomePage 用户输入偏好文本 → 新增 UI：文本输入框 + "AI智能推荐"按钮（约20行）
+② 客户端 sendJson() 发送 ai_recommend → 复用 clientwindow.cpp 第631行
+③ 服务端 onSocketReadyRead() 接收 → 复用 QHash<QTcpSocket*,QByteArray> 粘包缓冲
+④ 服务端 handleMessage() 分发 → 在 serverwindow.cpp 第393行新增 else if(type=="ai_recommend")
+⑤ handleAiRecommend() 查询 menu 表 → 复用 sendMenuTo() 第407行的 QSqlQuery 查询模式，SELECT id,name,price,description FROM menu WHERE stock>0
+⑥ 拼接提示词（全量菜单JSON + 用户偏好）→ 新增逻辑（约15行），构造："你是餐厅推荐助手。用户需求：X人用餐，偏好：XXX。菜单：[...]。请推荐3-5道菜，返回JSON数组[{id,reason}]"
+⑦ QNetworkAccessManager POST 到大模型 API → 完全复用 weatherfetcher.cpp 第65行的异步请求模式，只是 HTTP 方法从 GET 改为 POST
+⑧ 在 QNetworkReply::finished 信号回调中异步解析 AI 响应 → 复用 weatherfetcher.cpp 第78行 QJsonDocument::fromJson 解析模式
+⑨ 从全量菜单中匹配 AI 返回的菜品 ID → 新增逻辑（约10行），遍历 AI 返回的 [{id,reason}]，在全量菜单 QJsonArray 中按 id 匹配实际菜品数据
+⑩ 将推荐理由（reason字段）附加到每个菜品对象上 → 丰富客户端展示信息
+⑪ sendJson() 发送推荐结果给客户端 → 复用 serverwindow.cpp 第454行
+⑫ 客户端 handleMessage() 接收 → 在 clientwindow.cpp 第606行新增 else if(type=="ai_recommend") 分支，OrderPage 展示 AI 推荐卡片区域
+五、服务端新增函数 handleAiRecommend()
+插入位置：serverwindow.cpp 第452行（handleOrderSubmit 函数后面）
+分发入口：serverwindow.cpp handleMessage() 第393行新增：else if (type == "ai_recommend") { handleAiRecommend(sock, obj); }
+函数逻辑（约80行）：
+1. 从 QJsonObject 中提取 people（人数）和 preference（偏好文本）字段
+2. 执行 SELECT id, name, price, description FROM menu WHERE stock > 0 ORDER BY id ——完全复用 sendMenuTo() 第407行的 QSqlQuery 查询模式，获取全量菜品数据
+3. 构造提示词："你是餐厅推荐助手。用户需求：X人用餐，偏好：XXX。菜单：[全量菜品JSON数组]。请推荐3-5道菜，返回JSON数组[{id,reason}]，id对应菜单中的菜品ID，reason为推荐理由"
+4. 创建 QNetworkAccessManager，设置 Authorization: Bearer <API_KEY> 和 Content-Type: application/json，将提示词封装为 {"model":"qwen-plus", "messages":[{"role":"user","content":"提示词"}]}，调用 nam->post(req, QJsonDocument(body).toJson()) ——完全复用 WeatherFetcher 的异步请求模式
+5. 在 QNetworkReply::finished 信号的回调中（Lambda 闭包捕获 sock 指针和全量菜单数据）：
+   a. 检查 reply->error()，失败则回退到 sendMenuTo(sock) 发送普通菜单——降级策略保证基本功能可用
+   b. QJsonDocument::fromJson(reply->readAll()) 解析 AI 响应
+   c. 提取 choices[0].message.content，二次 QJsonDocument::fromJson 解析为推荐菜品数组
+   d. 遍历 AI 返回的推荐菜品 ID，从全量菜单中匹配实际菜品数据（名称、价格、图片路径）
+   e. 将推荐理由（reason 字段）附加到每个菜品对象上
+6. 调用 sendJson(sock, response) 将 {"type":"ai_recommend", "data":[...]} 发送给客户端
+handleAiRecommend() 伪代码框架（serverwindow.cpp 新增）:
+void ServerWindow::handleAiRecommend(QTcpSocket *sock, const QJsonObject &obj) {
+    int people = obj["people"].toInt();
+    QString pref = obj["preference"].toString();
+    // ① 查询全量菜单（复用 sendMenuTo 的查询模式）
+    QJsonArray fullMenu;
+    QSqlQuery q;
+    q.exec("SELECT id, name, price, description FROM menu WHERE stock>0");
+    while (q.next()) { fullMenu.append({id, name, price, desc}); }
+    // ② 构造提示词
+    QString prompt = QString("你是餐厅推荐助手。%1人用餐，偏好：%2。菜单：%3。推荐3-5道菜，返回[{id,reason}]")
+                     .arg(people).arg(pref).arg(QJsonDocument(fullMenu).toJson());
+    // ③ 异步HTTP POST（复用 WeatherFetcher 模式）
+    QNetworkAccessManager *nam = new QNetworkAccessManager(this);
+    QNetworkRequest req(QUrl("https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"));
+    req.setRawHeader("Authorization", "Bearer " + aiApiKey);
+    req.setRawHeader("Content-Type", "application/json");
+    QJsonObject body; body["model"]="qwen-plus";
+    body["messages"]=QJsonArray{{{"role","user"},{"content",prompt}}};
+    QNetworkReply *reply = nam->post(req, QJsonDocument(body).toJson());
+    // ④ 异步处理AI响应
+    connect(reply, &QNetworkReply::finished, [=]() {
+        reply->deleteLater(); nam->deleteLater();
+        if (reply->error() != NoError) { sendMenuTo(sock); return; }  // 降级
+        // 解析AI响应 + 匹配菜品ID + sendJson推荐结果
+        QJsonDocument aiDoc = QJsonDocument::fromJson(reply->readAll());
+        QString content = aiDoc["choices"][0]["message"]["content"].toString();
+        QJsonArray recs = QJsonDocument::fromJson(content.toUtf8()).array();
+        QJsonArray result;
+        for (auto &v : recs) {
+            int recId = v["id"].toInt();
+            for (auto &dish : fullMenu) {
+                if (dish["id"].toInt() == recId) {
+                    QJsonObject item = dish.toObject();
+                    item["reason"] = v["reason"].toString();
+                    result.append(item); break;
+                }
+            }
+        }
+        QJsonObject resp; resp["type"]="ai_recommend"; resp["data"]=result;
+        sendJson(sock, resp);
+    });
+}
+六、客户端改动
+1. WelcomePage 新增：偏好输入文本框(QLineEdit) + "AI 智能推荐"按钮(QPushButton)（约20行 Qt UI 代码，复用现有的 WelcomePage 布局模式）
+2. clientwindow.cpp handleMessage() 第606行新增分支：
+else if (type == "ai_recommend") {
+    QJsonArray dishes = obj["data"].toArray();
+    orderPage->showAiRecommend(dishes);
+}
+3. OrderPage 新增 showAiRecommend() 方法（约20行）：在 QListView 顶部插入"AI 推荐"区域，每道菜显示名称、价格、推荐理由(reason字段)，点击可直接加入购物车。推荐菜品的加减按钮复用 MenuDelegate::editorEvent() 的坐标比对逻辑——因为 AI 推荐菜品的渲染也通过同一个 MenuDelegate 的 paint() 处理。
+七、新增代码量估算
+serverwindow.cpp   新增 handleAiRecommend() 函数        约 80 行
+serverwindow.cpp   handleMessage() 新增分支              2 行
+clientwindow.cpp   handleMessage() 新增分支              2 行
+clientwindow.cpp   WelcomePage 偏好输入 + AI按钮          约 20 行
+clientwindow.cpp   OrderPage::showAiRecommend()          约 20 行
+合计                                                   约 120 行
+八、错误处理与降级策略
+1. AI API 调用超时/失败 → 自动降级为发送普通全量菜单（调用现有 sendMenuTo()），用户无感知——确保基本功能在任何情况下都可用
+2. AI 返回的菜品 ID 在数据库中不存在 → 跳过该菜品，只返回能匹配到的
+3. 用户偏好为空 → 直接发送普通菜单，不调用 AI，节省 API 调用成本
+4. 服务端未配置 AI API Key → AI 功能静默禁用，菜单正常展示，不阻塞主业务流程
+九、面试话术
+在 Aura 项目中，我在服务端新增了 AI 智能推荐功能。用户在欢迎页输入"3个人，想吃辣的"，服务端将全量菜单和用户偏好一起发给大模型 API，AI 返回推荐菜品 ID 后，服务端从 SQLite 数据库中匹配实际菜品数据返回给客户端。HTTP 请求用的是 Qt 的 QNetworkAccessManager——跟项目中已有的天气模块完全一样的异步请求模式，通过信号槽机制实现非阻塞回调，不阻塞 TCP 服务器的主事件循环。新增代码约 120 行。AI 调用失败时自动降级为发送普通菜单，用户无感知。这个设计体现了在嵌入式 Qt 应用中集成 AI 能力的工程化思维——不是简单地"调个 API"，而是考虑了降级策略、异步非阻塞、以及与现有 MVC 架构的无缝衔接。
+

@@ -1,0 +1,97 @@
+=== Sheet: 广东嵌入式Linux岗位明细 ===
+广东嵌入式Linux应用开发岗位调研报告（2025-2026）, , , , , , , , , , 
+数据来源：BOSS直聘、猎聘、职友集、海康威视官网、正浩创新、乐鑫科技等 | 更新日期：2026年6月, , , , , , , , , , 
+序号, 城市, 公司名称, 岗位名称, 薪资范围, 经验要求, 学历要求, 核心技能要求, 加分技能, 行业方向, 招聘平台/链接
+1, 深圳, 乐鑫科技, 嵌入式Linux工程师, 20-40K·15薪, 2年+/应届可, 本科及以上, C/C++、Linux开发环境、Git、脚本语言(python/shell)、嵌入式系统, WiFi/BLE协议栈、RTOS、IoT芯片经验, 物联网芯片, https://www.zhipin.com/job_detail/0de0f1d65ebd54a003F-3d21GFNS.html
+2, 深圳, 海康威视（微影）, 嵌入式软件工程师-应用层, 20-35K, 3年以上, 本科及以上, 精通C/C++/CMake、多线程多进程、网络通讯、文件操作、嵌入式Linux/RTOS、UART/SPI/I2C, GUI开发经验、系统性能优化、软件架构设计, 安防/热成像, https://talent.hikvision.com/home/socity/position?postId=6D5BF0628D00FB18C9AE69C60760043C
+3, 深圳, 正浩创新(EcoFlow), 嵌入式软件工程师(Linux应用部), 面议(校招), 应届硕士, 硕士及以上, C/C++、gdb/valgrind调试、UART/CAN通讯接口、Linux系统, MQTT、分布式通讯协议、ROS开发经验, 新能源/户外电源, https://www.shixiseng.com/intern/inn_oj0kfkfgmsmp
+4, 深圳, 大疆(DJI), 中/高级嵌入式工程师(Linux底软), 30-50K, 3年以上, 本科及以上, 深入理解多核编程、丰富的嵌入式软件开发经验、独立设计开发能力, Linux内核、驱动开发、实时系统, 无人机/机器人, https://we.dji.com/zh-CN/position/detail?positionId=1977740478786752512
+5, 深圳, 锐明技术, Linux嵌入式开发, 20-35K, 3年以上, 本科及以上, C/C++、Linux系统编程、多线程、网络编程、嵌入式开发, 车载电子经验、视频编解码, 车载电子/ADAS, https://www.nowcoder.com/fulltime/21319
+6, 深圳, 酷赛智能, 嵌入式Linux应用开发(实习), 面议, 应届/实习, 本科及以上, C/C++、数据结构、网络知识、多线程、socket、数据库, 音视频编解码、Linux系统裁剪编译, 智能硬件, https://www.zhipin.com/job_detail/906b752036fcbb9103F_2d65FVdS.html
+7, 深圳, 上海猎光者(深圳), 嵌入式开发工程师(C/C+++LVGL), 15-30K·13薪, 5年以上, 本科, C/C++、LVGL图形库、嵌入式Linux、GUI开发, Qt、硬件基础知识, 智能硬件/GUI, https://www.liepin.com/job/1978373879.shtml
+8, 深圳, 拓保软件, 嵌入式工程师(LVGL/前端), 13-22K, 3-5年, 本科, C/C++、LVGL、嵌入式GUI开发、Linux, Qt/QML、前端开发经验, 软件外包, https://www.zhaopin.com/jobdetail/CC157088920J40706126416.htm
+9, 深圳, 纳锐创新, 嵌入式工程师, 20-50K, 3年以上, 大专及以上, C/C++、嵌入式Linux、驱动开发、硬件调试, 音视频、AI芯片, AI芯片, https://www.jobui.com/company/18880591/salary/j/qianrushi/
+10, 深圳, 积加科技(北京), 嵌入式工程师(深圳), 30-50K+, 3年以上, 本科及以上, C/C++、嵌入式系统、Linux驱动、协议栈开发, WiFi/蓝牙协议栈, 智能家居/IoT, https://www.jobui.com/company/16071418/salary/j/qianrushi/shenzhen/edu2/
+11, 深圳, 致瓴科技, 嵌入式Linux应用开发工程师, 15-25K, 1-3年, 本科, C/C++、Linux系统编程、多线程、网络编程, MQTT、智能家居协议, 智能家居/IoT, https://www.zhipin.com/job_detail/14860e7c65301ae00nV82du7F1pT.html
+12, 深圳, CVTE(视源股份), 嵌入式软件开发工程师(Linux方向), 18-30K·15薪, 应届/1-3年, 本科及以上, C/C++、Linux系统编程、驱动调试、嵌入式开发, 显示类产品经验、Android, 智能显示/教育, https://www.cnblogs.com/lc-guo/p/18525044
+13, 广州, 广汽慧仑, Linux C嵌入式开发, 10-16K·15薪, 3年以上, 本科, C语言、Linux、嵌入式系统、汽车电子, CAN总线、AUTOSAR, 汽车电子, https://www.liepin.com/job/1981501937.shtml
+14, 广州, 长嘉电子(南沙), 嵌入式软件开发工程师, 15-25K·13薪, 3年, 不限, C/C++、嵌入式Linux、单片机开发、RTOS, 音视频、IoT, 消费电子, https://m.job5156.com/touch/index/zhaopin_zwrjkf/
+15, 广州, 长川智能, 嵌入式工程师, 15-50K, 1-3年, 本科及以上, C/C++、嵌入式系统、Linux、驱动开发, AI芯片、NPU, AI芯片/智能硬件, https://www.jobui.com/company/23631101/salary/j/qianrushi/
+16, 珠海, 双杰电气, 嵌入式软件工程师, 15-25K, 3年, 本科, C/C++、嵌入式Linux、配网终端产品、通信协议, 电力系统、IEC61850, 电力/新能源, https://mhr.bjx.com.cn/jobs/788243.html
+17, 珠海, 英为拓科技, 嵌入式软件开发工程师, 15-25K, 3-5年, 本科及以上, C/C++、嵌入式Linux、驱动开发、单片机, 家电控制、低功耗, 智能家电, https://www.jobui.com/company/16958572/salary/j/qianrushiruanjian/
+18, 惠州, 惠州本地企业(综合), 嵌入式软件工程师, 8-18K, 1-5年, 大专及以上, C语言、单片机(STM32)、RTOS、嵌入式系统, Linux、蓝牙/WiFi、IoT, 消费电子/家电, https://www.zhipin.com/zhaopin/1de647f323402e341HN4292-Eg~~/
+19, 东莞, 东莞电子信息企业(综合), 嵌入式软件工程师, 10-20K, 1-5年, 本科, C/C++、嵌入式系统、单片机、RTOS、Linux, 蓝牙/WiFi、IoT协议, 电子信息/制造, https://www.zhaopin.com/sou/jl765/kwBL652PAV1S/p1
+20, 深圳, 综合中小企业, 嵌入式应用开发(C/C++/Qt/LVGL), 10-20K, 1-3年, 大专及以上, C/C++、Qt或LVGL、Linux、socket编程、多线程, JAVA、硬件基础, 工业控制/智能家居, https://www.znhr.com/job/54519.html
+
+=== Sheet: 技能需求热度分析 ===
+企业核心技能要求频次统计, , , , 
+技能, 出现频次(20个岗位中), 热度等级, 你的匹配度, 建议
+C/C++, 20/20 (100%), ★★★★★ 必会, ⭐⭐⭐⭐⭐ 精通, 保持，面试必考指针/内存/多线程
+Linux系统编程(进程/线程/IO), 18/20 (90%), ★★★★★ 必会, ⭐⭐⭐⭐⭐ 精通, FluxFile+FluxCloud已覆盖
+TCP/IP网络编程(socket), 16/20 (80%), ★★★★★ 必会, ⭐⭐⭐⭐⭐ 精通, FluxCloud TCP服务器是核心亮点
+多线程/多进程编程, 16/20 (80%), ★★★★★ 必会, ⭐⭐⭐⭐ 熟练, 线程池经验很好，补多进程IPC
+UART/SPI/I2C外设接口, 14/20 (70%), ★★★★ 高频, ⭐⭐⭐⭐ 熟悉, STM32阶段已学，Linux下换ioctl
+数据结构与算法, 13/20 (65%), ★★★★ 高频, ⭐⭐⭐⭐ 熟练, 双向循环链表是亮点，补哈希表
+嵌入式Linux系统, 13/20 (65%), ★★★★ 高频, ⭐⭐⭐ 了解, 补：内核裁剪、设备树、交叉编译
+Git版本管理, 12/20 (60%), ★★★★ 高频, ⭐⭐⭐ 会用, 项目已用，面试能讲就行
+gdb调试, 11/20 (55%), ★★★ 常见, ⭐⭐⭐ 会用, FluxFile double free调试经历可讲
+Qt/LVGL GUI开发, 9/20 (45%), ★★★ 加分, ⭐⭐⭐⭐⭐ 精通, FluxFile LVGL + Aura Qt MVC是核心优势
+SQLite数据库, 7/20 (35%), ★★★ 加分, ⭐⭐⭐⭐ 熟练, Aura项目QSqlTableModel已覆盖
+MQTT协议, 6/20 (30%), ★★★ 加分, ⭐⭐ 了解, 最该补的！物联网标配，学2天
+RTOS(FreeRTOS等), 5/20 (25%), ★★ 了解, ⭐⭐⭐ 了解, STM32阶段学过基础
+CMake构建工具, 5/20 (25%), ★★ 了解, ⭐ 不熟, qmake够用，大厂倾向CMake
+HTTP/JSON, 5/20 (25%), ★★ 了解, ⭐⭐⭐⭐ 熟练, FluxCloud天气+cJSON已覆盖
+音视频编解码, 4/20 (20%), ★★ 加分, ⭐ 不熟, 特定行业需求，非通用
+CAN总线, 4/20 (20%), ★★ 行业, ⭐ 不熟, 汽车电子方向需要
+Python/Shell脚本, 3/20 (15%), ★ 了解, ⭐⭐ 基础, 能写基本脚本就行
+
+=== Sheet: 城市薪资对比 ===
+广东各城市嵌入式Linux岗位薪资对比, , , , , 
+城市, 初级(1-3年), 中级(3-5年), 高级(5年+), 典型公司, 特点
+深圳, 15K-22K, 22K-35K, 35K-50K+, 大疆、海康、乐鑫、正浩、锐明、CVTE、积加, 岗位最多、薪资最高、行业覆盖面最广（IoT/安防/车载/无人机/芯片）
+广州, 10K-16K, 16K-25K, 25K-40K, 广汽、CVTE、长嘉、长川智能, 汽车电子和智能硬件为主，薪资低于深圳约30%
+珠海, 10K-15K, 15K-22K, 22K-30K, 双杰电气、英为拓、格力, 电力新能源和家电控制为主，生活成本低
+东莞, 8K-15K, 15K-20K, 20K-30K, 电子信息制造企业、华为终端(松山湖), 制造业嵌入式为主，消费电子产业链完善
+惠州, 8K-13K, 13K-18K, 18K-25K, TCL、德赛、比亚迪(惠州), 家电和消费电子为主，岗位数量相对较少
+
+=== Sheet: 行业与公司分布 ===
+嵌入式Linux岗位行业分布与推荐公司, , , 
+行业方向, 代表公司(广东), 岗位特点, 对你的匹配度
+物联网/IoT/智能家居, 乐鑫科技、致瓴科技、积加科技、涂鸦智能, MQTT、WiFi/BLE协议、传感器、云平台对接，跟FluxCloud技术栈最匹配, ⭐⭐⭐⭐⭐ 最匹配
+安防监控, 海康威视、大华、萤石, 嵌入式Linux+GUI+网络+音视频，GUI开发经验优先，跟Aura和FluxFile高度吻合, ⭐⭐⭐⭐⭐ 最匹配
+车载电子, 锐明技术、德赛西威、广汽、比亚迪, CAN总线、功能安全、Linux系统，薪资高但行业门槛较高, ⭐⭐⭐⭐ 较匹配
+新能源/储能, 正浩创新(EcoFlow)、双杰电气, MQTT、分布式通讯、嵌入式Linux，跟IoT方向接近, ⭐⭐⭐⭐ 较匹配
+消费电子/无人机, 大疆、影石Insta360、安克创新, C/C++、Linux、多核编程，技术深度要求高，薪资顶级, ⭐⭐⭐ 需补强
+工业自动化, 汇川技术、信捷电气、CVTE, Modbus/Profinet工业协议、实时性要求、Qt上位机, ⭐⭐⭐⭐ 较匹配
+AI芯片/半导体, 纳锐创新、长川智能、地平线, 底层驱动、NPU、异构计算，偏底层和硬件, ⭐⭐ 偏底层
+智能家电, TCL、格力、英为拓, 单片机+RTOS为主，部分Linux，薪资偏低但稳定, ⭐⭐⭐ 保底选择
+
+=== Sheet: 你的求职建议 ===
+个人求职建议与行动计划（基于岗位数据分析）, 
+🎯 最匹配方向, 物联网/IoT + 安防监控 + 智能家居
+
+原因：FluxCloud的TCP服务器+线程池+MQTT（补上）完全对口IoT网关开发；
+Aura的Qt MVC + SQLite对口安防/工业上位机开发；
+FluxFile的LVGL对口嵌入式GUI设备开发。
+📊 薪资预期, 深圳：初级15K-22K，中级22K-35K
+广州：初级10K-16K，中级16K-25K
+珠海/东莞/惠州：初级8K-15K，中级13K-22K
+
+建议第一份工作瞄准深圳15K+，你的项目经验足够支撑。
+📝 简历关键词, 必须写：C/C++、Linux系统编程、多线程/线程池、TCP/IP、socket编程、Qt/LVGL、SQLite、ARM交叉编译
+加分写：MQTT、gdb/valgrind、Git、I2C/SPI/UART
+不要写：HTML/CSS/JS（跟嵌入式无关）
+⚠️ 最该补的, 1. MQTT协议（最重要！物联网标配，FluxCloud项目加一个MQTT上传功能就完美）
+2. epoll + Reactor模式（把FluxCloud的accept+线程池升级为epoll管理所有fd）
+3. 共享内存shm + 信号量（多进程IPC高频考点）
+4. CMake基础（大厂现在都用CMake）
+5. 用gdb调一次FluxFile的double free形成完整调试故事
+🏢 推荐投递顺序, 第一梯队：乐鑫科技、海康威视、正浩创新、致瓴科技
+第二梯队：锐明技术、CVTE、积加科技、汇川技术
+第三梯队：中小型IoT方案公司、智能家居创业公司
+保底：纯Qt客户端开发（工控上位机、医疗设备界面）
+💡 面试策略, 1. 三个项目串成一条线讲：FluxFile(单机)→FluxCloud(网络C/S)→Aura(跨平台Qt全栈)
+2. Aura的MVC性能重构重点讲：ARM板Widget堆叠→QPainter按需绘制，内存几十MB→2-3MB
+3. FluxFile的双向循环链表+断环释放法是C语言功底的证明
+4. 主动说项目局限和改进方向（如FluxCloud缺epoll），展现技术视野
+
