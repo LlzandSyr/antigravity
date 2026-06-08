@@ -1,0 +1,5 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary":  "深入讲解 FreeRTOS 队列集（Queue Set）的原理、硬性限制、避坑指南，并对比事件组与结构体单队列替代方案，附带完整闭环代码示例。",
+  "updatedAt":  "2026-06-08T03:18:45.431448800Z"
+}

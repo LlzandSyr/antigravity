@@ -1,0 +1,5 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary":  "A comprehensive guide and Python script demonstrating how to simulate mobile phone photos from AI-generated images, covering visual texture degradation (noise, sharpening, distortion) and EXIF metadata injection (Make, Model, DateTime, GPS, MakerNotes cloning).",
+  "updatedAt":  "2026-06-08T03:23:46.858634200Z"
+}
